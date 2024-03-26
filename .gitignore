@@ -14,5 +14,9 @@ npm-debug.log
 yarn-error.log
 /.fleet
 /.idea
+<<<<<<< HEAD
 /.vscode
 .env
+=======
+/.vscode
+>>>>>>> c0e38b258a1a8ac5c7e145523ea2b0aa2a3c94a6

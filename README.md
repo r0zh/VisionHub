@@ -34,12 +34,12 @@ Para instalar y comenzar a utilizar Artivision, sigue estos pasos:
 2.  Navega al directorio del proyecto.
 3.  Ejecuta `composer install` para instalar las dependencias de PHP.
 4.  Ejecuta `npm install` para instalar las dependencias de Node.js.
-5.  Utiliza `sail up -d` para iniciar el servidor Laravel Sail.
-6.  Ejecuta `sail artisan migrate` para aplicar las migraciones de la base de datos.
-7.  Ejecuta `sail artisan db:seed` para sembrar la base de datos con datos de prueba.
-8.  Ejecuta `sail artisan storage:link` para crear un enlace simbólico desde el directorio `public/storage` al directorio `storage/app/public`.
-9.  Ejecuta `npm run dev` para compilar los assets de JavaScript y CSS.
-10. Accede al servidor en `localhost`.
+6.  Utiliza `./vendor/bin/sail up -d` para iniciar el servidor Laravel Sail.
+7.  Ejecuta `./vendor/bin/sail artisan migrate` para aplicar las migraciones de la base de datos.
+8.  Ejecuta `./vendor/bin/sail artisan db:seed` para sembrar la base de datos con datos de prueba.
+9.  Ejecuta `./vendor/bin/sail artisan storage:link` para crear un enlace simbólico desde el directorio `public/storage` al directorio `storage/app/public`.
+10.  Ejecuta `npm run dev` para compilar los assets de JavaScript y CSS.
+11. Accede al servidor en `localhost`.
 
 ### Cuentas de Prueba
 
