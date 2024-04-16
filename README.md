@@ -1,5 +1,7 @@
 # VisionHub
 
+## [Notion](https://www.notion.so/Anteproyecto-ab2ea79e76064f66812afe1d15b711fb)
+
 ## Instalación y Uso
 
 Para instalar y comenzar a utilizar Artivision, sigue estos pasos:
