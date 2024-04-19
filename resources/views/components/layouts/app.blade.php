@@ -56,7 +56,7 @@ observer.observe(document.documentElement, { attributes: true, attributeFilter: 
         @endif
 
         <!-- Page Content -->
-        <main>
+        <main class="mt-10 mx-96">
             {{ $slot }}
         </main>
     </div>

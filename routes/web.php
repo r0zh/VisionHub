@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
+use App\Livewire\CreatePost;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +20,9 @@ Route::view('/', 'upload')->middleware(['auth'])->name('upload');
 Route::view('create', 'create')
     ->middleware(['auth'])
     ->name('create');
+
+     
+Route::get('posts/create', CreatePost::class);
 
 Route::view('upload', 'upload')
     ->middleware(['auth', 'verified'])
