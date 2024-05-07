@@ -45,11 +45,11 @@ jobs:
 
       - name: Update .env file
         run: |
-          sed -i 's/DB_HOST=mysql/DB_HOST=database-1.ccl3nurx4kwy.us-east-1.rds.amazonaws.com/g' .env
-          sed -i 's/DB_USERNAME=sail/DB_USERNAME=admin/g' .env
-          sed -i 's/DB_PASSWORD=password/DB_PASSWORD=admin1234/g' .env
-          sed -i 's|APP_URL=https://studious-enigma-9vwg995r4xwf9x6v-80.app.github.dev/|APP_URL=|g' .env
-          sed -i 's|ASSET_URL=https://studious-enigma-9vwg995r4xwf9x6v-80.app.github.dev/|ASSET_URL=|g' .env
+          sed -i 's/DB_HOST=mysql/DB_HOST=database-1.ccl3nurx4kwy.us-east-1.rds.amazonaws.com/g' ./.env
+          sed -i 's/DB_USERNAME=sail/DB_USERNAME=admin/g' ./.env
+          sed -i 's/DB_PASSWORD=password/DB_PASSWORD=admin1234/g' ./.env
+          sed -i 's|APP_URL=https://studious-enigma-9vwg995r4xwf9x6v-80.app.github.dev/|APP_URL=|g' ./.env
+          sed -i 's|ASSET_URL=https://studious-enigma-9vwg995r4xwf9x6v-80.app.github.dev/|ASSET_URL=|g' ./.env
           echo .env >> $GITHUB_OUTPUT
 
       - name: Login to Amazon ECR
