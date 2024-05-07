@@ -46,6 +46,7 @@ jobs:
       - name: Update .env file
         run: |
           echo "APP_NAME=VisionHub" > .env
+          echo "APP_ENV=production" >> .env
 
       - name: Login to Amazon ECR
         id: login-ecr
