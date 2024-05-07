@@ -46,7 +46,7 @@ jobs:
       - name: Update .env file
         run: |
           echo "APP_NAME=VisionHub" > .env
-          echo "APP_ENV=production" >> .env
+          echo "APP_ENV=local" >> .env
           echo "APP_KEY=base64:J1Z3" >> .env
           echo "APP_DEBUG=false" >> .env
           echo "DB_CONNECTION=mysql" >> .env
