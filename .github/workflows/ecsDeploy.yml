@@ -55,7 +55,6 @@ jobs:
           echo "DB_DATABASE=artivision" >> .env
           echo "DB_USERNAME=admin" >> .env
           echo "DB_PASSWORD=admin1234" >> .env
-          echo .env >> $GITHUB_OUTPUT
 
       - name: Login to Amazon ECR
         id: login-ecr
