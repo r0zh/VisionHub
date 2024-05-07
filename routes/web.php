@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 use App\Livewire\CreatePost;
+use App\Livewire\TagResource;
+use App\Livewire\ImageResource;
 
 
 /*
@@ -23,6 +25,8 @@ Route::view('create', 'create')
 
      
 Route::get('posts/create', CreatePost::class);
+Route::get('admin/tags/lists', TagResource::class);
+Route::get('admin/images/create', ImageResource::class);
 
 Route::view('upload', 'upload')
     ->middleware(['auth', 'verified'])

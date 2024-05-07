@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder {
         $this->call(RoleTableSeeder::class);
         $this->call(UserTableSeeder::class);
         $this->call(ImageTableSeeder::class);
+        $this->call(TagTableSeeder::class);
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([

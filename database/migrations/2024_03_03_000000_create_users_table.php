@@ -14,6 +14,8 @@ return new class extends Migration {
             $table->id();
             $table->unsignedBigInteger('role_id')->default(1);
             $table->string('name');
+            $table->string('bio')->nullable();
+            $table->string('profilePic')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

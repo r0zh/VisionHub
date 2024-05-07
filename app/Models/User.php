@@ -53,6 +53,18 @@ class User extends Authenticatable {
     public function images() {
         return $this->hasMany(Image::class)->first();
     }
+    /**
+     * Get the images for the user.
+     */
+    public function following(){
+        return $this->belongsToMany(User::class, 'follows', 'idFollower', 'idFollowed')->withTimestamps();
+    }
+    /**
+     * Get the users that are following this user.
+     */
+    public function followers(){
+        return $this->belongsToMany(User::class, 'follows', 'idFollowed', 'idFollower')->withTimestamps();
+    }
 
     /**
      * Check if the user has a specific role.
