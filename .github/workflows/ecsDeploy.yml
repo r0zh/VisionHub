@@ -53,8 +53,8 @@ jobs:
           echo "DB_HOST=database-1.ccl3nurx4kwy.us-east-1.rds.amazonaws.com" >> .env
           echo "DB_PORT=3306" >> .env
           echo "DB_DATABASE=artivision" >> .env
-          echo "DB_USERNAME=admin" >> .env
-          echo "DB_PASSWORD=admin1234" >> .env
+          echo "DB_USERNAME=${{ secrets.DB_USER }}" >> .env
+          echo "DB_PASSWORD=${{ secrets.DB_PASS }}" >> .env
 
       - name: Login to Amazon ECR
         id: login-ecr
