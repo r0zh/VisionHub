@@ -1,9 +1,8 @@
 {
-    "family": "LaravelServerTaskDef",
     "containerDefinitions": [
         {
             "name": "laravelContainer",
-            "image": "838642147285.dkr.ecr.us-east-1.amazonaws.com/php-server",
+            "image": "838642147285.dkr.ecr.us-east-1.amazonaws.com/php-server:8019cb32510c5f608ea708cf1e338ec0feb245d1",
             "cpu": 0,
             "portMappings": [
                 {
@@ -12,14 +11,19 @@
                     "hostPort": 80,
                     "protocol": "tcp",
                     "appProtocol": "http"
+                },
+                {
+                    "name": "laravelcontainer-8080-tcp",
+                    "containerPort": 8080,
+                    "hostPort": 8080,
+                    "protocol": "tcp",
+                    "appProtocol": "http"
                 }
             ],
             "essential": true,
             "environment": [],
-            "environmentFiles": [],
             "mountPoints": [],
             "volumesFrom": [],
-            "ulimits": [],
             "logConfiguration": {
                 "logDriver": "awslogs",
                 "options": {
@@ -27,15 +31,17 @@
                     "awslogs-group": "/ecs/LaravelServerTaskDef",
                     "awslogs-region": "us-east-1",
                     "awslogs-stream-prefix": "ecs"
-                },
-                "secretOptions": []
+                }
             },
             "systemControls": []
         }
     ],
+    "family": "LaravelServerTaskDef",
     "taskRoleArn": "arn:aws:iam::838642147285:role/LabRole",
     "executionRoleArn": "arn:aws:iam::838642147285:role/LabRole",
     "networkMode": "awsvpc",
+    "volumes": [],
+    "placementConstraints": [],
     "requiresCompatibilities": [
         "FARGATE"
     ],
@@ -44,5 +50,6 @@
     "runtimePlatform": {
         "cpuArchitecture": "X86_64",
         "operatingSystemFamily": "LINUX"
-    }
+    },
+    "tags": []
 }
