@@ -36,6 +36,7 @@ Parameters:
   VPCSubnets:
     Description: Choose which VPC subnets this RDS instance can be deployed to
     Type: List<AWS::EC2::Subnet::Id>
+    Default: subnet-0135e9876cd642e9d
 
 Resources:
   DBSecurityGroup:
