@@ -9,6 +9,10 @@ use App\Models\Image;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Group;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\CreateAction;
+use Filament\Forms\Components\Button;
 use Filament\Resources\Resource;
 use Livewire\Component;
 use Filament\Tables;
@@ -20,6 +24,7 @@ use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Columns\TextColumn;
+
 use Filament\Tables\Actions\Action;
 
 class ImageResource extends Component implements HasForms, HasTable
@@ -34,12 +39,32 @@ class ImageResource extends Component implements HasForms, HasTable
     public static function form(Form $form): Form
     {
         return $form
+            
             ->schema([
                 Section::make('Create Image')
                 ->schema([
-                    TextInput::make('name')
+                    TextInput::make('name'),
+                
+                    Group::make()
+                    ->schema([
+                        Section::make('Tags')->schema([
+                            
+                            Select::make('tags')
+                            ->multiple()
+                            ->options(Tag::pluck('name', 'id')->toArray())
+                        ])
+                    ])
                 ])
-            ]);
+                
+            ])
+            ->actions(function () {
+                return [
+                    CreateAction::make('Create')
+                        ->submit(),
+                    
+                    // Otros botones si los necesitas
+                ];
+            });
     }
 
     public static function table(Table $table): Table
@@ -56,9 +81,9 @@ class ImageResource extends Component implements HasForms, HasTable
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
+                /* Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                ]), */
             ]);
     }
 
@@ -79,6 +104,15 @@ class ImageResource extends Component implements HasForms, HasTable
     }
     public function render(): View
     {
+        
         return view('livewire.visionHub.forms.form-image');
+        
+
+        /* $form = Form::make(); // Crear el formulario
+        $this->form($form); // Configurar el esquema del formulario
+
+        return view('livewire.visionHub.forms.form-image', [
+        'form' => $form->schema()->render(), // Renderizar el formulario
+    ]); */
     }
 }
