@@ -47,7 +47,7 @@ jobs:
         run: |
           echo "APP_NAME=VisionHub" > .env
           echo "APP_ENV=local" >> .env
-          echo "APP_KEY=base64:J1Z3" >> .env
+          echo "APP_KEY=base64:/smQviY6DyGdLc3JDyIoygk1bSe5FAVUWi9on1kuDGM=" >> .env
           echo "APP_DEBUG=true" >> .env
           echo "DB_CONNECTION=mysql" >> .env
           echo "DB_HOST=visionhub-db.ccl3nurx4kwy.us-east-1.rds.amazonaws.com" >> .env
