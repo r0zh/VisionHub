@@ -20,7 +20,7 @@ env:
   ECS_SERVICE: LaravelService # set this to your Amazon ECS service name
   ECS_CLUSTER: VisionHubCluster # set this to your Amazon ECS cluster name
   ECS_TASK_DEFINITION:
-    LaravelServerTaskDef # set this to the path to your Amazon ECS task definition
+    laravelServerTaskDef.json # set this to the path to your Amazon ECS task definition
     # file, e.g. .aws/task-definition.json
   CONTAINER_NAME:
     laravelContainer # set this to the name of the container in the
