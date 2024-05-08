@@ -1,9 +1,9 @@
 {
-    "family": "LaravelServerTaskDef",
+    "taskDefinitionArn": "arn:aws:ecs:us-east-1:838642147285:task-definition/LaravelServerTaskDef:5",
     "containerDefinitions": [
         {
             "name": "laravelContainer",
-            "image": "838642147285.dkr.ecr.us-east-1.amazonaws.com/php-server",
+            "image": "838642147285.dkr.ecr.us-east-1.amazonaws.com/php-server:8019cb32510c5f608ea708cf1e338ec0feb245d1",
             "cpu": 0,
             "portMappings": [
                 {
@@ -16,10 +16,8 @@
             ],
             "essential": true,
             "environment": [],
-            "environmentFiles": [],
             "mountPoints": [],
             "volumesFrom": [],
-            "ulimits": [],
             "logConfiguration": {
                 "logDriver": "awslogs",
                 "options": {
@@ -27,15 +25,52 @@
                     "awslogs-group": "/ecs/LaravelServerTaskDef",
                     "awslogs-region": "us-east-1",
                     "awslogs-stream-prefix": "ecs"
-                },
-                "secretOptions": []
+                }
             },
             "systemControls": []
         }
     ],
+    "family": "LaravelServerTaskDef",
     "taskRoleArn": "arn:aws:iam::838642147285:role/LabRole",
     "executionRoleArn": "arn:aws:iam::838642147285:role/LabRole",
     "networkMode": "awsvpc",
+    "revision": 5,
+    "volumes": [],
+    "status": "ACTIVE",
+    "requiresAttributes": [
+        {
+            "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+        },
+        {
+            "name": "ecs.capability.execution-role-awslogs"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.ecr-auth"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.task-iam-role"
+        },
+        {
+            "name": "ecs.capability.execution-role-ecr-pull"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+        },
+        {
+            "name": "ecs.capability.task-eni"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.29"
+        }
+    ],
+    "placementConstraints": [],
+    "compatibilities": [
+        "EC2",
+        "FARGATE"
+    ],
     "requiresCompatibilities": [
         "FARGATE"
     ],
@@ -44,5 +79,8 @@
     "runtimePlatform": {
         "cpuArchitecture": "X86_64",
         "operatingSystemFamily": "LINUX"
-    }
+    },
+    "registeredAt": "2024-05-08T12:33:47.447Z",
+    "registeredBy": "arn:aws:sts::838642147285:assumed-role/voclabs/user2373298=rsanmar1705@g.educaand.es",
+    "tags": []
 }
