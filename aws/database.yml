@@ -74,7 +74,7 @@ Resources:
       DBInstanceClass: !Ref DBInstanceClass
       DBSubnetGroupName: !Ref DBSubnetGroup
       Engine: "MySQL"
-      EngineVersion: "5.7.22"
+      EngineVersion: "8.0.35"
       MasterUsername: !Ref DBMasterUsername
       MasterUserPassword: !Ref DBMasterUserPassword
       # WARNING: DB Instance is Publicly Accessible
