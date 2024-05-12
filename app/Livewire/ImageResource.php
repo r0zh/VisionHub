@@ -24,7 +24,7 @@ use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Columns\TextColumn;
-
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Actions\Action;
 
 class ImageResource extends Component implements HasForms, HasTable
@@ -56,15 +56,10 @@ class ImageResource extends Component implements HasForms, HasTable
                     ])
                 ])
                 
-            ])
-            ->actions(function () {
-                return [
-                    CreateAction::make('Create')
-                        ->submit(),
-                    
-                    // Otros botones si los necesitas
-                ];
-            });
+            ]);
+            /* ->actions([
+                Tables\Actions\EditAction::make(),
+            ]); */
     }
 
     public static function table(Table $table): Table
@@ -72,18 +67,26 @@ class ImageResource extends Component implements HasForms, HasTable
         return $table
             ->query(Image::query())
             ->columns([
-                //
+                TextColumn::make('user.name')->label('User Name'),
+                TextColumn::make('user.email')->label('Email'),
+                TextColumn::make('name')->label('Name'),
+                //TextColumn::make('positivePrompt')->label('Positive Promp'),
+                TextColumn::make('style')->label('Style'),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                ->form([
+                    TextInput::make('name')
+                        ->required()
+                        ->maxLength(255),
+                ]),
+                Tables\Actions\DeleteAction::make()
             ])
             ->bulkActions([
-                /* Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]), */
+
             ]);
     }
 
@@ -104,9 +107,18 @@ class ImageResource extends Component implements HasForms, HasTable
     }
     public function render(): View
     {
-        
-        return view('livewire.visionHub.forms.form-image');
-        
+
+         if (request()->is('admin/images/create'))
+            return view('livewire.visionHub.forms.form-image');
+        return view('livewire.visionHub.lists.list-image');
+
+        /* if (request()->is('admin/images/create')) {
+            return view('livewire.visionHub.forms.form-image');
+        } elseif (request()->is('admin/images/list')) {
+            return view('livewire.visionHub.lists.list-image');
+        }else
+            return view('livewire.visionHub.forms.form-image');
+         */
 
         /* $form = Form::make(); // Crear el formulario
         $this->form($form); // Configurar el esquema del formulario

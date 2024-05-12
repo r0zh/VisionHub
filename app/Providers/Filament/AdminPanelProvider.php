@@ -55,4 +55,8 @@ class AdminPanelProvider extends PanelProvider
                 Authenticate::class,
             ]);
     }
+    public function render(): View
+    {
+        return view('livewire.visionHub.lists.list-user');
+    }
 }

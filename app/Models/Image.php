@@ -29,7 +29,10 @@ class Image extends Model {
     ];
 
     public function user() {
-        return $this->belongsTo(User::class)->first();
+        return $this->belongsTo(User::class);
+    }
+    public function owner() {
+        return $this->belongsTo(User::class, 'users');
     }
     public function tags() {
         return $this->belongsToMany(Tag::class, 'images_has_tags');

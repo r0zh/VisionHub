@@ -5,6 +5,9 @@ use Livewire\Volt\Volt;
 use App\Livewire\CreatePost;
 use App\Livewire\TagResource;
 use App\Livewire\ImageResource;
+use App\Livewire\UserResource;
+use App\Filament\Resources\ImageResource\Pages;
+use App\Providers\Filament;
 
 
 /*
@@ -24,9 +27,12 @@ Route::view('create', 'create')
     ->name('create');
 
      
-Route::get('posts/create', CreatePost::class);
-Route::get('admin/tags/lists', TagResource::class);
-Route::get('admin/images/create', ImageResource::class);
+Route::get('posts/create', CreatePost::class)->middleware(['auth', 'verified']);
+Route::get('admin/tags/list', TagResource::class)->middleware(['auth', 'verified']);
+Route::get('admin/images/create', ImageResource::class)->middleware(['auth', 'verified']);
+Route::get('admin/user/list', UserResource::class)->middleware(['auth', 'verified']);
+Route::get('admin/images/list', ImageResource::class)->middleware(['auth', 'verified']);
+Route::get('admin/panel/try', AdminPanelProvider::class)->middleware(['auth', 'verified']);
 
 Route::view('upload', 'upload')
     ->middleware(['auth', 'verified'])
