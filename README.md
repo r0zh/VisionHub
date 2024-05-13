@@ -2,6 +2,8 @@
 
 ## [Angular version](https://github.com/r0zh/VisionHub-angular)
 
+## [Despligue](http://laravelloadbalancer-1413397690.us-east-1.elb.amazonaws.com/login)
+
 ## [Notion](https://www.notion.so/Anteproyecto-ab2ea79e76064f66812afe1d15b711fb)
 
 ## Instalación y Uso
