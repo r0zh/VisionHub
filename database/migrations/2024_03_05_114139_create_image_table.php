@@ -11,7 +11,8 @@ return new class extends Migration {
     public function up(): void {
         Schema::create('image', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('idUser');
+            $table->unsignedBigInteger('idStyle');
             $table->string('path');
             $table->bigInteger('seed');
             $table->text('positivePrompt');
@@ -20,7 +21,8 @@ return new class extends Migration {
             $table->string('style')->nullable();
             $table->string('description')->nullable();
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('idUser')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('idStyle')->references('id')->on('styles')->onDelete('cascade');
         });
     }
 

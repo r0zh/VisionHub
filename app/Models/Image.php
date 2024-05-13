@@ -18,7 +18,8 @@ class Image extends Model {
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'user_id', // 'user_id' is a foreign key to the 'id' column in the 'users' table
+        'idUser', // 'user_id' is a foreign key to the 'id' column in the 'users' table
+        'idStyle',
         'seed',
         'name',
         'path',
@@ -31,8 +32,11 @@ class Image extends Model {
     public function user() {
         return $this->belongsTo(User::class);
     }
+    public function style() {
+        return $this->belongsTo(Style::class);
+    }
     public function owner() {
-        return $this->belongsTo(User::class, 'users');
+        return $this->belongsTo(User::class, 'user')->first();
     }
     public function tags() {
         return $this->belongsToMany(Tag::class, 'images_has_tags');
