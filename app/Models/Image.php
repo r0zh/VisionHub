@@ -10,7 +10,8 @@ use Illuminate\Database\Eloquent\Model;
  * 
  * This class represents an image model.
  */
-class Image extends Model {
+class Image extends Model
+{
     use HasFactory;
 
     protected $table = 'image';
@@ -29,7 +30,8 @@ class Image extends Model {
         'style'
     ];
 
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
     public function style() {
@@ -38,7 +40,8 @@ class Image extends Model {
     public function owner() {
         return $this->belongsTo(User::class, 'user')->first();
     }
-    public function tags() {
+    public function tags()
+    {
         return $this->belongsToMany(Tag::class, 'images_has_tags');
     }
 }

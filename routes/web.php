@@ -32,7 +32,7 @@ Route::get('admin/tags/list', TagResource::class)->middleware(['auth', 'verified
 Route::get('admin/images/create', ImageResource::class)->middleware(['auth', 'verified']);
 Route::get('admin/user/list', UserResource::class)->middleware(['auth', 'verified']);
 Route::get('admin/images/list', ImageResource::class)->middleware(['auth', 'verified']);
-
+// Route::get('admin/panel/try', AdminPanelProvider::class)->middleware(['auth', 'verified']);
 
 Route::view('upload', 'upload')
     ->middleware(['auth', 'verified'])

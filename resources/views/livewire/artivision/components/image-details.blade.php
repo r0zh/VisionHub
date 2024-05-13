@@ -15,12 +15,12 @@
             <p>No negative prompt</p>
             @endif
             <h1 class="text-3xl font-bold">User</h1>
-            <p>{{ $image->user()->name }}</p>
+            <p>{{ $image->user()->first()->name }}</p>
             <h1 class="text-3xl font-bold">Style</h1>
             <p>{{ $image->style }}</p>
             <h1 class="text-3xl font-bold"> Created At</h1>
             <p>{{ $dateCreated }}</p>
-            @if ($image->user()->id == auth()->id() || auth()->user()->hasRole('moderator') || auth()->user()->hasRole('admin'))
+            @if ($image->user()->first()->id == auth()->id() || auth()->user()->hasRole('moderator') || auth()->user()->hasRole('admin'))
                 <div class="flex absolute bottom-0 left-0 justify-end">
                     <!-- togle public -->
                     <button
@@ -30,7 +30,7 @@
                     </button>
                 </div>
             @endif
-            @if ($image->user()->id == auth()->id() || auth()->user()->hasRole('admin'))
+            @if ($image->user()->first()->id == auth()->id() || auth()->user()->hasRole('admin'))
                 <div class="flex absolute right-0 bottom-0 justify-end">
                     <button class="py-2 px-4 text-white bg-red-500 rounded-md"
                         wire:click="deleteImage({{ $image->id }})">Delete</button>
