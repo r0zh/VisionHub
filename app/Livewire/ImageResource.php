@@ -6,6 +6,7 @@ use App\Filament\Resources\TagResource\Pages;
 use App\Filament\Resources\TagResource\RelationManagers;
 use App\Models\Tag;
 use App\Models\Image;
+use App\Models\Style;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Forms\Components\Section;
@@ -13,6 +14,10 @@ use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\CreateAction;
 use Filament\Forms\Components\Button;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\FileUpload;
+
 use Filament\Resources\Resource;
 use Livewire\Component;
 use Filament\Tables;
@@ -21,7 +26,7 @@ use Illuminate\Contracts\View\View;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
-use Filament\Forms\Components\TextInput;
+
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -40,8 +45,8 @@ class ImageResource extends Component implements HasForms, HasTable
     use InteractsWithForms;
 
     public $fetching;
-    public $positive_prompt;
-    public $negative_prompt;
+    public $positivePrompt;
+    public $negativePrompt;
     public $seed;
     public $imagePath;
     public $name;
@@ -60,11 +65,11 @@ class ImageResource extends Component implements HasForms, HasTable
                 Section::make('Create Image')
                 ->schema([
                     TextInput::make('name'),
-                    Section::make('Style')->schema([
-                            
-                        Select::make('styles')
-                        ->options(Style::pluck('name', 'id')->toArray())
-                    ]),
+                    TextInput::make('positivePrompt'),
+                    TextInput::make('negativePrompt'),
+                    TextInput::make('seed')->numeric(),
+                    Select::make('style')->options(Style::pluck('name', 'id')->toArray()),
+
                     Group::make()
                     ->schema([
                         Section::make('Tags')->schema([
@@ -73,7 +78,14 @@ class ImageResource extends Component implements HasForms, HasTable
                             ->multiple()
                             ->options(Tag::pluck('name', 'id')->toArray())
                         ])
-                    ])
+                    ]),
+                    
+                    Checkbox::make('public'),
+                    
+                    FileUpload::make('imagePath')->label('Add Image')->previewable(false)
+
+
+                    //->image()->imageEditor()
                 ])
                 
             ]);
@@ -156,7 +168,7 @@ class ImageResource extends Component implements HasForms, HasTable
     public function fetch()
     {
         $this->fetching = true;
-        $this->validate();
+        //ñ$this->validate();
         $this->dispatch('fetch-image');
     }
 
@@ -199,6 +211,8 @@ class ImageResource extends Component implements HasForms, HasTable
     public function saveImage()
     {
         // move the image to the public or private directory
+        //dd($this->form->getState());
+        dd($this->name, $this->positivePrompt, $this->negativePrompt, $this->seed, $this->style, $this->imagePath);
         $userPath = Auth::user()->id . '_' . explode('@', Auth::user()->email)[0];
         Storage::disk('public')->move($this->imagePath, 'images/' . $userPath . '/' . $this->name . '.png');
 
