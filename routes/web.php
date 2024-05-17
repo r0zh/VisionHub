@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Images\UploadImage;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 use App\Livewire\CreatePost;
@@ -20,13 +21,17 @@ use App\Providers\Filament\AdminPanelProvider;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::view('/', 'upload')->middleware(['auth'])->name('upload');
+
+// rerout to the upload page
+Route::get('/', function () {
+    return redirect('upload');
+});
 
 Route::view('create', 'create')
     ->middleware(['auth'])
     ->name('create');
 
-     
+
 Route::get('posts/create', CreatePost::class)->middleware(['auth', 'verified']);
 Route::get('admin/tags/list', TagResource::class)->middleware(['auth', 'verified']);
 Route::get('admin/images/create', ImageResource::class)->middleware(['auth', 'verified']);
@@ -34,9 +39,7 @@ Route::get('admin/user/list', UserResource::class)->middleware(['auth', 'verifie
 Route::get('admin/images/list', ImageResource::class)->middleware(['auth', 'verified']);
 // Route::get('admin/panel/try', AdminPanelProvider::class)->middleware(['auth', 'verified']);
 
-Route::view('upload', 'upload')
-    ->middleware(['auth', 'verified'])
-    ->name('upload');
+Route::get('upload', UploadImage::class)->middleware(['auth', 'verified'])->name('upload');
 
 Route::view('gallery', 'gallery')
     ->middleware(['auth'])
