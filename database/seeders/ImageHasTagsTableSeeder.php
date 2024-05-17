@@ -16,7 +16,7 @@ class ImageHasTagsTableSeeder extends Seeder
         DB::table('image_has_tags')->insert([
             [
                 'image_id' => 1,
-                'idTag' => 1
+                'tag_id' => 1
             ]
         ]);
     }
