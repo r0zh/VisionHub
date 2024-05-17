@@ -15,12 +15,12 @@ return new class extends Migration {
             $table->string('name')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('style_id');
+            $table->unsignedBigInteger('tag_id')->nullable();
             $table->string('path');
             $table->bigInteger('seed');
             $table->text('positivePrompt');
             $table->text('negativePrompt')->nullable();
             $table->boolean('public');
-            $table->string('style')->nullable();
             $table->string('description')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
