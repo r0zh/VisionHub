@@ -2,9 +2,9 @@
     <form wire:submit="create">
         {{ $this->form }}
 
-        <button type="submit">
-            Submit
-        </button>
+        <x-filament::button type="submit">
+            New Image
+        </x-filament::button>
     </form>
 
     <x-filament-actions::modals />

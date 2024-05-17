@@ -7,9 +7,9 @@
     >
         {{ $this->form }}
 
-        <x-filament::button type="submit">
-            New Image
-        </x-filament::button>
+        
     </x-filament-panels::form>
-    
+    <x-filament::button type="submit">
+            New Image
+    </x-filament::button>
 </div>

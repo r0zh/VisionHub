@@ -23,6 +23,7 @@ class Image extends Model
         'style_id',
         'seed',
         'name',
+        'description',
         'path',
         'positivePrompt',
         'negativePrompt',

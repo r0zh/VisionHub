@@ -36,20 +36,22 @@ class UploadImage extends Component implements HasForms
     {
         return $form
             ->schema([
-                Section::make('Create Image')->schema([
+                Section::make('Upload Image')->schema([
                     Grid::make([
                         'default' => 1,
                         'md' => 2
                     ])->schema([
                                 Group::make()->schema([
-                                    TextInput::make('name'),
-                                    TextInput::make('positivePrompt'),
-                                    TextInput::make('negativePrompt'),
-                                    TextInput::make('seed')->numeric(),
-                                    Select::make('style_id')->options(Style::pluck('name', 'id')->toArray())->label('Style'),
+                                    TextInput::make('name')->required(),
+                                    TextInput::make('description')->nullable(),
+                                    TextInput::make('positivePrompt')->required(),
+                                    TextInput::make('negativePrompt')->required(),
+                                    TextInput::make('seed')->numeric()->required(),
+                                    
                                 ]),
 
                                 Group::make()->schema([
+                                    Select::make('style_id')->options(Style::pluck('name', 'id')->toArray())->label('Style')->required(),
                                     Section::make('Tags')->schema([
 
                                         Select::make('tags')
@@ -63,10 +65,11 @@ class UploadImage extends Component implements HasForms
                                             '16:9',
                                             '4:3',
                                             '1:1',
-                                        ])
+                                        ])->image()->label('Upload Image')->required(),
+                                        Checkbox::make('public')
                                 ])
                             ]),
-                    Checkbox::make('public')
+                    
                 ])
             ])
             ->statePath('data')
