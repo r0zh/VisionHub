@@ -15,7 +15,7 @@ class ImageTableSeeder extends Seeder {
     public function run(): void {
         DB::table('image')->insert([
             [
-                'idUser'        => 1,
+                'user_id'        => 1,
                 'idStyle'       =>1,
                 'path'           => 'images/1_johndoe/5347_9501947412_98a2c7d9ca_c_512_512_nofilter.jpg',
                 'seed'           => 1234567,
@@ -26,7 +26,7 @@ class ImageTableSeeder extends Seeder {
                 'created_at'     => now(),
             ],
             [
-                'idUser'        => 1,
+                'user_id'        => 1,
                 'idStyle'       =>1,
                 'path'           => 'images/1_johndoe/65535_52856652098_92e0ee7cc2_c_512_512_nofilter.jpg',
                 'seed'           => 123456,
@@ -37,7 +37,7 @@ class ImageTableSeeder extends Seeder {
                 'created_at'     => now(),
             ],
             [
-                'idUser'        => 1,
+                'user_id'        => 1,
                 'idStyle'       =>1,
                 'path'           => 'images/1_johndoe/65535_52703934851_8c909d130a_c_512_512_nofilter.jpg',
                 'seed'           => 1234567,
@@ -48,7 +48,7 @@ class ImageTableSeeder extends Seeder {
                 'created_at'     => Carbon::yesterday(),
             ],
             [
-                'idUser'        => 1,
+                'user_id'        => 1,
                 'idStyle'       =>1,
                 'path'           => 'images/1_johndoe/3019_2668873606_e343579bcb_c_512_512_nofilter.jpg',
                 'seed'           => 1234567,
@@ -59,7 +59,7 @@ class ImageTableSeeder extends Seeder {
                 'created_at'     => now(),
             ],
             [
-                'idUser'        => 1,
+                'user_id'        => 1,
                 'idStyle'       =>1,
                 'path'           => 'images/1_johndoe/65535_52900904214_0381a2a49b_z_512_512_nofilter.jpg',
                 'seed'           => 123456,
@@ -71,7 +71,7 @@ class ImageTableSeeder extends Seeder {
 
             ],
             [
-                'idUser'        => 1,
+                'user_id'        => 1,
                 'idStyle'       =>1,
                 'path'           => 'images/1_johndoe/65535_53052627466_c5e437b4ab_c_512_768_nofilter.jpg',
                 'seed'           => 1234567,
@@ -82,7 +82,7 @@ class ImageTableSeeder extends Seeder {
                 'created_at'     => now(),
             ],
             [
-                'idUser'        => 1,
+                'user_id'        => 1,
                 'idStyle'       =>1,
                 'path'           => 'images/1_johndoe/65535_52740248362_91bb36acce_h_512_768_nofilter.jpg',
                 'seed'           => 123456,
@@ -93,7 +93,7 @@ class ImageTableSeeder extends Seeder {
                 'created_at'     => Carbon::yesterday(),
             ],
             [
-                'idUser'        => 1,
+                'user_id'        => 1,
                 'idStyle'       =>1,
                 'path'           => 'images/1_johndoe/65535_53535554439_e9b8c9af46_c_512_768_nofilter.jpg',
                 'seed'           => 1234567,
@@ -104,7 +104,7 @@ class ImageTableSeeder extends Seeder {
                 'created_at'     => now(),
             ],
             [
-                'idUser'        => 1,
+                'user_id'        => 1,
                 'idStyle'       =>1,
                 'path'           => 'private_images/1_johndoe/65535_52940735624_4d0052fd1e_c_512_768_nofilter.jpg',
                 'seed'           => 123456,
@@ -115,7 +115,7 @@ class ImageTableSeeder extends Seeder {
                 'created_at'     => now(),
             ],
             [
-                'idUser'        => 1,
+                'user_id'        => 1,
                 'idStyle'       =>1,
                 'path'           => 'private_images/1_johndoe/65535_53001912562_3decc04d9d_h_512_768_nofilter.jpg',
                 'seed'           => 1234567,
@@ -126,7 +126,7 @@ class ImageTableSeeder extends Seeder {
                 'created_at'     => now(),
             ],
             [
-                'idUser'        => 2,
+                'user_id'        => 2,
                 'idStyle'       =>1,
                 'path'           => 'images/2_janedoe/512x768.png',
                 'seed'           => 1234567,
@@ -137,7 +137,7 @@ class ImageTableSeeder extends Seeder {
                 'created_at'     => now(),
             ],
             [
-                'idUser'        => 2,
+                'user_id'        => 2,
                 'idStyle'       =>1,
                 'path'           => 'images/2_janedoe/512x512.png',
                 'seed'           => 123456,
@@ -148,7 +148,7 @@ class ImageTableSeeder extends Seeder {
                 'created_at'     => Carbon::yesterday(),
             ],
             [
-                'idUser'        => 2,
+                'user_id'        => 2,
                 'idStyle'       =>1,
                 'path'           => 'images/2_janedoe/65535_52640991406_8754d28c89_b_768_768_nofilter.jpg',
                 'seed'           => 123456,
@@ -159,7 +159,7 @@ class ImageTableSeeder extends Seeder {
                 'created_at'     => Carbon::yesterday(),
             ],
             [
-                'idUser'        => 2,
+                'user_id'        => 2,
                 'idStyle'       =>1,
                 'path'           => 'private_images/2_janedoe/65535_52974542495_8e8301bae7_h_512_768_nofilter.jpg',
                 'seed'           => 1234567,

@@ -11,7 +11,7 @@ return new class extends Migration {
     public function up(): void {
         Schema::create('image', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('idUser');
+            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('idStyle');
             $table->string('path');
             $table->bigInteger('seed');
@@ -21,7 +21,7 @@ return new class extends Migration {
             $table->string('style')->nullable();
             $table->string('description')->nullable();
             $table->timestamps();
-            $table->foreign('idUser')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('idStyle')->references('id')->on('styles')->onDelete('cascade');
         });
     }

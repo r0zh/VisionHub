@@ -19,7 +19,7 @@ class Image extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'idUser', // 'user_id' is a foreign key to the 'id' column in the 'users' table
+        'user_id', // 'user_id' is a foreign key to the 'id' column in the 'users' table
         'idStyle',
         'seed',
         'name',
