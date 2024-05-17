@@ -6,6 +6,7 @@ use App\Models\Image;
 use App\Models\Style;
 use App\Models\Tag;
 
+use Filament\Forms\Components\Grid;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
@@ -36,26 +37,36 @@ class UploadImage extends Component implements HasForms
         return $form
             ->schema([
                 Section::make('Create Image')->schema([
-                    TextInput::make('name'),
-                    TextInput::make('positivePrompt'),
-                    TextInput::make('negativePrompt'),
-                    TextInput::make('seed')->numeric(),
-                    Select::make('style_id')->options(Style::pluck('name', 'id')->toArray())->label('Style'),
+                    Grid::make([
+                        'default' => 1,
+                        'md' => 2
+                    ])->schema([
+                                Group::make()->schema([
+                                    TextInput::make('name'),
+                                    TextInput::make('positivePrompt'),
+                                    TextInput::make('negativePrompt'),
+                                    TextInput::make('seed')->numeric(),
+                                    Select::make('style_id')->options(Style::pluck('name', 'id')->toArray())->label('Style'),
+                                ]),
 
-                    Group::make()
-                        ->schema([
-                            Section::make('Tags')->schema([
+                                Group::make()->schema([
+                                    Section::make('Tags')->schema([
 
-                                Select::make('tags')
-                                    ->multiple()
-                                    ->options(Tag::pluck('name', 'id')->toArray())
-                            ])
-                        ]),
+                                        Select::make('tags')
+                                            ->multiple()
+                                            ->options(Tag::pluck('name', 'id')->toArray())
+                                    ]),
 
-                    Checkbox::make('public'),
 
-                    FileUpload::make('imagePath'),
-
+                                    FileUpload::make('imagePath')->imageEditor()
+                                        ->imageEditorAspectRatios([
+                                            '16:9',
+                                            '4:3',
+                                            '1:1',
+                                        ])
+                                ])
+                            ]),
+                    Checkbox::make('public')
                 ])
             ])
             ->statePath('data')
@@ -64,9 +75,9 @@ class UploadImage extends Component implements HasForms
 
     public function create(): void
     {
-        $data            = $this->form->getState();
+        $data = $this->form->getState();
         $data['user_id'] = auth()->id();
-        $data['path']    = $data['imagePath'];
+        $data['path'] = $data['imagePath'];
 
         $record = Image::create($data);
 
@@ -75,6 +86,6 @@ class UploadImage extends Component implements HasForms
 
     public function render(): View
     {
-        return view('livewire.images.create-image');
+        return view('livewire.images.upload-image');
     }
 }
