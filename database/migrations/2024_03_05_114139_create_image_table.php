@@ -8,11 +8,12 @@ return new class extends Migration {
     /**
      * Run the migrations.
      */
-    public function up(): void {
+    public function up(): void
+    {
         Schema::create('image', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('idStyle');
+            $table->unsignedBigInteger('style_id');
             $table->string('path');
             $table->bigInteger('seed');
             $table->text('positivePrompt');
@@ -22,14 +23,15 @@ return new class extends Migration {
             $table->string('description')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('idStyle')->references('id')->on('styles')->onDelete('cascade');
+            $table->foreign('style_id')->references('id')->on('styles')->onDelete('cascade');
         });
     }
 
     /**
      * Reverse the migrations.
      */
-    public function down(): void {
+    public function down(): void
+    {
         Schema::dropIfExists('image');
     }
 };

@@ -20,7 +20,7 @@ class Image extends Model
 
     protected $fillable = [
         'user_id', // 'user_id' is a foreign key to the 'id' column in the 'users' table
-        'idStyle',
+        'style_id',
         'seed',
         'name',
         'path',
@@ -34,10 +34,12 @@ class Image extends Model
     {
         return $this->belongsTo(User::class);
     }
-    public function style() {
+    public function style()
+    {
         return $this->belongsTo(Style::class);
     }
-    public function owner() {
+    public function owner()
+    {
         return $this->belongsTo(User::class, 'user')->first();
     }
     public function tags()
