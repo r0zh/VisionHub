@@ -6,25 +6,18 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class TagTableSeeder extends Seeder
+class ImageTagsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-
-        DB::table('tags')->insert([
+        DB::table('image_tags')->insert([
             [
-                'name' => 'Modern',
-            ],
-            [
-                'name' => 'Futurist',
-            ],
-            [
-                'name' => 'Manga',
+                'image_id' => 1,
+                'tags_id'  => 1
             ]
         ]);
-
     }
 }

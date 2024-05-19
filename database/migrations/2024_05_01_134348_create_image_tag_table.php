@@ -10,7 +10,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('image_has_tags', function (Blueprint $table) {
+        Schema::create('image_tag', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->unsignedBigInteger('image_id');
@@ -25,6 +25,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('image_has_tags');
+        Schema::dropIfExists('image_tag');
     }
 };

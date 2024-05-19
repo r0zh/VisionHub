@@ -12,10 +12,9 @@ return new class extends Migration {
     {
         Schema::create('image', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('style_id');
-            $table->unsignedBigInteger('tag_id')->nullable();
+            $table->string('name')->nullable();
             $table->string('path');
             $table->bigInteger('seed');
             $table->text('positivePrompt');
