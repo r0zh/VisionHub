@@ -45,6 +45,6 @@ class Image extends Model
     }
     public function tags()
     {
-        return $this->belongsToMany(Tag::class, 'images_has_tags');
+        return $this->belongsToMany(Tag::class, 'images_tag');
     }
 }
