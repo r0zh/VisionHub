@@ -50,7 +50,6 @@ class UploadImage extends Component implements HasForms
                                     RichEditor::make('description')->nullable(),
                                     Select::make('tags')
                                         ->multiple()
-                                        ->live()
                                         ->preload()
                                         ->relationship('tags', 'name')
                                         ->createOptionForm([
@@ -66,11 +65,6 @@ class UploadImage extends Component implements HasForms
                                     TextInput::make('negativePrompt')->required(),
 
                                     TextInput::make('seed')->numeric()->required()->maxValue(4294967296),
-
-
-
-
-
 
                                     FileUpload::make('imagePath')->imageEditor()->visibility('private')
                                         ->imageEditorAspectRatios([
