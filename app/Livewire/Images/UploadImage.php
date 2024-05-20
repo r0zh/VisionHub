@@ -7,6 +7,7 @@ use App\Models\Style;
 use App\Models\Tag;
 
 use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
@@ -46,33 +47,29 @@ class UploadImage extends Component implements HasForms
                     ])->schema([
                                 Group::make()->schema([
                                     TextInput::make('name'),
-                                    TextInput::make('description')->nullable(),
-                                    TextInput::make('positivePrompt')->required(),
-                                    TextInput::make('negativePrompt')->required(),
-                                    TextInput::make('seed')->numeric()->required()->maxValue(4294967296),
-
-                                ]),
-
-                                Group::make()->schema([
-                                    Select::make('style_id')->live()->preload()->relationship(name: 'style', titleAttribute: 'name')->required(),
-
-
+                                    RichEditor::make('description')->nullable(),
                                     Select::make('tags')
                                         ->multiple()
                                         ->live()
-                                        ->disabled(function (): bool {
-                                            if ($this->data['style_id']) {
-                                                return true;
-                                            } else {
-                                                return false;
-                                            };
-                                        })
                                         ->preload()
                                         ->relationship('tags', 'name')
                                         ->createOptionForm([
                                             TextInput::make('name')
                                                 ->required(),
                                         ]),
+                                    Select::make('style_id')->preload()->relationship(name: 'style', titleAttribute: 'name')->required(),
+
+                                ]),
+
+                                Group::make()->schema([
+                                    TextInput::make('positivePrompt')->required(),
+                                    TextInput::make('negativePrompt')->required(),
+
+                                    TextInput::make('seed')->numeric()->required()->maxValue(4294967296),
+
+
+
+
 
 
                                     FileUpload::make('imagePath')->imageEditor()->visibility('private')
@@ -84,37 +81,37 @@ class UploadImage extends Component implements HasForms
                                     Checkbox::make('public')
                                 ])
                             ]),
-
                 ])
             ])
             ->statePath('data')
             ->model(Image::class);
     }
 
-    public function create(): void
+    public function create()
     {
-        $data            = $this->form->getState();
-        $data['user_id'] = auth()->id();
-        if ($data['public']) {
-            $newPath      = "images/" . auth()->id() . '_' . explode('@', auth()->user()->email)[0] . '/' . $data['imagePath'];
-            $data['path'] = $newPath;
-            Storage::disk('public')->put($newPath, Storage::disk('public')->get($data['imagePath']));
+        $formData            = $this->form->getState();
+        $formData['user_id'] = auth()->id();
+        if ($formData['public']) {
+            $newPath          = "images/" . auth()->id() . '_' . explode('@', auth()->user()->email)[0] . '/' . $formData['imagePath'];
+            $formData['path'] = $newPath;
+            Storage::disk('public')->put($newPath, Storage::disk('public')->get($formData['imagePath']));
         } else {
-            $newPath      = "private_images/" . auth()->id() . '_' . explode('@', auth()->user()->email)[0] . '/' . $data['imagePath'];
-            $data['path'] = $newPath;
-            Storage::disk('local')->put($newPath, Storage::disk('public')->get($data['imagePath']));
+            $newPath          = "private_images/" . auth()->id() . '_' . explode('@', auth()->user()->email)[0] . '/' . $formData['imagePath'];
+            $formData['path'] = $newPath;
+            Storage::disk('local')->put($newPath, Storage::disk('public')->get($formData['imagePath']));
         }
 
-        Storage::disk('public')->delete($data['imagePath']);
+        Storage::disk('public')->delete($formData['imagePath']);
 
-        $record = Image::create($data);
+        $record = Image::create($formData);
         $this->form->model($record)->saveRelationships();
+
+        return redirect()->to('/gallery');
     }
 
-    public function resetName(): void
+    public function resetForm()
     {
-        $this->reset('data.name');
-        $this->bool = true;
+        $this->reset();
     }
 
     public function render(): View

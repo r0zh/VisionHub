@@ -2,13 +2,15 @@
     <form wire:submit="create">
         {{ $this->form }}
 
-        <x-filament::button type="submit">
-            New Image
-        </x-filament::button>
+        <div class="flex w-full items-center justify-center mt-4 gap-2">
+            <x-filament::button type="submit">
+                Create
+            </x-filament::button>
+            <x-filament::button type="button" wire:click="resetForm" color="danger">
+                Reset
+            </x-filament::button>
+        </div>
 
-        <x-filament::button wire:click="resetName" type="button">
-            resetName
-        </x-filament::button>
     </form>
 
     <x-filament-actions::modals />
