@@ -5,6 +5,10 @@
         <x-filament::button type="submit">
             New Image
         </x-filament::button>
+
+        <x-filament::button wire:click="resetName" type="button">
+            resetName
+        </x-filament::button>
     </form>
 
     <x-filament-actions::modals />
