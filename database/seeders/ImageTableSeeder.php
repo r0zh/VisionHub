@@ -119,7 +119,7 @@ class ImageTableSeeder extends Seeder
             [
                 'user_id'        => 2,
                 'style_id'       => 1,
-                'path'           => 'images/2_janedoe/512x768.png',
+                'path'           => 'images/2_janedoe/512x768.jpg',
                 'seed'           => 1234567,
                 'positivePrompt' => 'placeholder',
                 'negativePrompt' => 'This is a negative prompt.',
@@ -130,7 +130,7 @@ class ImageTableSeeder extends Seeder
             [
                 'user_id'        => 2,
                 'style_id'       => 1,
-                'path'           => 'images/2_janedoe/512x512.png',
+                'path'           => 'images/2_janedoe/512x512.jpg',
                 'seed'           => 123456,
                 'positivePrompt' => 'placeholder',
                 'negativePrompt' => 'This is a negative prompt.',
