@@ -13,10 +13,10 @@ class ImageTagsTableSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('image_tags')->insert([
+        DB::table('image_tag')->insert([
             [
                 'image_id' => 1,
-                'tags_id'  => 1
+                'tag_id'   => 1
             ]
         ]);
     }
