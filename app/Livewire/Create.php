@@ -77,14 +77,14 @@ class Create extends Component
         $this->negative_prompt;
         $this->seed;
         $json     = json_encode(['positivePrompt' => $this->positive_prompt, 'negativePrompt' => $this->negative_prompt, "seed" => $this->seed, "ratio" => $this->ratio, "style" => $this->style]);
-        $address  = "https://1843-2a0c-5a85-6402-c500-dee3-dd3c-b34e-c0d2.ngrok-free.app/get_image";
+        $address  = "192.168.0.5:5000/get_image";
         $response = Http::withBody($json, 'application/json')->timeout(60 * 5)
             ->withHeaders([
                 'Content-Type' => 'application/json',
-            ])->post($address);
+            ])->get($address);
         // display the image in the browser
         $image           = $response->getBody();
-        $this->imagePath = "images/tmp/image.png";
+        $this->imagePath = "images/tmp/image.jpg";
         Storage::disk('public')->put($this->imagePath, $image);
         $this->fetching = false;
     }
