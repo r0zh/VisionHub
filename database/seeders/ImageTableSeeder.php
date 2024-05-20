@@ -19,17 +19,6 @@ class ImageTableSeeder extends Seeder
             [
                 'user_id'        => 1,
                 'style_id'       => 1,
-                'path'           => 'images/1_johndoe/5347_9501947412_98a2c7d9ca_c_512_512_nofilter.jpg',
-                'seed'           => 1234567,
-                'positivePrompt' => 'cat, beautiful, cute.',
-                'negativePrompt' => 'This is a negative prompt.',
-                'public'         => true,
-                //'style'          => 'realistic',
-                'created_at'     => now(),
-            ],
-            [
-                'user_id'        => 1,
-                'style_id'       => 1,
                 'path'           => 'images/1_johndoe/65535_52856652098_92e0ee7cc2_c_512_512_nofilter.jpg',
                 'seed'           => 123456,
                 'positivePrompt' => 'plant, green',
