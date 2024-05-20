@@ -15,7 +15,7 @@ class ImageTableSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('image')->insert([
+        DB::table('images')->insert([
             [
                 'user_id'        => 1,
                 'style_id'       => 1,

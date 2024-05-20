@@ -14,7 +14,7 @@ class Image extends Model
 {
     use HasFactory;
 
-    protected $table = 'image';
+    protected $table = 'images';
 
     protected $primaryKey = 'id';
 
@@ -45,6 +45,6 @@ class Image extends Model
     }
     public function tags()
     {
-        return $this->belongsToMany(Tag::class, 'images_tag');
+        return $this->belongsToMany(Tag::class, 'image_tag');
     }
 }

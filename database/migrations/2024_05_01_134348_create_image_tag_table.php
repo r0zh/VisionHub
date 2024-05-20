@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->timestamps();
             $table->unsignedBigInteger('image_id');
             $table->unsignedBigInteger('tag_id');
-            $table->foreign('image_id')->references('id')->on('image')->onDelete('cascade');
+            $table->foreign('image_id')->references('id')->on('images')->onDelete('cascade');
             $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');
         });
     }
