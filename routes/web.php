@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Images\GenerateImage;
 use App\Livewire\Images\UploadImage;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
@@ -27,11 +28,6 @@ Route::get('/', function () {
     return redirect('upload');
 });
 
-Route::view('create', 'create')
-    ->middleware(['auth'])
-    ->name('create');
-
-
 Route::get('posts/create', CreatePost::class)->middleware(['auth', 'verified']);
 Route::get('admin/tags/list', TagResource::class)->middleware(['auth', 'verified']);
 Route::get('admin/images/create', ImageResource::class)->middleware(['auth', 'verified']);
@@ -39,6 +35,7 @@ Route::get('admin/user/list', UserResource::class)->middleware(['auth', 'verifie
 Route::get('admin/images/list', ImageResource::class)->middleware(['auth', 'verified']);
 // Route::get('admin/panel/try', AdminPanelProvider::class)->middleware(['auth', 'verified']);
 
+Route::get('create', GenerateImage::class)->middleware(['auth', 'verified'])->name('create');
 Route::get('upload', UploadImage::class)->middleware(['auth', 'verified'])->name('upload');
 
 Route::view('gallery', 'gallery')
