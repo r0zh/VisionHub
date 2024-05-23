@@ -13,6 +13,7 @@ return [
     | a conventional file to locate the various service credentials.
     |
     */
+    'flask' => 'https://organic-adventure-w97x64g4j5wf949g-5000.app.github.dev',
 
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),
