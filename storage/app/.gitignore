@@ -5,3 +5,5 @@
 private_images/*
 !private_images/1_johndoe
 !private_images/2_janedoe
+!private_images/1_johndoe/*
+!private_images/2_janedoe/*
