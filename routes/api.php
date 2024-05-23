@@ -25,6 +25,8 @@ Route::post('/auth/register', [AuthController::class, 'register']);
 Route::post('/auth/login', [AuthController::class, 'login']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('auth/logout', [AuthController::class, 'logout']);
-    Route::apiResource('images', ImageController::class);
+    Route::get('images/public', [ImageController::class, 'index']);
+    Route::get('images/user', [ImageController::class, 'userImages']);
+    Route::get('images/all', [ImageController::class, 'allImages'])->middleware(['role:admin']);
     Route::get('images/{id}/get', [ImageServeController::class, 'serveImage'])->name('images.download');
 });

@@ -20,6 +20,25 @@ class ImageController extends Controller
     }
 
     /**
+     * Get the images uploaded by the user.
+     */
+    public function userImages()
+    {
+        $user = auth()->user();
+        $images = Image::where('user_id', $user->id)->get();
+        return response()->json($images);
+    }
+
+    /**
+     * Get all images.
+     */
+    public function allImages()
+    {
+        $images = Image::all();
+        return response()->json($images);
+    }
+
+    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
