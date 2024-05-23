@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('loras', function (Blueprint $table) {
+        Schema::create('style_lora', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id')->nullable();
             $table->timestamps();
-            $table->string('name')->unique();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('lora_id');
+            $table->unsignedBigInteger('style_id');
+            $table->foreign('lora_id')->references('id')->on('loras')->onDelete('cascade');
+            $table->foreign('style_id')->references('id')->on('style')->onDelete('cascade');
         });
     }
 
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('loras');
+        Schema::dropIfExists('style_lora');
     }
 };

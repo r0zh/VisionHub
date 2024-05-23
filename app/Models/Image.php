@@ -21,19 +21,23 @@ class Image extends Model
     protected $fillable = [
         'user_id', // 'user_id' is a foreign key to the 'id' column in the 'users' table
         'style_id',
+        'checkpoint_id',
         'seed',
         'name',
         'description',
         'path',
         'positivePrompt',
         'negativePrompt',
-        'public',
-        'style'
+        'public'
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+    public function checkpoint()
+    {
+        return $this->belongsTo(Checkpoint::class);
     }
     public function style()
     {
@@ -46,5 +50,9 @@ class Image extends Model
     public function tags()
     {
         return $this->belongsToMany(Tag::class, 'image_tag');
+    }
+    public function loras()
+    {
+        return $this->belongsToMany(Lora::class, 'image_lora');
     }
 }

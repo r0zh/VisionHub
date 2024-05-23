@@ -12,6 +12,20 @@ class Style extends Model
 
     protected $primaryKey = 'id';
     protected $fillable = [
-        'name'
+        'user_id',
+        'name',
+        'checkpoint_id'
     ];
+    public function loras()
+    {
+        return $this->belongsToMany(Lora::class, 'style_lora');
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    public function checkpoint()
+    {
+        return $this->belongsTo(Checkpoint::class);
+    }
 }
