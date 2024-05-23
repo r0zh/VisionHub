@@ -25,7 +25,7 @@ return new class extends Migration {
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('style_id')->references('id')->on('styles')->onDelete('cascade');
-            $table->foreign('checkpoint_id')->references('id')->on('checkpoint')->onDelete('cascade');
+            $table->foreign('checkpoint_id')->references('id')->on('checkpoints')->onDelete('cascade');
         });
     }
 
