@@ -9,12 +9,18 @@ use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
 use Livewire\Component;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class GenerateImage extends Component implements HasForms
 {
     use InteractsWithForms;
 
     public ?array $data = [];
+    private $fetching;
+    private $imagePath;
+
 
     public function mount(): void
     {
@@ -55,8 +61,22 @@ class GenerateImage extends Component implements HasForms
 
     public function create(): void
     {
+        $this->fetching = true;
         $data = $this->form->getState();
+        $apiUrl = config('services.flask') . '/get_image';
+        //display jpeg response
+        $response = Http::post($apiUrl, $data);
 
+        // display the image in the browser
+        $image = $response->getBody();
+        $this->imagePath = "images/tmp/" . Str::of($response->getHeader('Content-Disposition')[0])->after('filename=');
+        Storage::disk('public')->put($this->imagePath, $image);
+
+        $this->fetching = false;
+    }
+
+    public function save($data): void
+    {
         $record = Image::create($data);
 
         $this->form->model($record)->saveRelationships();
