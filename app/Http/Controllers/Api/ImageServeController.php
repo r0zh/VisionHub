@@ -18,14 +18,15 @@ class ImageServeController extends Controller
 
         if (!$image) {
             return response()->json(['message' => 'Image not found'], 404);
-        }
-        if ($image->public) {
-            return Storage::disk('public')->download($image->path);
         } else {
-            if (Auth::user()->id == $image->user_id || Auth::user()->role == 'admin') {
-                return Storage::disk('local')->download($image->path);
+            if ($image->public) {
+                return Storage::disk('public')->download($image->path);
             } else {
-                return response()->json(['message' => 'Unauthorized'], 403);
+                if (Auth::user()->id == $image->user_id || Auth::user()->role == 'admin') {
+                    return Storage::disk('local')->download($image->path);
+                } else {
+                    return response()->json(['message' => 'Unauthorized'], 403);
+                }
             }
         }
     }
