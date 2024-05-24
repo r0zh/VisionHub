@@ -13,8 +13,8 @@ return new class extends Migration {
         Schema::create('checkpoints', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->string('description')->nullable();
             $table->string('fileName')->unique();
+            $table->string('description')->nullable();
             $table->timestamps();
         });
     }

@@ -14,8 +14,8 @@ class Lora extends Model
 
     protected $fillable = [
         'name',
+        'fileName',
         'description',
-        'user_id',
     ];
     public function styles()
     {

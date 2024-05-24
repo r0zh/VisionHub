@@ -14,8 +14,8 @@ class Checkpoint extends Model
 
     protected $fillable = [
         'name',
-        'description',
         'fileName',
+        'description',
     ];
 
     public function images()
