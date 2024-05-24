@@ -46,7 +46,7 @@ class UploadImage extends Component implements HasForms
                         'md'      => 2
                     ])->schema([
                                 Group::make()->schema([
-                                    TextInput::make('name'),
+                                    TextInput::make('name')->nullable(),
                                     RichEditor::make('description')->nullable(),
                                     Select::make('tags')
                                         ->multiple()
@@ -83,14 +83,14 @@ class UploadImage extends Component implements HasForms
 
     public function create()
     {
-        $formData            = $this->form->getState();
+        $formData = $this->form->getState();
         $formData['user_id'] = auth()->id();
         if ($formData['public']) {
-            $newPath          = "images/" . auth()->id() . '_' . explode('@', auth()->user()->email)[0] . '/' . $formData['imagePath'];
+            $newPath = "images/" . auth()->id() . '_' . explode('@', auth()->user()->email)[0] . '/' . $formData['imagePath'];
             $formData['path'] = $newPath;
             Storage::disk('public')->put($newPath, Storage::disk('public')->get($formData['imagePath']));
         } else {
-            $newPath          = "private_images/" . auth()->id() . '_' . explode('@', auth()->user()->email)[0] . '/' . $formData['imagePath'];
+            $newPath = "private_images/" . auth()->id() . '_' . explode('@', auth()->user()->email)[0] . '/' . $formData['imagePath'];
             $formData['path'] = $newPath;
             Storage::disk('local')->put($newPath, Storage::disk('public')->get($formData['imagePath']));
         }
