@@ -13,17 +13,17 @@ class Checkpoint extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'user_id',
-        'name'
+        'name',
+        'description',
+        'fileName',
     ];
-    public function user()
+
+    public function images()
     {
-        return $this->belongsTo(User::class);
-    }
-    public function images() {
         return $this->hasMany(Image::class);
     }
-    public function styles() {
+    public function styles()
+    {
         return $this->hasMany(Style::class);
     }
 }

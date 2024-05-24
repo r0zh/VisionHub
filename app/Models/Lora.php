@@ -13,13 +13,10 @@ class Lora extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'user_id', // 'user_id' is a foreign key to the 'id' column in the 'users' table
         'name',
+        'description',
+        'user_id',
     ];
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
     public function styles()
     {
         return $this->hasMany(Style::class, 'style_lora');
