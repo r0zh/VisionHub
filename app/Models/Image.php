@@ -55,4 +55,8 @@ class Image extends Model
     {
         return $this->belongsToMany(Lora::class, 'image_lora');
     }
+    public function embeddings()
+    {
+        return $this->belongsToMany(Embedding::class, 'image_embedding');           
+    }
 }
