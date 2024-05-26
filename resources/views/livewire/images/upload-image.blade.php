@@ -1,4 +1,4 @@
-<div class="flex flex-col gap-y-6">
+<div class="flex flex-col gap-y-6 2xl:mx-96">
     <form wire:submit="create">
         {{ $this->form }}
 
