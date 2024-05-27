@@ -21,7 +21,7 @@ RUN docker-php-ext-install mbstring exif pcntl bcmath gd intl
 
 RUN composer install --no-dev --optimize-autoloader
 
-RUN php artisan migrate:refresh
+RUN php artisan migrate:fresh
 RUN php artisan db:seed
 RUN php artisan storage:link
 RUN php artisan config:cache
