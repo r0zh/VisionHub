@@ -53,7 +53,7 @@ class GenerateImage extends Component implements HasForms, HasActions
                 Section::make('Upload Image')->schema([
                     Grid::make([
                         'default' => 1,
-                        'md'      => 2
+                        'md' => 2
                     ])->schema([
                                 Select::make('style_id')->preload()->relationship(name: 'style', titleAttribute: 'name'),
                                 Select::make('checkpoint_id')->preload()->relationship(name: 'checkpoint', titleAttribute: 'name')->required(),
@@ -61,9 +61,8 @@ class GenerateImage extends Component implements HasForms, HasActions
                                 TextInput::make('negativePrompt')->required(),
                                 TextInput::make('seed')->numeric()->required()->maxValue(4294967296)->minValue(0),
                                 Select::make('ratio')->options([
-                                    '16:9',
-                                    '4:3',
-                                    '1:1',
+                                    '2_3' => '2:3',
+                                    '1_1' => '1:1',
                                 ])->required(),
                                 Select::make('lora_id')
                                     ->multiple()
@@ -100,8 +99,8 @@ class GenerateImage extends Component implements HasForms, HasActions
     public function create(): void
     {
         $this->fetching = true;
-        $data           = $this->form->getState();
-        $apiUrl         = config('services.flask') . '/get_image';
+        $data = $this->form->getState();
+        $apiUrl = config('services.flask') . '/get_image';
         //display jpeg response
         $response = Http::post($apiUrl, $data);
 
@@ -120,16 +119,16 @@ class GenerateImage extends Component implements HasForms, HasActions
 
     public function saveImage($data)
     {
-        $enrichedData            = array_merge($data, $this->form->getState());
+        $enrichedData = array_merge($data, $this->form->getState());
         $enrichedData['user_id'] = Auth::user()->id;
-        $path                    = str_replace("images/tmp/", "", session('imagePath'));
+        $path = str_replace("images/tmp/", "", session('imagePath'));
 
         if ($enrichedData['public']) {
-            $newPath              = "images/" . auth()->id() . '_' . explode('@', auth()->user()->email)[0] . '/' . $path;
+            $newPath = "images/" . auth()->id() . '_' . explode('@', auth()->user()->email)[0] . '/' . $path;
             $enrichedData['path'] = $newPath;
             Storage::disk('public')->put($newPath, Storage::disk('public')->get(session('imagePath')));
         } else {
-            $newPath              = "private_images/" . auth()->id() . '_' . explode('@', auth()->user()->email)[0] . '/' . $path;
+            $newPath = "private_images/" . auth()->id() . '_' . explode('@', auth()->user()->email)[0] . '/' . $path;
             $enrichedData['path'] = $newPath;
             Storage::disk('local')->put($newPath, Storage::disk('public')->get(session('imagePath')));
         }
