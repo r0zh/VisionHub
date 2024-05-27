@@ -55,6 +55,10 @@ jobs:
           echo "DB_DATABASE=visionhub" >> .env
           echo "DB_USERNAME=${{ secrets.DB_USER }}" >> .env
           echo "DB_PASSWORD=${{ secrets.DB_PASS }}" >> .env
+        
+      - name: Update config/services.php. Replace flask service with external service
+        run: |
+          sed -i 's|'flask' => '.*'|'flask' => 'http://flaskloadbalancer-64905749.us-east-1.elb.amazonaws.com/'|' config/services.php
 
       - name: Login to Amazon ECR
         id: login-ecr
