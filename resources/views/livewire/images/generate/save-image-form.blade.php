@@ -1,7 +1,6 @@
 <div class="w-full">
     <style>
         .fi-modal-content {
-            flex-direction: row !important;
             align-items: center;
         }
 
@@ -12,6 +11,12 @@
         .fi-modal-footer-actions {
             justify-content: end !important;
         }
+        @media (min-width: 768px) { 
+            .fi-modal-content {
+                flex-direction: row !important;
+            }
+        }
+
     </style>
     <img src="{{ asset('storage/' . $imagePath) }}" alt="generated image" class="w-3/4 mx-auto">
 </div>

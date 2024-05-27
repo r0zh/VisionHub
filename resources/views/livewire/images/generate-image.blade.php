@@ -9,7 +9,7 @@
         }
     </style>
     <div
-        class="@if ($this->fetching || $this->imagePath) md:flex md:flex-row md:mx-20 @else 2xl:mx-96 @endif transition-all items-center gap-16">
+        class="@if ($this->fetching || $this->imagePath) md:flex md:flex-row md:mx-20 md:h-[80vh] @else 2xl:mx-96 @endif transition-all items-center justify-center gap-16">
         <form wire:submit="create"
             class="transition-all flex justify-center flex-col @if ($this->fetching || $this->imagePath) w-full @endif">
             {{ $this->form }}
@@ -19,9 +19,10 @@
             </x-filament::button>
         </form>
 
+        <div class="flex justify-center items-center flex-col w-full gap-y-2 mt-10 md:mx-2">
         @if ($this->fetching)
             <div class="flex justify-center items-center h-[500px] ">
-                <svg width="50" height="50" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <svg width="400" height="400" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <style>
                         .spinner_zWVm {
                             animation: spinner_5QiW 1.2s linear infinite, spinner_PnZo 1.2s linear infinite
@@ -220,16 +221,16 @@
             </div>
         @endif
         @if (!$this->fetching && $this->imagePath)
-            <div class="flex justify-center items-center flex-col w-full gap-y-2 mt-10 mx-2">
                 <div class="flex justify-center items-center rounded-lg">
                     <img src="{{ asset('storage/' . $this->imagePath) }}" alt="image"
-                        class="h-auto w-full rounded-xl">
+                        class="h-auto w-full md:w-[600px] rounded-xl">
                 </div>
                 <div class="flex justify-between items-center">
                     {{ $this->saveImageAction() }}
                 </div>
-            </div>
         @endif
+    </div>
+
     </div>
     <x-filament-actions::modals />
 </div>
