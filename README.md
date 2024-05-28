@@ -1,14 +1,22 @@
 # VisionHub
 
-## [Angular version](https://github.com/r0zh/VisionHub-angular)
+## Repositorios relacionados
 
-## [Despligue](http://laravelloadbalancer-1413397690.us-east-1.elb.amazonaws.com/login)
+[Angular repository](https://github.com/r0zh/VisionHub-angular): Angular frontend
 
-## [Notion](https://www.notion.so/Anteproyecto-ab2ea79e76064f66812afe1d15b711fb)
+[Flask repository](https://github.com/r0zh/VisionHub-flask): Flask microservice
+
+
+## Despliegue de la aplicación
+[VisionHub](http://laravelloadbalancer-1413397690.us-east-1.elb.amazonaws.com/login) (temporalmente apagado para ahorrar recursos)
+
+## Notion del proyecto 
+[Notion](https://www.notion.so/e67ae944be194b38bcba67d7642c7b3f?v=912bed725fd94a7dab5d94a88ed09741) 
+[Anteproyecto](https://www.notion.so/Anteproyecto-ab2ea79e76064f66812afe1d15b711fb)
 
 ## Instalación y Uso
 
-Para instalar y comenzar a utilizar Artivision, sigue estos pasos:
+Para instalar y utilizar VisionHub, sigue estos pasos:
 
 1.  Clona el repositorio del proyecto.
 2.  Navega al directorio del proyecto.
@@ -29,9 +37,9 @@ Para instalar y comenzar a utilizar Artivision, sigue estos pasos:
 
 ### Páginas Principales
 
+-   **Generate**: Crea imagenes con inteligencia artificial
 -   **Upload**: Para subir una nueva foto.
 -   **Gallery**: Muestra la galería personal del usuario.
 -   **Community**: Visualiza todas las fotos públicas, incluyendo las del usuario.
 -   **Admin**: Acceso a todas las fotos, públicas y privadas, para moderadores y administradores.
 -   **Profile**: Permite editar el perfil del usuario.
--   **Create**: Crea imagenes con inteligencia artificial
