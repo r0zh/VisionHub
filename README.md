@@ -36,9 +36,9 @@ Para instalar y utilizar VisionHub, sigue estos pasos:
 
 ### Cuentas de Prueba
 
--   **Usuario**: gmail: [johndoe@gmail.com](mailto:johndoe@gmail.com), contraseña: password, rol: usuario
--   **Moderador**: gmail: [janedoe@gmail.com](mailto:janedoe@gmail.com), contraseña: password, rol: moderador
--   **Admin**: gmail: [admin@admin.com](mailto:admin@admin.com), contraseña: password, rol: admin
+-   **Usuario**: email: [johndoe@gmail.com](mailto:johndoe@gmail.com), contraseña: password, rol: usuario
+-   **Moderador**: email: [janedoe@gmail.com](mailto:janedoe@gmail.com), contraseña: password, rol: moderador
+-   **Admin**: email: [admin@admin.com](mailto:admin@admin.com), contraseña: password, rol: admin
 
 ### Páginas Principales
 
