@@ -48,3 +48,6 @@ Para instalar y utilizar VisionHub, sigue estos pasos:
 -   **Community**: Visualiza todas las fotos públicas, incluyendo las del usuario.
 -   **Admin**: Acceso a todas las fotos, públicas y privadas, para moderadores y administradores.
 -   **Profile**: Permite editar el perfil del usuario.
+
+### CheckPoint
+[Video](https://drive.google.com/file/d/1GPy1Gv4cX6CCfkl943jLvkfbpGoQ8JoE/view?usp=sharing)
