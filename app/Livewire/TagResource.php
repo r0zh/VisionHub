@@ -63,7 +63,6 @@ class TagResource extends Component implements HasForms, HasTable
                 /* Action::make('relatedPost')
                     ->label('View Related Posts')
                     ->url(fn (): string => route('posts.edit', ['name'])), */
-                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make()
                 ->form([
                     TextInput::make('name')
@@ -74,7 +73,9 @@ class TagResource extends Component implements HasForms, HasTable
                 Tables\Actions\DeleteAction::make()
             ])
             ->bulkActions([
-                // ...
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                ]),
             ]);
     }
 

@@ -79,6 +79,7 @@ class UserResource extends Component implements HasForms, HasTable
                         ->required()
                         ->maxLength(255)->label('New password')
                     ]),
+                Tables\Actions\DeleteAction::make()
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

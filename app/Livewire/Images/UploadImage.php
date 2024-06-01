@@ -57,12 +57,34 @@ class UploadImage extends Component implements HasForms
                                                 ->required(),
                                         ]),
                                     Select::make('style_id')->preload()->relationship(name: 'style', titleAttribute: 'name')->required(),
-
+                                    Select::make('checkpoint_id')->preload()->relationship(name: 'checkpoint', titleAttribute: 'name')->required(),
                                 ]),
 
                                 Group::make()->schema([
                                     TextInput::make('positivePrompt')->required(),
                                     TextInput::make('negativePrompt')->required(),
+                                    Select::make('lora_id')
+                                    ->multiple()
+                                    ->preload()
+                                    ->relationship('loras', 'name')
+                                    ->createOptionForm([
+                                        TextInput::make('name')
+                                            ->required(),
+                                        TextInput::make('fileName')
+                                            ->required(),
+                                        RichEditor::make('description')->nullable(),
+                                    ]),
+                                    Select::make('embedding_id')
+                                    ->multiple()
+                                    ->preload()
+                                    ->relationship('embeddings', 'name')
+                                    ->createOptionForm([
+                                        TextInput::make('name')
+                                            ->required(),
+                                        TextInput::make('fileName')
+                                            ->required(),
+                                        RichEditor::make('description')->nullable(),
+                                    ]),
 
                                     TextInput::make('seed')->numeric()->required()->maxValue(4294967296),
 
