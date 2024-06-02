@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Admin;
 
 use App\Filament\Resources\TagResource\Pages;
 use App\Filament\Resources\TagResource\RelationManagers;
@@ -27,7 +27,7 @@ use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Actions\Action;
 
-class UserResource extends Component implements HasForms, HasTable
+class UserAdminResource extends Component implements HasForms, HasTable
 {
     use InteractsWithTable;
     use InteractsWithForms;

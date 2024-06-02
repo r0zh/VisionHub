@@ -28,4 +28,8 @@ class Style extends Model
     {
         return $this->belongsTo(Checkpoint::class);
     }
+    public function embedding()
+    {
+        return $this->belongsTo(Embedding::class);
+    }
 }

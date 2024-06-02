@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Admin;
 
 use App\Filament\Resources\TagResource\Pages;
 use App\Filament\Resources\TagResource\RelationManagers;
@@ -24,7 +24,7 @@ use App\Models\Post;
 use Filament\Tables\Actions\Action;
 
 
-class TagResource extends Component implements HasForms, HasTable
+class TagAdminResource extends Component implements HasForms, HasTable
 {
     use InteractsWithTable;
     use InteractsWithForms;

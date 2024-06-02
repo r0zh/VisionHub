@@ -17,10 +17,13 @@ class StyleTableSeeder extends Seeder
     {
         DB::table('styles')->insert([[
             'name' => 'Realistic',
+            'checkpoint_id' => 3,
         ], [
             'name' => 'Futurist',
+            'checkpoint_id' => 3,
         ], [
             'name' => 'Anime',
+            'checkpoint_id' => 3,
         ]
         ]);
     }

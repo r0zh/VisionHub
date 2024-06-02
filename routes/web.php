@@ -3,14 +3,13 @@
 use App\Livewire\Images\GenerateImage;
 use App\Livewire\Images\UploadImage;
 use Illuminate\Support\Facades\Route;
-use Livewire\Volt\Volt;
 use App\Livewire\CreatePost;
-use App\Livewire\TagResource;
-use App\Livewire\ImageResource;
-use App\Livewire\UserResource;
-use App\Filament\Resources\ImageResource\Pages;
-use App\Providers\Filament\AdminPanelProvider;
-
+use App\Livewire\Admin\TagAdminResource;
+use App\Livewire\Admin\ImageAdminResource;
+use App\Livewire\Admin\UserAdminResource;
+use App\Livewire\Admin\LoraAdminResource;
+use App\Livewire\Admin\CheckpointAdminResource;
+use App\Livewire\Admin\StyleAdminResource;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,11 +28,13 @@ Route::get('/', function () {
 });
 
 Route::get('posts/create', CreatePost::class)->middleware(['auth', 'verified']);
-Route::get('admin/tags/list', TagResource::class)->middleware(['auth', 'verified']);
-Route::get('admin/images/create', ImageResource::class)->middleware(['auth', 'verified']);
-Route::get('admin/user/list', UserResource::class)->middleware(['auth', 'verified']);
-Route::get('admin/images/list', ImageResource::class)->middleware(['auth', 'verified']);
-// Route::get('admin/panel/try', AdminPanelProvider::class)->middleware(['auth', 'verified']);
+
+Route::get('admin/tags', TagAdminResource::class)->middleware('checkPermission:admin')->middleware(['auth', 'verified']);
+Route::get('admin/users', UserAdminResource::class)->middleware('checkPermission:admin')->middleware(['auth', 'verified']);
+Route::get('admin/images', ImageAdminResource::class)->middleware('checkPermission:admin')->middleware(['auth', 'verified']);
+Route::get('admin/loras', LoraAdminResource::class)->middleware('checkPermission:admin')->middleware(['auth', 'verified']);
+Route::get('admin/checkpoints', CheckpointAdminResource::class)->middleware('checkPermission:admin')->middleware(['auth', 'verified']);
+Route::get('admin/styles', StyleAdminResource::class)->middleware('checkPermission:admin')->middleware(['auth', 'verified']);
 
 Route::get('create', GenerateImage::class)->middleware(['auth', 'verified'])->name('create');
 Route::get('upload', UploadImage::class)->middleware(['auth', 'verified'])->name('upload');

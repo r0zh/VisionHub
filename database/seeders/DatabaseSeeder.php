@@ -14,13 +14,15 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(RoleTableSeeder::class);
         $this->call(UserTableSeeder::class);
+        $this->call(EmbeddingTableSeeder::class);
+        $this->call(LoraTableSeeder::class);
+        $this->call(CheckpointTableSeeder::class);
         $this->call(StyleTableSeeder::class);
         $this->call(ImageTableSeeder::class);
         $this->call(TagTableSeeder::class);
         $this->call(ImageTagsTableSeeder::class);
-        $this->call(CheckpointTableSeeder::class);
-        $this->call(EmbeddingTableSeeder::class);
-        $this->call(LoraTableSeeder::class);
+        
+        
 
 
         // \App\Models\User::factory(10)->create();

@@ -13,11 +13,14 @@ return new class extends Migration {
         Schema::create('styles', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->unsignedBigInteger('checkpoint_id')->nullable();
+            $table->unsignedBigInteger('checkpoint_id');
+            $table->unsignedBigInteger('embedding_id')->nullable();
             $table->string('name')->unique();
+            $table->string('description')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('checkpoint_id')->references('id')->on('checkpoints')->onDelete('cascade');
+            $table->foreign('embedding_id')->references('id')->on('embeddings')->onDelete('cascade');
         });
     }
 

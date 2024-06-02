@@ -1,24 +1,13 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Admin;
 
 use App\Filament\Resources\TagResource\Pages;
-use App\Filament\Resources\TagResource\RelationManagers;
-use App\Models\Tag;
 use App\Models\Image;
-use App\Models\Style;
-use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Forms\Components\Section;
-use Filament\Forms\Components\Group;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\CreateAction;
-use Filament\Forms\Components\Button;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Checkbox;
-use Filament\Forms\Components\FileUpload;
 
-use Filament\Resources\Resource;
+use Filament\Forms\Components\TextInput;
+
+
 use Livewire\Component;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -29,8 +18,7 @@ use Filament\Forms\Contracts\HasForms;
 
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Columns\TextColumn;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Tables\Actions\Action;
+
 
 
 
@@ -39,7 +27,7 @@ use Livewire\Attributes\On;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Auth;
 
-class ImageResource extends Component implements HasForms, HasTable
+class ImageAdminResource extends Component implements HasForms, HasTable
 {
     use InteractsWithTable;
     use InteractsWithForms;
@@ -57,43 +45,7 @@ class ImageResource extends Component implements HasForms, HasTable
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    public static function form(Form $form): Form
-    {
-        return $form
-            
-            ->schema([
-                Section::make('Create Image')
-                ->schema([
-                    TextInput::make('name'),
-                    TextInput::make('positivePrompt'),
-                    TextInput::make('negativePrompt'),
-                    TextInput::make('seed')->numeric(),
-                    Select::make('style')->options(Style::pluck('name', 'id')->toArray()),
-
-                    Group::make()
-                    ->schema([
-                        Section::make('Tags')->schema([
-                            
-                            Select::make('tags')
-                            ->multiple()
-                            ->options(Tag::pluck('name', 'id')->toArray())
-                        ])
-                    ]),
-                    
-                    Checkbox::make('public'),
-                    
-                    FileUpload::make('imagePath')->label('Add Image')->previewable(false)
-
-
-                    //->image()->imageEditor()
-                ])
-                
-            ]);
-            /* ->actions([
-                Tables\Actions\EditAction::make(),
-            ]); */
-    }
-
+    
     public static function table(Table $table): Table
     {
         return $table
@@ -102,8 +54,6 @@ class ImageResource extends Component implements HasForms, HasTable
                 TextColumn::make('user.name')->label('User Name'),
                 TextColumn::make('user.email')->label('Email'),
                 TextColumn::make('name')->label('Name'),
-                //TextColumn::make('positivePrompt')->label('Positive Promp'),
-                TextColumn::make('style')->label('Style'),
             ])
             ->filters([
                 //
