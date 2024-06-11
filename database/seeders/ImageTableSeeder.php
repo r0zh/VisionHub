@@ -97,7 +97,7 @@ class ImageTableSeeder extends Seeder
             [
                 'user_id' => 1,
                 'style_id' => 1,
-                'path' => 'private_images/1_johndoe/65535_52940735624_4d0052fd1e_c_512_768_nofilter.jpg',
+                'path' => 'private/images/1_johndoe/65535_52940735624_4d0052fd1e_c_512_768_nofilter.jpg',
                 'seed' => 123456,
                 'positivePrompt' => 'pengiun, ice, cold, cute',
                 'negativePrompt' => 'This is a negative prompt.',
@@ -108,7 +108,7 @@ class ImageTableSeeder extends Seeder
             [
                 'user_id' => 1,
                 'style_id' => 1,
-                'path' => 'private_images/1_johndoe/65535_53001912562_3decc04d9d_h_512_768_nofilter.jpg',
+                'path' => 'private/images/1_johndoe/65535_53001912562_3decc04d9d_h_512_768_nofilter.jpg',
                 'seed' => 1234567,
                 'positivePrompt' => 'green, trees, sunny',
                 'negativePrompt' => 'This is a negative prompt.',
@@ -152,7 +152,7 @@ class ImageTableSeeder extends Seeder
             [
                 'user_id' => 2,
                 'style_id' => 1,
-                'path' => 'private_images/2_janedoe/65535_52974542495_8e8301bae7_h_512_768_nofilter.jpg',
+                'path' => 'private/images/2_janedoe/65535_52974542495_8e8301bae7_h_512_768_nofilter.jpg',
                 'seed' => 1234567,
                 'positivePrompt' => 'view from a plane, sky, desert',
                 'negativePrompt' => 'This is a negative prompt.',

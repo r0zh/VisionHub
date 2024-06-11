@@ -34,13 +34,13 @@ class Upload extends Component
      * Validation rules for the component properties.
      */
     protected $rules = [
-        'name'           => 'required|string',
-        'seed'           => 'required|numeric',
+        'name' => 'required|string',
+        'seed' => 'required|numeric',
         'positivePrompt' => 'required|string',
         'negativePrompt' => 'required|string',
-        'image'          => 'required|mimes:jpeg,png,jpg,gif|max:2048',
-        'public'         => 'boolean',
-        'style'          => 'required'
+        'image' => 'required|mimes:jpeg,png,jpg,gif|max:2048',
+        'public' => 'boolean',
+        'style' => 'required'
     ];
 
     public $id = 1;
@@ -52,23 +52,23 @@ class Upload extends Component
     {
         $this->validate();
         Image::create([
-            'seed'           => $this->seed,
+            'seed' => $this->seed,
             'positivePrompt' => $this->positivePrompt,
             'negativePrompt' => $this->negativePrompt,
-            'style'          => $this->style,
-            'public'         => $this->public,
+            'style' => $this->style,
+            'public' => $this->public,
             // Store the image in the public or private directory
-            'path'           => $this->public ? Storage::disk('public')->putFileAs(
+            'path' => $this->public ? Storage::disk('public')->putFileAs(
                 'images/' . Auth::user()->id . '_' . explode('@', Auth::user()->email)[0],
                 $this->image,
                 $this->name . '.' . $this->image->getClientOriginalExtension()
             ) : Storage::disk('local')->putFileAs(
-                        'private_images/' . Auth::user()->id . '_' . explode('@', Auth::user()->email)[0],
+                        'private/images/' . Auth::user()->id . '_' . explode('@', Auth::user()->email)[0],
                         $this->image,
                         $this->name . '.' . $this->image->getClientOriginalExtension()
                     ),
-            'created_at'     => now(),
-            'user_id'        => Auth::user()->id,
+            'created_at' => now(),
+            'user_id' => Auth::user()->id,
         ]);
         $this->resetImage();
     }

@@ -128,7 +128,7 @@ class GenerateImage extends Component implements HasForms, HasActions
             $enrichedData['path'] = $newPath;
             Storage::disk('public')->put($newPath, Storage::disk('public')->get(session('imagePath')));
         } else {
-            $newPath = "private_images/" . auth()->id() . '_' . explode('@', auth()->user()->email)[0] . '/' . $path;
+            $newPath = "private/images/" . auth()->id() . '_' . explode('@', auth()->user()->email)[0] . '/' . $path;
             $enrichedData['path'] = $newPath;
             Storage::disk('local')->put($newPath, Storage::disk('public')->get(session('imagePath')));
         }

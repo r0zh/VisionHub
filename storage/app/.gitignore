@@ -1,9 +1,9 @@
 *
 !public/
-!private_images/
+!private/images/
 !.gitignore
-private_images/*
-!private_images/1_johndoe
-!private_images/2_janedoe
-!private_images/1_johndoe/*
-!private_images/2_janedoe/*
+private/images/*
+!private/images/1_johndoe
+!private/images/2_janedoe
+!private/images/1_johndoe/*
+!private/images/2_janedoe/*

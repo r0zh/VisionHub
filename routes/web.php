@@ -51,7 +51,7 @@ Route::view('community', 'community')
     ->middleware(['auth'])
     ->name('community');
 
-Route::get('/private_images/{user}/{file}', [App\Http\Controllers\ImageController::class, 'getImage']);
+Route::get('/private/images/{user}/{file}', [App\Http\Controllers\ImageController::class, 'getImage']);
 
 Route::view('/admin', 'admin')->middleware('checkPermission:admin')->name('admin');
 

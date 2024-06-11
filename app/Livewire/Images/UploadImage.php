@@ -43,7 +43,7 @@ class UploadImage extends Component implements HasForms
                 Section::make('Upload Image')->schema([
                     Grid::make([
                         'default' => 1,
-                        'md'      => 2
+                        'md' => 2
                     ])->schema([
                                 Group::make()->schema([
                                     TextInput::make('name')->nullable(),
@@ -64,27 +64,27 @@ class UploadImage extends Component implements HasForms
                                     TextInput::make('positivePrompt')->required(),
                                     TextInput::make('negativePrompt')->required(),
                                     Select::make('lora_id')
-                                    ->multiple()
-                                    ->preload()
-                                    ->relationship('loras', 'name')
-                                    ->createOptionForm([
-                                        TextInput::make('name')
-                                            ->required(),
-                                        TextInput::make('fileName')
-                                            ->required(),
-                                        RichEditor::make('description')->nullable(),
-                                    ]),
+                                        ->multiple()
+                                        ->preload()
+                                        ->relationship('loras', 'name')
+                                        ->createOptionForm([
+                                            TextInput::make('name')
+                                                ->required(),
+                                            TextInput::make('fileName')
+                                                ->required(),
+                                            RichEditor::make('description')->nullable(),
+                                        ]),
                                     Select::make('embedding_id')
-                                    ->multiple()
-                                    ->preload()
-                                    ->relationship('embeddings', 'name')
-                                    ->createOptionForm([
-                                        TextInput::make('name')
-                                            ->required(),
-                                        TextInput::make('fileName')
-                                            ->required(),
-                                        RichEditor::make('description')->nullable(),
-                                    ]),
+                                        ->multiple()
+                                        ->preload()
+                                        ->relationship('embeddings', 'name')
+                                        ->createOptionForm([
+                                            TextInput::make('name')
+                                                ->required(),
+                                            TextInput::make('fileName')
+                                                ->required(),
+                                            RichEditor::make('description')->nullable(),
+                                        ]),
 
                                     TextInput::make('seed')->numeric()->required()->maxValue(4294967296),
 
@@ -112,7 +112,7 @@ class UploadImage extends Component implements HasForms
             $formData['path'] = $newPath;
             Storage::disk('public')->put($newPath, Storage::disk('public')->get($formData['imagePath']));
         } else {
-            $newPath = "private_images/" . auth()->id() . '_' . explode('@', auth()->user()->email)[0] . '/' . $formData['imagePath'];
+            $newPath = "private/images/" . auth()->id() . '_' . explode('@', auth()->user()->email)[0] . '/' . $formData['imagePath'];
             $formData['path'] = $newPath;
             Storage::disk('local')->put($newPath, Storage::disk('public')->get($formData['imagePath']));
         }

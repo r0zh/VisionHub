@@ -16,7 +16,8 @@ use LivewireUI\Modal\ModalComponent;
  * This class represents a Livewire component for displaying and managing image details.
  * It extends the ModalComponent class.
  */
-class ImageDetails extends ModalComponent {
+class ImageDetails extends ModalComponent
+{
 
     public $image;
 
@@ -28,7 +29,8 @@ class ImageDetails extends ModalComponent {
      * @param int $id The image ID.
      * @return void
      */
-    public function mount($id) {
+    public function mount($id)
+    {
         // Retrieve the image by ID
         $this->image = Image::find($id);
 
@@ -41,16 +43,17 @@ class ImageDetails extends ModalComponent {
      *
      * @return void
      */
-    public function togglePublic() {
+    public function togglePublic()
+    {
         if ($this->image->public) {
-            // Move the image to private_images directory, delete the public image and update the path
-            $newPath = Str::replaceFirst('images/', 'private_images/', $this->image->path);
+            // Move the image to private/images directory, delete the public image and update the path
+            $newPath = Str::replaceFirst('images/', 'private/images/', $this->image->path);
             Storage::disk('local')->put($newPath, Storage::disk('public')->get($this->image->path));
             Storage::disk('public')->delete($this->image->path);
             $this->image->path = $newPath;
         } else {
             // Move the image to images public directory, delete the private image and update the path
-            $newPath = Str::replaceFirst('private_images/', 'images/', $this->image->path);
+            $newPath = Str::replaceFirst('private/images/', 'images/', $this->image->path);
             Storage::disk('public')->put($newPath, Storage::disk('local')->get($this->image->path));
             Storage::disk('local')->delete($this->image->path);
             $this->image->path = $newPath;
@@ -68,7 +71,8 @@ class ImageDetails extends ModalComponent {
      *
      * @return void
      */
-    public function deleteImage() {
+    public function deleteImage()
+    {
         // Destroy the image file
         $path = Str::replaceFirst('storage/', '', $this->image->path);
         if ($this->image->public) {
@@ -88,7 +92,8 @@ class ImageDetails extends ModalComponent {
      * Handle the 'imageVisibilityUpdated' event.
      */
     #[On('imageVisibilityUpdated')]
-    public function imageVisibilityUpdated() {
+    public function imageVisibilityUpdated()
+    {
         // Refresh the image object
         $this->image = Image::find($this->image->id);
     }
@@ -96,7 +101,8 @@ class ImageDetails extends ModalComponent {
     /**
      * Render the component.
      */
-    public function render() {
+    public function render()
+    {
         return view('livewire.artivision.components.image-details');
     }
 }
