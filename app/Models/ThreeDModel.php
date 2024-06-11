@@ -26,28 +26,4 @@ class ThreeDModel extends Model
     {
         return $this->belongsTo(User::class);
     }
-    public function checkpoint()
-    {
-        return $this->belongsTo(Checkpoint::class);
-    }
-    public function style()
-    {
-        return $this->belongsTo(Style::class);
-    }
-    public function owner()
-    {
-        return $this->belongsTo(User::class, 'user')->first();
-    }
-    public function tags()
-    {
-        return $this->belongsToMany(Tag::class, 'image_tag');
-    }
-    public function loras()
-    {
-        return $this->belongsToMany(Lora::class, 'image_lora');
-    }
-    public function embeddings()
-    {
-        return $this->belongsToMany(Embedding::class, 'image_embedding');           
-    }
 }

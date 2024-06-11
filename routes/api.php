@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ImageController;
 use App\Http\Controllers\Api\ImageServeController;
+use App\Http\Controllers\Api\ThreeDModelController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,4 +30,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('images/user', [ImageController::class, 'userImages']);
     Route::get('images/all', [ImageController::class, 'allImages'])->middleware(['role:admin']);
     Route::get('images/{id}/get', [ImageServeController::class, 'serveImage'])->name('images.download');
+    Route::post('models/upload', [ThreeDModelController::class, 'store']);
 });
