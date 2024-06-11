@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\ThreeDModel;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
 
 class ThreeDModelController extends Controller
 {
@@ -48,11 +51,25 @@ class ThreeDModelController extends Controller
         $model->user_id = $user->id;
         $model->name = $request->name;
         $model->description = $request->description;
-        $model->path = $request->file;
+        // request->file is the file uploaded by the user
+        $file = $request->file('file');
+        $randomName = Str::random(40) . ".obj";
+
+        if ($request->isPublic) {
+            // get name or put a random unique name
+            $path = "three_d_models/" . $user->id . '_' . explode('@', $user->email)[0] . '/';
+            Storage::disk('public')->putFileAs($path, $file, $randomName);
+            $model->path = $path . $randomName;
+            $model->public = 1;
+        } else {
+            $path = "private/three_d_models/" . $user->id . '_' . explode('@', $user->email)[0] . '/';
+            Storage::disk('local')->putFileAs($path, $file, $randomName);
+            $model->path = $path . $randomName;
+            $model->public = 0;
+        }
+
         $model->prompt = $request->prompt;
-        $model->public = $request->public;
-        return response()->json($model);
-        $model->save();
+        return $model->save();
     }
 
     /**
