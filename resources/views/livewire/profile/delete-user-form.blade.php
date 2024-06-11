@@ -19,6 +19,8 @@ new class extends Component {
 
         Storage::disk('public')->deleteDirectory('images/' . Auth::user()->id . '_' . explode('@', Auth::user()->email)[0]);
         Storage::disk('local')->deleteDirectory('private/images/' . Auth::user()->id . '_' . explode('@', Auth::user()->email)[0]);
+        Storage::disk('public')->deleteDirectory('three_d_models/' . Auth::user()->id . '_' . explode('@', Auth::user()->email)[0]);
+        Storage::disk('local')->deleteDirectory('private/three_d_models/' . Auth::user()->id . '_' . explode('@', Auth::user()->email)[0]);
 
         tap(Auth::user(), $logout(...))->delete();
 
