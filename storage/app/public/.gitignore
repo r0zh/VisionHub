@@ -8,6 +8,6 @@ imgages/*
 three_d_models/*
 !three_d_models/1_johndoe
 !three_d_models/2_janedoe
-three_d_models/1_johndoe/*
-three_d_models/2_janedoe/*
+!three_d_models/1_johndoe/*
+!three_d_models/2_janedoe/*
 !tmp
