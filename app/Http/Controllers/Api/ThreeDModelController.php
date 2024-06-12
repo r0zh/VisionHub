@@ -52,19 +52,27 @@ class ThreeDModelController extends Controller
         $model->name = $request->name;
         $model->description = $request->description;
         // request->file is the file uploaded by the user
-        $file = $request->file('file');
-        $randomName = Str::random(40) . ".obj";
+        $modelFile = $request->file('model');
+        $modelThumbnail = $request->file('thumbnail');
+        Log::info("modelFile:   " . $modelFile);
+        Log::info("modelThum:   " . $modelThumbnail);
+        $randomName = Str::random(40);
 
         if ($request->isPublic == 1) {
             // get name or put a random unique name
             $path = "three_d_models/" . $user->id . '_' . explode('@', $user->email)[0] . '/';
-            Storage::disk('public')->putFileAs($path, $file, $randomName);
-            $model->path = $path . $randomName;
+            Storage::disk('public')->putFileAs($path, $modelFile, $randomName . ".obj");
+            Storage::disk('public')->putFileAs($path, $modelThumbnail, 'thumbnail_' . $randomName . '.png');
+            $model->path = $path . $randomName . ".obj";
+            $model->thumbnail = $path . 'thumbnail_' . $randomName . '.png';
             $model->public = 1;
         } else {
             $path = "private/three_d_models/" . $user->id . '_' . explode('@', $user->email)[0] . '/';
-            Storage::disk('local')->putFileAs($path, $file, $randomName);
-            $model->path = $path . $randomName;
+            Storage::disk('local')->putFileAs($path, $modelFile, $randomName . ".obj");
+            Storage::disk('local')->putFileAs($path, $modelThumbnail, 'thumbnail_' . $randomName . '.png');
+            $model->path = $path . $randomName . ".obj";
+            $model->thumbnail = $path . 'thumbnail_' . $randomName . '.png';
+
             $model->public = 0;
         }
 

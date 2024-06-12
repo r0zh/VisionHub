@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->string('name')->nullable();
             $table->text('description')->nullable();
             $table->string('path');
+            $table->string('thumbnail');
             $table->string('prompt');
             $table->boolean('public')->default(false);
             $table->timestamps();

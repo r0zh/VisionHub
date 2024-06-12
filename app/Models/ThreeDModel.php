@@ -18,6 +18,7 @@ class ThreeDModel extends Model
         'name',
         'description',
         'path',
+        'thumbnail',
         'prompt',
         'public'
     ];

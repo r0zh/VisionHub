@@ -16,10 +16,11 @@ class ThreeDModelTableSeeder extends Seeder
         DB::table('three_d_models')->insert([
             [
                 'user_id' => 1,
-                'name' => 'Banana',
-                'description' => 'This is a 3D banana.',
+                'name' => 'Banana chair',
+                'description' => 'This is a 3D chair banana.',
                 'path' => 'three_d_models/1_johndoe/zkACCAoP.obj',
-                'prompt' => 'a banana',
+                'thumbnail' => 'three_d_models/1_johndoe/zkACCAoP.png',
+                'prompt' => 'a banana chair',
                 'public' => true,
                 'created_at' => now(),
             ],
