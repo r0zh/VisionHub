@@ -21,8 +21,9 @@ class DatabaseSeeder extends Seeder
         $this->call(ImageTableSeeder::class);
         $this->call(TagTableSeeder::class);
         $this->call(ImageTagsTableSeeder::class);
-        
-        
+        $this->call(ThreeDModelTableSeeder::class);
+
+
 
 
         // \App\Models\User::factory(10)->create();

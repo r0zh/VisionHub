@@ -55,7 +55,7 @@ class ThreeDModelController extends Controller
         $file = $request->file('file');
         $randomName = Str::random(40) . ".obj";
 
-        if ($request->isPublic) {
+        if ($request->isPublic == 1) {
             // get name or put a random unique name
             $path = "three_d_models/" . $user->id . '_' . explode('@', $user->email)[0] . '/';
             Storage::disk('public')->putFileAs($path, $file, $randomName);
