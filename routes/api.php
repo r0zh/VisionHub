@@ -32,6 +32,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('images/all', [ImageController::class, 'allImages'])->middleware(['role:admin']);
     Route::get('images/{id}/get', [ImageServeController::class, 'serveImage'])->name('images.download');
     Route::post('models/upload', [ThreeDModelController::class, 'store']);
+    Route::get('models/public', [ThreeDModelController::class, 'index']);
+    Route::get('models/user', [ThreeDModelController::class, 'userModels']);
     Route::get('model/{id}/get', [ThreeDModelServeController::class, 'serveThreeDModel'])->name('models.download');
     Route::get('model/{id}/thumbnail', [ThreeDModelServeController::class, 'serveThreeDModelThumbnail'])->name('models.thumbnail');
 });

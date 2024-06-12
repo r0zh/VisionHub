@@ -25,7 +25,7 @@ class ThreeDModelController extends Controller
     /**
      * Get the images uploaded by the user.
      */
-    public function userImages()
+    public function userModels()
     {
         $user = auth()->user();
         $models = ThreeDModel::where('user_id', $user->id)->get();
