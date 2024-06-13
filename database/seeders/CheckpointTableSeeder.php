@@ -15,20 +15,15 @@ class CheckpointTableSeeder extends Seeder
     {
         DB::table('checkpoints')->insert([
             [
-                'name' => 'Stable diffusion v1.5',
-                'description' => null,
-                'fileName' => 'sd-v1-5.safetensors',
+                'name' => 'PonyMixDPO',
+                'description' => "Go-to model for generating anime/cartoon/drawings images.",
+                'fileName' => 'autismmixSDXL_autismmixDPO.safetensors',
             ],
             [
-                'name' => 'Realistic vision V6.0 B1',
+                'name' => 'Realistic vision V6.0',
                 'description' => 'This model is a good starting point for generating realistic images.',
                 'fileName' => 'realisticVisionV60B1_v51HyperVAE.safetensors',
             ],
-            [
-                'name' => 'AnyLora',
-                'description' => 'Go-to anime model to use along loras.',
-                'fileName' => 'anyloraCheckpoint_bakedvaeBlessedFp16.safetensors'
-            ]
         ]);
     }
 }
