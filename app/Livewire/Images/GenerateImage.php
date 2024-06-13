@@ -59,7 +59,7 @@ class GenerateImage extends Component implements HasForms, HasActions
                                 Select::make('style_id')->preload()->relationship(name: 'style', titleAttribute: 'name'),
                                 Select::make('checkpoint_id')->preload()->relationship(name: 'checkpoint', titleAttribute: 'name')->required(),
                                 TextInput::make('positivePrompt')->required(),
-                                TextInput::make('negativePrompt')->required(),
+                                TextInput::make('negativePrompt'),
                                 TextInput::make('seed')->numeric()->required()->maxValue(4294967296)->minValue(0),
                                 Select::make('ratio')->options([
                                     '2:3' => '2:3',
@@ -101,6 +101,7 @@ class GenerateImage extends Component implements HasForms, HasActions
     {
         $this->fetching = true;
         $data = $this->form->getState();
+        $data['checkpoint'] = Checkpoint::find($data['checkpoint_id'])->fileName;
         $apiUrl = config('services.flask') . '/generate';
         //display jpeg response
         $response = Http::timeout(5 * 60)->post($apiUrl, $data);
