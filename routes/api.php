@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\ImageController;
 use App\Http\Controllers\Api\ImageServeController;
 use App\Http\Controllers\Api\ThreeDModelController;
 use App\Http\Controllers\Api\ThreeDModelServeController;
+use App\Http\Controllers\Api\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,4 +37,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('models/user', [ThreeDModelController::class, 'userModels']);
     Route::get('model/{id}/get', [ThreeDModelServeController::class, 'serveThreeDModel'])->name('models.download');
     Route::get('model/{id}/thumbnail', [ThreeDModelServeController::class, 'serveThreeDModelThumbnail'])->name('models.thumbnail');
+    Route::get('user/{id}/get', [UserController::class, 'user'])->name('user.get');
+    Route::get('user/get_id', [UserController::class, 'id'])->name('user.get_id');
 });
