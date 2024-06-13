@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Images;
 
+use App\Models\Checkpoint;
 use App\Models\Image;
 use App\Models\ModelRequest;
 use Filament\Forms;
@@ -61,8 +62,8 @@ class GenerateImage extends Component implements HasForms, HasActions
                                 TextInput::make('negativePrompt')->required(),
                                 TextInput::make('seed')->numeric()->required()->maxValue(4294967296)->minValue(0),
                                 Select::make('ratio')->options([
-                                    '2_3' => '2:3',
-                                    '1_1' => '1:1',
+                                    '2:3' => '2:3',
+                                    '1:1' => '1:1',
                                 ])->required(),
                                 Select::make('lora_id')
                                     ->multiple()
@@ -100,9 +101,9 @@ class GenerateImage extends Component implements HasForms, HasActions
     {
         $this->fetching = true;
         $data = $this->form->getState();
-        $apiUrl = config('services.flask') . '/get_image';
+        $apiUrl = config('services.flask') . '/generate';
         //display jpeg response
-        $response = Http::post($apiUrl, $data);
+        $response = Http::timeout(5 * 60)->post($apiUrl, $data);
 
         // display the image in the browser
         $image = $response->getBody();
@@ -121,6 +122,7 @@ class GenerateImage extends Component implements HasForms, HasActions
     {
         $enrichedData = array_merge($data, $this->form->getState());
         $enrichedData['user_id'] = Auth::user()->id;
+        $enrichedData['checkpoint'] = Checkpoint::find($enrichedData['checkpoint_id'])->fileName;
         $path = str_replace("images/tmp/", "", session('imagePath'));
 
         if ($enrichedData['public']) {
