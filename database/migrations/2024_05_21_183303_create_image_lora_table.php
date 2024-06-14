@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -16,9 +15,10 @@ return new class extends Migration
             $table->timestamps();
             $table->unsignedBigInteger('lora_id');
             $table->unsignedBigInteger('image_id');
+            $table->float('weight');
             $table->foreign('lora_id')->references('id')->on('loras')->onDelete('cascade');
             $table->foreign('image_id')->references('id')->on('images')->onDelete('cascade');
-        
+
         });
     }
 

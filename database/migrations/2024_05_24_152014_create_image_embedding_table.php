@@ -14,6 +14,8 @@ return new class extends Migration {
             $table->id();
             $table->unsignedBigInteger('embedding_id');
             $table->unsignedBigInteger('image_id');
+            $table->float('weight');
+            $table->string('prompt_target');
             $table->foreign('embedding_id')->references('id')->on('embeddings')->onDelete('cascade');
             $table->foreign('image_id')->references('id')->on('images')->onDelete('cascade');
             $table->timestamps();

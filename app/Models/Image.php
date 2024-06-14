@@ -51,12 +51,20 @@ class Image extends Model
     {
         return $this->belongsToMany(Tag::class, 'image_tag');
     }
+    public function imageLoras()
+    {
+        return $this->hasMany(ImageLora::class);
+    }
+    public function imageEmbeddings()
+    {
+        return $this->hasMany(ImageEmbedding::class);
+    }
     public function loras()
     {
         return $this->belongsToMany(Lora::class, 'image_lora');
     }
     public function embeddings()
     {
-        return $this->belongsToMany(Embedding::class, 'image_embedding');           
+        return $this->belongsToMany(Embedding::class, 'image_embedding');
     }
 }
