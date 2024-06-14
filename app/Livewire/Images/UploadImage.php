@@ -2,9 +2,18 @@
 
 namespace App\Livewire\Images;
 
+// auth
+use Illuminate\Support\Facades\Auth;
+
 use App\Models\Image;
 use App\Models\Style;
 use App\Models\Tag;
+use App\Models\ResourceRequest;
+
+use Filament\Actions\Action;
+use Filament\Actions\Contracts\HasActions;
+use Filament\Actions\Concerns\InteractsWithActions;
+
 
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\RichEditor;
@@ -18,15 +27,19 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Radio;
+use Filament\Forms\Components\Actions\Action as FormAction;
+
 
 use Livewire\Component;
 use Illuminate\Contracts\View\View;
 
 use Illuminate\Support\Facades\Storage;
 
-class UploadImage extends Component implements HasForms
+class UploadImage extends Component implements HasForms, HasActions
 {
-    use InteractsWithForms;
+    use InteractsWithForms, InteractsWithActions;
 
     public ?array $data = [];
     public bool $bool = false;
@@ -43,60 +56,84 @@ class UploadImage extends Component implements HasForms
                 Section::make('Upload Image')->schema([
                     Grid::make([
                         'default' => 1,
+                        'md' => 5
+                    ])->schema([
+                                TextInput::make('name')->nullable()->columnSpan(4),
+                                Checkbox::make('public')->label('Public')->default(true)->required(),
+                            ]),
+                    RichEditor::make('description')->nullable(),
+                    Grid::make([
+                        'default' => 1,
                         'md' => 2
                     ])->schema([
-                                Group::make()->schema([
-                                    TextInput::make('name')->nullable(),
-                                    RichEditor::make('description')->nullable(),
-                                    Select::make('tags')
-                                        ->multiple()
-                                        ->preload()
-                                        ->relationship('tags', 'name')
-                                        ->createOptionForm([
-                                            TextInput::make('name')
-                                                ->required(),
-                                        ]),
-                                    Select::make('style_id')->preload()->relationship(name: 'style', titleAttribute: 'name')->required(),
-                                    Select::make('checkpoint_id')->preload()->relationship(name: 'checkpoint', titleAttribute: 'name')->required(),
-                                ]),
 
-                                Group::make()->schema([
-                                    TextInput::make('positivePrompt')->required(),
-                                    TextInput::make('negativePrompt')->required(),
-                                    Select::make('lora_id')
-                                        ->multiple()
-                                        ->preload()
-                                        ->relationship('loras', 'name')
-                                        ->createOptionForm([
-                                            TextInput::make('name')
-                                                ->required(),
-                                            TextInput::make('fileName')
-                                                ->required(),
-                                            RichEditor::make('description')->nullable(),
-                                        ]),
-                                    Select::make('embedding_id')
-                                        ->multiple()
-                                        ->preload()
-                                        ->relationship('embeddings', 'name')
-                                        ->createOptionForm([
-                                            TextInput::make('name')
-                                                ->required(),
-                                            TextInput::make('fileName')
-                                                ->required(),
-                                            RichEditor::make('description')->nullable(),
-                                        ]),
+                                Select::make('style_id')->preload()->relationship(name: 'style', titleAttribute: 'name'),
+                                Select::make('checkpoint_id')->preload()->relationship(name: 'checkpoint', titleAttribute: 'name')->required()->hint(view('forms.components.request-form', ['type' => 'checkpoint'])),
+                                TextInput::make('positivePrompt')->required(),
+                                TextInput::make('negativePrompt'),
+                                TextInput::make('seed')->numeric()->required()->maxValue(4294967296)->minValue(0)->default(rand(1, 4294967296)),
+                                Select::make('tags')
+                                    ->multiple()
+                                    ->preload()
+                                    ->relationship('tags', 'name')
+                                    ->createOptionForm([
+                                        TextInput::make('name')
+                                            ->required(),
+                                    ]),
+                            ])->extraAttributes(['class' => 'custom-section-style']),
+                    Repeater::make('loras')
+                        ->schema([
+                            Select::make('lora_id')->relationship(name: 'loras', titleAttribute: 'name')->label("Lora name")->required(),
+                            TextInput::make('weight')->numeric()->required()->maxValue(1.0)->minValue(-1.0)->step(0.01)->default(1),
 
-                                    TextInput::make('seed')->numeric()->required()->maxValue(4294967296),
+                        ])
+                        ->extraItemActions([
+                            FormAction::make('LoraInfo')
+                                ->icon('heroicon-m-information-circle')
+                                ->color('info')
+                                ->modalSubmitAction(false)
+                                ->modalCancelActionLabel('Close')
+                                ->modalContent(view('info.lora'))
+                        ])
+                        ->cloneable()
+                        ->defaultItems(0)
+                        ->columns(2)
+                        ->hint(view('forms.components.request-form', ['type' => 'lora'])),
 
-                                    FileUpload::make('imagePath')->imageEditor()->visibility('private')
-                                        ->imageEditorAspectRatios([
-                                            '16:9',
-                                            '4:3',
-                                            '1:1',
-                                        ])->image()->label('Upload Image')->required(),
-                                    Checkbox::make('public')
+                    Repeater::make('embeddings')
+                        ->columns([
+                            'default' => 1,
+                            'sm' => 1,
+                            'md' => 5,
+                            'lg' => 5,
+                            'xl' => 5,
+                            '2xl' => 5,
+                        ])
+                        ->schema([
+                            Select::make('embedding_id')->relationship(name: 'embeddings', titleAttribute: 'name')->label("Embedding name")->required()->columnSpan(2),
+                            TextInput::make('weight')->numeric()->required()->maxValue(1.0)->minValue(-1.0)->step(0.01)->columnSpan(2)->default(1),
+                            Radio::make('prompt_target')
+                                ->options([
+                                    'positive' => 'Positive',
+                                    'negative' => 'Negative',
                                 ])
-                            ]),
+                                ->inline()
+                                ->inlineLabel(false)
+                                ->required()
+                        ])->extraItemActions([
+                                FormAction::make('LoraInfo')->icon('heroicon-m-information-circle')->color('info')->modalSubmitAction(false)->modalCancelActionLabel('Close')->modalContent(view('info.embedding'))
+                            ])
+                        ->cloneable()
+                        ->defaultItems(0)
+                        ->columns(2)
+                        ->hint(view('forms.components.request-form', ['type' => 'embedding'])),
+
+                    FileUpload::make('imagePath')->imageEditor()->visibility('private')
+                        ->imageEditorAspectRatios([
+                            '16:9',
+                            '4:3',
+                            '1:1',
+                        ])->image()->label('Upload Image')->required(),
                 ])
             ])
             ->statePath('data')
@@ -123,6 +160,27 @@ class UploadImage extends Component implements HasForms
         $this->form->model($record)->saveRelationships();
 
         return redirect()->to('/gallery');
+    }
+
+    public function openRequestForm(): Action
+    {
+        return Action::make('openRequestForm')
+            ->label('here')
+            ->modalHeading('Resource request')
+            ->form([
+                TextInput::make('resource_name')
+                    ->maxLength(255)->required(),
+                TextInput::make('resource_url')->url()->required(),
+                TextInput::make('resource_description')
+                    ->nullable()
+            ])
+            ->model(Image::class)
+            ->action(function (array $arguments, array $data): void {
+                $data['request_type'] = $arguments['type'];
+                $data['sender_id'] = Auth::user()->id;
+                ResourceRequest::create($data);
+            })->link()
+        ;
     }
 
     public function resetForm()
