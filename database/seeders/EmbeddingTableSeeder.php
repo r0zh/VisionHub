@@ -16,14 +16,19 @@ class EmbeddingTableSeeder extends Seeder
         DB::table('embeddings')->insert([
             [
                 'name' => 'FastNegative V2',
-                'description' => null,
-                'fileName' => 'FastNegativeV2.pt',
+                'description' => "Embedding with common negative prompts. This embedding should be used in your NEGATIVE prompt.",
+                'fileName' => 'FastNegativeV2',
             ],
             [
-                'name' => 'Realistic vision Negative Embedding',
-                'description' => 'This embedding is a good for generating realistic images.',
-                'fileName' => 'realisticvision-negative-embedding.pt',
+                'name' => 'EasyNegative',
+                'description' => 'Embedding with common negative prompts. This embedding should be used in your NEGATIVE prompt.',
+                'fileName' => 'easynegative',
             ],
+            [
+                'name' => 'PlanIt',
+                'description' => "Embedding that is good for generating images of plans/blueprints.",
+                "fileName" => "PlanIt",
+            ]
         ]);
     }
 }
