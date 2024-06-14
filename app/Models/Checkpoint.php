@@ -16,6 +16,10 @@ class Checkpoint extends Model
         'name',
         'fileName',
         'description',
+        'steps',
+        'cfg',
+        'sampler_name',
+        'scheduler',
     ];
 
     public function images()

@@ -15,6 +15,10 @@ return new class extends Migration {
             $table->string('name')->unique();
             $table->string('fileName')->unique();
             $table->string('description')->nullable();
+            $table->integer('steps');
+            $table->float('cfg');
+            $table->string('sampler_name');
+            $table->string('scheduler');
             $table->timestamps();
         });
     }
