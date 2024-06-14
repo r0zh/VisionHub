@@ -24,35 +24,27 @@ use App\Livewire\Admin\StyleAdminResource;
 
 // rerout to the upload page
 Route::get('/', function () {
-    return redirect('upload');
+    return redirect('create');
 });
 
-Route::get('posts/create', CreatePost::class)->middleware(['auth', 'verified']);
+Route::middleware('auth')->middleware('checkPermission:admin')->group(function () {
+    Route::get('admin/tags', TagAdminResource::class);
+    Route::get('admin/users', UserAdminResource::class);
+    Route::get('admin/images', ImageAdminResource::class);
+    Route::get('admin/loras', LoraAdminResource::class);
+    Route::get('admin/checkpoints', CheckpointAdminResource::class);
+    Route::get('admin/styles', StyleAdminResource::class);
+    Route::view('/admin', 'admin')->name('admin');
+});
 
-Route::get('admin/tags', TagAdminResource::class)->middleware('checkPermission:admin')->middleware(['auth', 'verified']);
-Route::get('admin/users', UserAdminResource::class)->middleware('checkPermission:admin')->middleware(['auth', 'verified']);
-Route::get('admin/images', ImageAdminResource::class)->middleware('checkPermission:admin')->middleware(['auth', 'verified']);
-Route::get('admin/loras', LoraAdminResource::class)->middleware('checkPermission:admin')->middleware(['auth', 'verified']);
-Route::get('admin/checkpoints', CheckpointAdminResource::class)->middleware('checkPermission:admin')->middleware(['auth', 'verified']);
-Route::get('admin/styles', StyleAdminResource::class)->middleware('checkPermission:admin')->middleware(['auth', 'verified']);
-
-Route::get('create', GenerateImage::class)->middleware(['auth', 'verified'])->name('create');
-Route::get('upload', UploadImage::class)->middleware(['auth', 'verified'])->name('upload');
-
-Route::view('gallery', 'gallery')
-    ->middleware(['auth'])
-    ->name('gallery');
-
-Route::view('profile', 'profile')
-    ->middleware(['auth'])
-    ->name('profile');
-
-Route::view('community', 'community')
-    ->middleware(['auth'])
-    ->name('community');
+Route::middleware('auth')->group(function () {
+    Route::get('create', GenerateImage::class)->middleware(['auth'])->name('create');
+    Route::get('upload', UploadImage::class)->middleware(['auth'])->name('upload');
+    Route::view('gallery', 'gallery')->name('gallery');
+    Route::view('profile', 'profile')->name('profile');
+    Route::view('community', 'community')->name('community');
+});
 
 Route::get('/private/images/{user}/{file}', [App\Http\Controllers\ImageController::class, 'getImage']);
-
-Route::view('/admin', 'admin')->middleware('checkPermission:admin')->name('admin');
 
 require __DIR__ . '/auth.php';
