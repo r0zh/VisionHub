@@ -102,7 +102,7 @@ class GenerateImage extends Component implements HasForms, HasActions
                         ->schema([
                             Select::make('embedding_id')->relationship(name: 'embeddings', titleAttribute: 'name')->label("Embedding name")->required()->columnSpan(2),
                             TextInput::make('weight')->numeric()->required()->maxValue(1.0)->minValue(-1.0)->step(0.01)->columnSpan(2)->default(1),
-                            Radio::make('effect')
+                            Radio::make('prompt_target')
                                 ->options([
                                     'positive' => 'Positive',
                                     'negative' => 'Negative',
