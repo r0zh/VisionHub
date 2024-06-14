@@ -1,5 +1,5 @@
 <p class="text-sm dark:text-white">
-    @if ($type === 'checkpoint' && $this->imagePath)
+    @if ($type === 'checkpoint' && isset($this->imagePath))
         Request {{ $type }}
         {{ ($this->openRequestForm)(['type' => $type]) }}
     @else
