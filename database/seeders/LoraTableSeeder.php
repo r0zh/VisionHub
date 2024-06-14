@@ -15,14 +15,14 @@ class LoraTableSeeder extends Seeder
     {
         DB::table('loras')->insert([
             [
-                'name' => 'Zelda Breath of the Wild',
-                'description' => null,
-                'fileName' => 'zelda-breath-of-the-wild.safetensors',
+                'name' => 'Drawing Lora',
+                'description' => "Lora model trained on monochrome drawings.",
+                'fileName' => 'sp1tXLP.safetensors',
             ],
             [
-                'name' => 'Ghibli',
-                'description' => 'Studio Ghibli',
-                'fileName' => 'ghibli_style_offset.safetensors',
+                'name' => 'Monet Lora',
+                'description' => 'Lora model trained on Monet paintings.',
+                'fileName' => 'm0n3tXLP.safetensors',
             ]
 
         ]);
