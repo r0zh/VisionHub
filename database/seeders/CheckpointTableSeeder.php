@@ -21,15 +21,15 @@ class CheckpointTableSeeder extends Seeder
                 'steps' => 25,
                 'cfg' => 7,
                 'sampler_name' => 'euler_ancestral',
-                'scheduler' => 'karras'
+                'scheduler' => 'karras',
             ],
             [
-                'name' => 'Realistic vision V6.0',
+                'name' => 'RealisticVisionV4',
                 'description' => 'This model is a good starting point for generating realistic images.',
-                'fileName' => 'realisticVisionV60B1_v51HyperVAE.safetensors',
+                'fileName' => 'realvisxlV40_v40LightningBakedvae.safetensors',
                 'steps' => 5,
                 'cfg' => 1.0,
-                "smapler_name" => "dpmpp_sde",
+                "sampler_name" => "dpmpp_sde",
                 'scheduler' => 'karras'
             ],
         ]);
