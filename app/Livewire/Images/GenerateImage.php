@@ -126,6 +126,11 @@ class GenerateImage extends Component implements HasForms, HasActions
 
     public function create(): void
     {
+        if (session('imagePath')) {
+            Storage::disk('public')->delete(session('imagePath'));
+            session()->forget('imagePath');
+        }
+        $this->imagePath = "";
         $this->fetching = true;
         $data = $this->form->getState();
         $checkpoint = Checkpoint::find($data['checkpoint_id']);
