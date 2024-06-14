@@ -82,8 +82,9 @@ class UploadImage extends Component implements HasForms, HasActions
                                     ]),
                             ])->extraAttributes(['class' => 'custom-section-style']),
                     Repeater::make('loras')
+                        ->relationship('imageLoras')
                         ->schema([
-                            Select::make('lora_id')->relationship(name: 'loras', titleAttribute: 'name')->label("Lora name")->required(),
+                            Select::make('lora_id')->relationship(name: 'lora', titleAttribute: 'name')->label("Lora name")->required(),
                             TextInput::make('weight')->numeric()->required()->maxValue(1.0)->minValue(-1.0)->step(0.01)->default(1),
 
                         ])
@@ -109,8 +110,9 @@ class UploadImage extends Component implements HasForms, HasActions
                             'xl' => 5,
                             '2xl' => 5,
                         ])
+                        ->relationship('imageEmbeddings')
                         ->schema([
-                            Select::make('embedding_id')->relationship(name: 'embeddings', titleAttribute: 'name')->label("Embedding name")->required()->columnSpan(2),
+                            Select::make('embedding_id')->relationship(name: 'embedding', titleAttribute: 'name')->label("Embedding name")->required()->columnSpan(2),
                             TextInput::make('weight')->numeric()->required()->maxValue(1.0)->minValue(-1.0)->step(0.01)->columnSpan(2)->default(1),
                             Radio::make('prompt_target')
                                 ->options([
