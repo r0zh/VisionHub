@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
         $this->call(TagTableSeeder::class);
         $this->call(ImageTagsTableSeeder::class);
         $this->call(ThreeDModelTableSeeder::class);
-
+        $this->call(ResourceRequestTableSeeder::class);
 
 
 

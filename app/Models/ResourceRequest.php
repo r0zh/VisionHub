@@ -19,8 +19,15 @@ class ResourceRequest extends Model
         "resource_url",
         "resource_description",
         "sender_id",
-        "approved_by",
+        "status",
+        "resolved_by",
     ];
+
+    public function resolve()
+    {
+        $this->resolved_by = auth()->id();
+        $this->save();
+    }
 
     public function sender()
     {
@@ -29,6 +36,6 @@ class ResourceRequest extends Model
 
     public function approvedBy()
     {
-        return $this->belongsTo(User::class, 'approved_by');
+        return $this->belongsTo(User::class, 'resolved_by');
     }
 }
