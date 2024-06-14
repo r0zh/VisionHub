@@ -9,7 +9,7 @@
         }
     </style>
     <div
-        class="@if ($this->fetching || $this->imagePath) md:flex md:flex-row md:mx-20 md:h-[80vh] @else 2xl:mx-96 @endif transition-all items-center justify-center gap-16">
+        class="@if ($this->fetching || $this->imagePath) md:flex md:flex-row md:mx-20  @else 2xl:mx-96 @endif transition-all items-center justify-center gap-16">
         <form wire:submit="create"
             class="transition-all flex justify-center flex-col @if ($this->fetching || $this->imagePath) w-full @endif">
             {{ $this->form }}
