@@ -2,8 +2,9 @@
 
 use App\Livewire\Images\GenerateImage;
 use App\Livewire\Images\UploadImage;
+use App\Livewire\Moderator\ResolveRequest;
+use App\Livewire\Moderator\ResolveRequestResource;
 use Illuminate\Support\Facades\Route;
-use App\Livewire\CreatePost;
 use App\Livewire\Admin\TagAdminResource;
 use App\Livewire\Admin\ImageAdminResource;
 use App\Livewire\Admin\UserAdminResource;
@@ -35,6 +36,10 @@ Route::middleware('auth')->middleware('checkPermission:admin')->group(function (
     Route::get('admin/checkpoints', CheckpointAdminResource::class);
     Route::get('admin/styles', StyleAdminResource::class);
     Route::view('/admin', 'admin')->name('admin');
+});
+
+Route::middleware('auth')->middleware('checkPermission:moderator')->group(function () {
+    Route::get('resolve', ResolveRequestResource::class);
 });
 
 Route::middleware('auth')->group(function () {
