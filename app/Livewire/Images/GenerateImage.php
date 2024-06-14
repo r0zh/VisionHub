@@ -231,7 +231,7 @@ class GenerateImage extends Component implements HasForms, HasActions
             ->form([
                 TextInput::make('resource_name')
                     ->maxLength(255)->required(),
-                TextInput::make('resource_url')->required(),
+                TextInput::make('resource_url')->url()->required(),
                 TextInput::make('resource_description')
                     ->nullable()
             ])
