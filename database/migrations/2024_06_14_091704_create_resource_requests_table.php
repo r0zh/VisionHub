@@ -4,18 +4,18 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        // Model request that fills the user for the admins
-        Schema::create('model_requests', function (Blueprint $table) {
+        Schema::create('resource_requests', function (Blueprint $table) {
             $table->id();
-            $table->string('modelName');
-            $table->text('description');
+            $table->string('request_type');
+            $table->string('resource_name');
+            $table->string('resource_url');
+            $table->text('resource_description');
             $table->unsignedBigInteger('sender_id');
             $table->unsignedBigInteger('approved_by')->nullable();
             $table->timestamps();
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('model_requests');
+        Schema::dropIfExists('resource_requests');
     }
 };

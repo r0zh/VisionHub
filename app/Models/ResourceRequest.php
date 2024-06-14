@@ -5,19 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ModelRequest extends Model
+class ResourceRequest extends Model
 {
     use HasFactory;
 
-    protected $table = 'model_requests';
+    protected $table = 'resource_requests';
 
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'modelName',
-        'modelDescription',
-        'sender_id',
-        'approved_by',
+        "request_type",
+        "resource_name",
+        "resource_url",
+        "resource_description",
+        "sender_id",
+        "approved_by",
     ];
 
     public function sender()
