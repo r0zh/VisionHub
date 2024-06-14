@@ -4,6 +4,8 @@ namespace App\Livewire\Images;
 
 use App\Models\Checkpoint;
 use App\Models\Image;
+use App\Models\Lora;
+use App\Models\Embedding;
 use App\Models\ResourceRequest;
 use Filament\Actions\Action;
 use Filament\Forms\Components\Actions\Action as FormAction;
@@ -20,6 +22,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Radio;
+use Filament\Forms\Components\Toggle;
 
 use Illuminate\Support\HtmlString;
 
@@ -61,7 +64,7 @@ class GenerateImage extends Component implements HasForms, HasActions
                                 Select::make('checkpoint_id')->preload()->relationship(name: 'checkpoint', titleAttribute: 'name')->required()->hint(view('forms.components.request-form', ['type' => 'checkpoint'])),
                                 TextInput::make('positivePrompt')->required(),
                                 TextInput::make('negativePrompt'),
-                                TextInput::make('seed')->numeric()->required()->maxValue(4294967296)->minValue(0),
+                                TextInput::make('seed')->numeric()->required()->maxValue(4294967296)->minValue(0)->default(rand(1, 4294967296)),
                                 Select::make('ratio')->options([
                                     '2:3' => '2:3',
                                     '1:1' => '1:1',
@@ -71,7 +74,7 @@ class GenerateImage extends Component implements HasForms, HasActions
                     Repeater::make('loras')
                         ->schema([
                             Select::make('lora_id')->relationship(name: 'loras', titleAttribute: 'name')->label("Lora name")->required(),
-                            TextInput::make('weight')->numeric()->required()->maxValue(1.0)->minValue(-1.0)->step(0.01),
+                            TextInput::make('weight')->numeric()->required()->maxValue(1.0)->minValue(-1.0)->step(0.01)->default(1),
 
                         ])
                         ->extraItemActions([
@@ -98,7 +101,7 @@ class GenerateImage extends Component implements HasForms, HasActions
                         ])
                         ->schema([
                             Select::make('embedding_id')->relationship(name: 'embeddings', titleAttribute: 'name')->label("Embedding name")->required()->columnSpan(2),
-                            TextInput::make('weight')->numeric()->required()->maxValue(1.0)->minValue(-1.0)->step(0.01)->columnSpan(2),
+                            TextInput::make('weight')->numeric()->required()->maxValue(1.0)->minValue(-1.0)->step(0.01)->columnSpan(2)->default(1),
                             Radio::make('effect')
                                 ->options([
                                     'positive' => 'Positive',
@@ -113,6 +116,7 @@ class GenerateImage extends Component implements HasForms, HasActions
                         ->defaultItems(0)
                         ->columns(2)
                         ->hint(view('forms.components.request-form', ['type' => 'embedding'])),
+                    Toggle::make('highQ')->label('High Quality')->hint('High quality images take longer to generate.'),
                 ])
             ])
             ->statePath('data')
@@ -131,6 +135,18 @@ class GenerateImage extends Component implements HasForms, HasActions
             'sampler_name' => $checkpoint->sampler_name,
             'scheduler' => $checkpoint->scheduler
         ];
+
+        // FIll the lora and embeddings with file names
+        for ($i = 0; $i < count($data['loras']); $i++) {
+            $lora = Lora::find($data['loras'][$i]['lora_id']);
+            $data['loras'][$i]['lora'] = $lora->fileName;
+        }
+
+        for ($i = 0; $i < count($data['embeddings']); $i++) {
+            $embedding = Embedding::find($data['embeddings'][$i]['embedding_id']);
+            $data['embeddings'][$i]['embedding'] = $embedding->fileName;
+        }
+
         $apiUrl = config('services.flask') . '/generate';
         //display jpeg response
         $response = Http::timeout(5 * 60)->post($apiUrl, $data);
