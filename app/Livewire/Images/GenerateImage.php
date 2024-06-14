@@ -109,6 +109,7 @@ class GenerateImage extends Component implements HasForms, HasActions
                                 ])
                                 ->inline()
                                 ->inlineLabel(false)
+                                ->required()
                         ])->extraItemActions([
                                 FormAction::make('LoraInfo')->icon('heroicon-m-information-circle')->color('info')->modalSubmitAction(false)->modalCancelActionLabel('Close')->modalContent(view('info.embedding'))
                             ])
