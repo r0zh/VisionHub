@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->string('request_type');
             $table->string('resource_name');
             $table->string('resource_url');
-            $table->text('resource_description');
+            $table->text('resource_description')->nullable();
             $table->unsignedBigInteger('sender_id');
             $table->unsignedBigInteger('approved_by')->nullable();
             $table->timestamps();
