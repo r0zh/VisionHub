@@ -22,11 +22,12 @@ use App\Livewire\Admin\StyleAdminResource;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+Route::view('/', 'index.html')->name('landing');
 // rerout to the upload page
 Route::get('/', function () {
     return redirect('create');
 });
+
 
 Route::middleware('auth')->middleware('checkPermission:admin')->group(function () {
     Route::get('admin/tags', TagAdminResource::class);

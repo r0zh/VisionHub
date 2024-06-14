@@ -1,0 +1,182 @@
+@font-face {
+    font-family: mate;
+    src: url('../fonts/MatePrata/Mate/Mate-Regular.ttf');
+
+}
+@font-face {
+    font-family: prata ;
+    src: url("../fonts/MatePrata/Prata/Prata-Regular.ttf");
+}
+*{
+    box-sizing: border-box;
+    font-family: prata;
+    margin: 0;
+    padding: 0;
+}
+a{
+    text-decoration: none;
+}
+#visionHubdiv{
+    background-image: url(./Frame\ 2.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    display: flex;
+    justify-content: center;
+    padding: 15vh;
+    margin: 10vh;
+    
+}
+#visionHubT{
+    font-size:8em;
+}
+#sloganVH{
+    text-align: center;
+    
+}
+#subTitleVH{
+    font-size:4em;
+}
+#subSloganVH{
+    font-size: 1.5em;
+}
+#mainBodyTemplate{
+    margin-top: 22vh;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    justify-items: center;
+}
+#content1{
+    display: grid;
+    grid-auto-rows: auto;
+}
+.genericWrapper{
+    border-radius: 20px;
+    display: flex;
+    width: 90%;
+    justify-content: center;
+    margin-bottom: 15vh;
+}
+#wrapper2D{
+    background-color: #fedeb7;
+}
+#wrapper3D{
+    background-color: #b7d6fd;
+}
+.subVisionHubdiv{
+    margin: 20px;
+    padding: 50px;
+    text-align: center;
+    width: 75%;
+}
+.subVisionHubT{
+    font-size: 2em;
+}
+#transition {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#gradientYellow {
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(to bottom, #fedeb7, white);
+}
+#whiteSpace{
+    width: 100%;
+    height: 100px;
+    background-color: white;
+}
+#gradientBlue {
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(to bottom, white, #b7d6fd);
+}
+
+#generatordiv2d{
+    background-color: #fdae4b;
+    border-radius: 30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+#generatorB2d{
+    background-color: #fdae4b;
+}
+#generatordiv3d{
+    border-radius: 30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: #4b9afc;
+}
+#generatorB3d{
+    background-color: #4b9afc;
+}
+
+.buttonApp{
+    width: 50%;
+    display: inline-block;
+    color: black;
+    cursor: pointer;
+    padding: 2.5vh;
+    border-radius: 10px;
+}
+
+/* 
+                                    FLIP CARDS STUFF
+ */
+.flipCardDetails {
+    height: 200px;
+    perspective: 1000px;
+}
+
+.flip-card-inner {
+    border-radius: 10px;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.flipCardDetails:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+    border-radius: 10px;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+}
+
+.flip-card-front {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    color: black;
+}
+#flip-card-front-2d{
+    background-color: #fdae4b;
+}
+#flip-card-front-3d{
+    background-color: #4b9afc;
+}
+
+.flip-card-back {
+    border: 4px solid white;
+    
+    color: black;
+
+    transform: rotateY(180deg);
+}
+#flip-card-back-2d{
+    background-color: #fedeb7;
+}
+#flip-card-back-3d{
+    background-color: #b7d6fd;
+}
