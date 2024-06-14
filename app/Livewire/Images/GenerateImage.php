@@ -123,7 +123,14 @@ class GenerateImage extends Component implements HasForms, HasActions
     {
         $this->fetching = true;
         $data = $this->form->getState();
-        $data['checkpoint'] = Checkpoint::find($data['checkpoint_id'])->fileName;
+        $checkpoint = Checkpoint::find($data['checkpoint_id']);
+        $data['checkpoint'] = $checkpoint->fileName;
+        $data['ksampler'] = [
+            'steps' => $checkpoint->steps,
+            'cfg' => $checkpoint->cfg,
+            'sampler_name' => $checkpoint->sampler_name,
+            'scheduler' => $checkpoint->scheduler
+        ];
         $apiUrl = config('services.flask') . '/generate';
         //display jpeg response
         $response = Http::timeout(5 * 60)->post($apiUrl, $data);
@@ -133,7 +140,7 @@ class GenerateImage extends Component implements HasForms, HasActions
         if ($response->status() !== 200) {
             return;
         }
-        $this->imagePath = "images/tmp/" . Str::of($response->getHeader('Content-Disposition')[0])->after('filename=');
+        $this->imagePath = "images/tmp/" . Str::random(40) . ".png";
         Storage::disk('public')->put($this->imagePath, $image);
 
         session(['imagePath' => $this->imagePath]);
