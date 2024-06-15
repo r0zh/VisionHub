@@ -116,14 +116,7 @@ class Gallery extends Component
     {
         $this->getImages();
     }
-
-    public function loadMore()
-    {
-        Notification::make()
-            ->title('Saved successfully')
-            ->send();
-    }
-
+    
     /**
      * Render the Livewire component.
      */
