@@ -20,7 +20,7 @@ use Livewire\Attributes\On;
 use Livewire\Component;
 
 
-class ImageAdminResource extends Component implements HasForms, HasTable
+class ImageResource extends Component implements HasForms, HasTable
 {
     use InteractsWithTable;
     use InteractsWithForms;
@@ -38,7 +38,7 @@ class ImageAdminResource extends Component implements HasForms, HasTable
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    
+
     public static function table(Table $table): Table
     {
         return $table
@@ -53,11 +53,11 @@ class ImageAdminResource extends Component implements HasForms, HasTable
             ])
             ->actions([
                 Tables\Actions\EditAction::make()
-                ->form([
-                    TextInput::make('name')
-                        ->required()
-                        ->maxLength(255),
-                ]),
+                    ->form([
+                        TextInput::make('name')
+                            ->required()
+                            ->maxLength(255),
+                    ]),
                 Tables\Actions\DeleteAction::make()
             ])
             ->bulkActions([
@@ -81,13 +81,13 @@ class ImageAdminResource extends Component implements HasForms, HasTable
         ];
     }
     protected $rules = [
-        'name'            => 'required|string|min:2|max:255',
-        'seed'            => 'required|numeric',
+        'name' => 'required|string|min:2|max:255',
+        'seed' => 'required|numeric',
         'positive_prompt' => 'required|string|min:2',
         'negative_prompt' => '',
-        'ratio'           => 'required',
-        'style'           => 'required',
-        'tags'            => 'required'
+        'ratio' => 'required',
+        'style' => 'required',
+        'tags' => 'required'
     ];
 
     /**
@@ -129,14 +129,14 @@ class ImageAdminResource extends Component implements HasForms, HasTable
         $this->positive_prompt;
         $this->negative_prompt;
         $this->seed;
-        $json     = json_encode(['positivePrompt' => $this->positive_prompt, 'negativePrompt' => $this->negative_prompt, "seed" => $this->seed, "ratio" => $this->ratio, "style" => $this->style]);
-        $address  = "https://1843-2a0c-5a85-6402-c500-dee3-dd3c-b34e-c0d2.ngrok-free.app/get_image";
+        $json = json_encode(['positivePrompt' => $this->positive_prompt, 'negativePrompt' => $this->negative_prompt, "seed" => $this->seed, "ratio" => $this->ratio, "style" => $this->style]);
+        $address = "https://1843-2a0c-5a85-6402-c500-dee3-dd3c-b34e-c0d2.ngrok-free.app/get_image";
         $response = Http::withBody($json, 'application/json')->timeout(60 * 5)
             ->withHeaders([
                 'Content-Type' => 'application/json',
             ])->post($address);
         // display the image in the browser
-        $image           = $response->getBody();
+        $image = $response->getBody();
         $this->imagePath = "images/tmp/image.png";
         Storage::disk('public')->put($this->imagePath, $image);
         $this->fetching = false;
@@ -162,15 +162,15 @@ class ImageAdminResource extends Component implements HasForms, HasTable
         // save the image path to the database
         $imagePath = 'images/' . $userPath . '/' . $this->name . '.png';
         Image::create([
-            'seed'           => $this->seed,
+            'seed' => $this->seed,
             'positivePrompt' => $this->positive_prompt,
             'negativePrompt' => $this->negative_prompt,
-            'public'         => true,
-            'style'          => $this->style,
+            'public' => true,
+            'style' => $this->style,
             // Store the image in the public or private directory
-            'path'           => $imagePath,
-            'created_at'     => now(),
-            'user_id'        => Auth::user()->id,
+            'path' => $imagePath,
+            'created_at' => now(),
+            'user_id' => Auth::user()->id,
         ]);
 
         // redirect to gallery
@@ -179,14 +179,14 @@ class ImageAdminResource extends Component implements HasForms, HasTable
     public function render(): View
     {
 
-         if (request()->is('admin/images/create'))
+        if (request()->is('admin/images/create'))
             return view('livewire.visionHub.forms.form-image');
-        return view('livewire.visionHub.lists.list-image');
+        return view('livewire.pages.admin.image-resource');
 
         /* if (request()->is('admin/images/create')) {
             return view('livewire.visionHub.forms.form-image');
         } elseif (request()->is('admin/images/list')) {
-            return view('livewire.visionHub.lists.list-image');
+            return view('livewire.pages.admin.image-resource');
         }else
             return view('livewire.visionHub.forms.form-image');
          */

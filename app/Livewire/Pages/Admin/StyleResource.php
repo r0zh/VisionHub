@@ -16,7 +16,7 @@ use Illuminate\Contracts\View\View;
 use Livewire\Component;
 
 
-class StyleAdminResource extends Component implements HasForms, HasTable
+class StyleResource extends Component implements HasForms, HasTable
 {
     use InteractsWithTable;
     use InteractsWithForms;
@@ -88,6 +88,6 @@ class StyleAdminResource extends Component implements HasForms, HasTable
     }
     public function render(): View
     {
-        return view('livewire.admin.admin-style');
+        return view('livewire.pages.admin.style-resource');
     }
 }

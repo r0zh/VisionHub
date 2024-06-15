@@ -151,6 +151,6 @@ class ResolveRequestResource extends Component implements HasForms, HasTable
 
     public function render(): View
     {
-        return view('livewire.common.resolve-request');
+        return view('livewire.pages.moderator.resolve-request-resource');
     }
 }

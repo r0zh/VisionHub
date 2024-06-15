@@ -19,7 +19,7 @@ use Illuminate\Contracts\View\View;
 use Livewire\Component;
 
 
-class TagAdminResource extends Component implements HasForms, HasTable
+class TagResource extends Component implements HasForms, HasTable
 {
     use InteractsWithTable;
     use InteractsWithForms;
@@ -38,7 +38,7 @@ class TagAdminResource extends Component implements HasForms, HasTable
 
     public static function table(Table $table): Table
     {
-        
+
         return $table
             ->query(Tag::query())
             ->headerActions([
@@ -59,12 +59,12 @@ class TagAdminResource extends Component implements HasForms, HasTable
                     ->label('View Related Posts')
                     ->url(fn (): string => route('posts.edit', ['name'])), */
                 Tables\Actions\EditAction::make()
-                ->form([
-                    TextInput::make('name')
-                        ->required()
-                        ->maxLength(255),
-                ]),
-            
+                    ->form([
+                        TextInput::make('name')
+                            ->required()
+                            ->maxLength(255),
+                    ]),
+
                 Tables\Actions\DeleteAction::make()
             ])
             ->bulkActions([
@@ -83,7 +83,7 @@ class TagAdminResource extends Component implements HasForms, HasTable
 
     public static function getPages(): array
     {
-        
+
         return [
             'index' => Pages\ListTags::route('/admin/tags/lists'),
             'create' => Pages\CreateTag::route('/create'),
@@ -92,6 +92,6 @@ class TagAdminResource extends Component implements HasForms, HasTable
     }
     public function render(): View
     {
-        return view('livewire.visionHub.lists.list-tags');
+        return view('livewire.pages.admin.tags-resource');
     }
 }

@@ -14,7 +14,7 @@ use Filament\Tables\Table;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
 
-class LoraAdminResource extends Component implements HasForms, HasTable
+class LoraResource extends Component implements HasForms, HasTable
 {
     use InteractsWithTable;
     use InteractsWithForms;
@@ -24,7 +24,7 @@ class LoraAdminResource extends Component implements HasForms, HasTable
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    
+
     public static function table(Table $table): Table
     {
         return $table
@@ -52,16 +52,16 @@ class LoraAdminResource extends Component implements HasForms, HasTable
             ])
             ->actions([
                 Tables\Actions\EditAction::make()
-                ->form([
-                    TextInput::make('name')
-                        ->required()
-                        ->maxLength(255)->label('Name'),
-                    TextInput::make('fileName')
-                        ->required()
-                        ->maxLength(255)->label('Path'),
-                    TextInput::make('description')
-                        ->maxLength(255)->label('Description'),
-                ]),
+                    ->form([
+                        TextInput::make('name')
+                            ->required()
+                            ->maxLength(255)->label('Name'),
+                        TextInput::make('fileName')
+                            ->required()
+                            ->maxLength(255)->label('Path'),
+                        TextInput::make('description')
+                            ->maxLength(255)->label('Description'),
+                    ]),
                 Tables\Actions\DeleteAction::make()
             ])
             ->bulkActions([
@@ -72,6 +72,6 @@ class LoraAdminResource extends Component implements HasForms, HasTable
     }
     public function render(): View
     {
-        return view('livewire.admin.admin-lora');
+        return view('livewire.pages.admin.lora-resource');
     }
 }

@@ -57,6 +57,6 @@ class AdminPanelProvider extends PanelProvider
     }
     public function render(): View
     {
-        return view('livewire.visionHub.lists.list-user');
+        return view('livewire.pages.admin.user-resource');
     }
 }
