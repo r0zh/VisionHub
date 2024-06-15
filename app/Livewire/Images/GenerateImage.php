@@ -145,14 +145,18 @@ class GenerateImage extends Component implements HasForms, HasActions
         ];
 
         // FIll the lora and embeddings with file names
-        for ($i = 0; $i < count($data['loras']); $i++) {
-            $lora = Lora::find($data['loras'][$i]['lora_id']);
-            $data['loras'][$i]['lora'] = $lora->fileName;
+        if (isset($data['loras'])) {
+            for ($i = 0; $i < count($data['loras']); $i++) {
+                $lora = Lora::find($data['loras'][$i]['lora_id']);
+                $data['loras'][$i]['lora'] = $lora->fileName;
+            }
         }
 
-        for ($i = 0; $i < count($data['embeddings']); $i++) {
-            $embedding = Embedding::find($data['embeddings'][$i]['embedding_id']);
-            $data['embeddings'][$i]['embedding'] = $embedding->fileName;
+        if (isset($data['embeddings'])) {
+            for ($i = 0; $i < count($data['embeddings']); $i++) {
+                $embedding = Embedding::find($data['embeddings'][$i]['embedding_id']);
+                $data['embeddings'][$i]['embedding'] = $embedding->fileName;
+            }
         }
 
         $apiUrl = config('services.flask') . '/generate';
