@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Livewire\Admin;
+namespace App\Livewire\Pages\Admin;
 
 use App\Models\Checkpoint;
 use Filament\Forms\Components\TextInput;
-use Livewire\Component;
-use Filament\Tables;
-use Filament\Tables\Table;
-use Illuminate\Contracts\View\View;
-use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
-use Filament\Tables\Contracts\HasTable;
+use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Concerns\InteractsWithTable;
+use Filament\Tables\Contracts\HasTable;
+use Filament\Tables\Table;
+use Illuminate\Contracts\View\View;
+use Livewire\Component;
 
 class CheckpointAdminResource extends Component implements HasForms, HasTable
 {

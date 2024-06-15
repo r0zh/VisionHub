@@ -1,31 +1,24 @@
 <?php
 
-namespace App\Livewire\Admin;
+namespace App\Livewire\Pages\Admin;
 
 use App\Filament\Resources\TagResource\Pages;
 use App\Models\Image;
-
 use Filament\Forms\Components\TextInput;
-
-
-use Livewire\Component;
-use Filament\Tables;
-use Filament\Tables\Table;
-use Illuminate\Contracts\View\View;
-use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
-
-use Filament\Tables\Contracts\HasTable;
+use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
-
-
-
-
+use Filament\Tables\Concerns\InteractsWithTable;
+use Filament\Tables\Contracts\HasTable;
+use Filament\Tables\Table;
+use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\On;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Auth;
+use Livewire\Component;
+
 
 class ImageAdminResource extends Component implements HasForms, HasTable
 {

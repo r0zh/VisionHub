@@ -1,27 +1,22 @@
 <?php
 
-namespace App\Livewire\Admin;
+namespace App\Livewire\Pages\Admin;
 
 use App\Filament\Resources\TagResource\Pages;
 use App\Filament\Resources\TagResource\RelationManagers;
+use App\Models\Post;
 use App\Models\Tag;
-use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
-use Livewire\Component;
-use Filament\Tables;
-use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Illuminate\Contracts\View\View;
-use Filament\Tables\Concerns\InteractsWithTable;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
-use Filament\Forms\Components\TextInput;
-use Filament\Tables\Contracts\HasTable;
+use Filament\Forms\Form;
+use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
-use App\Models\Post;
-use Filament\Tables\Actions\Action;
+use Filament\Tables\Concerns\InteractsWithTable;
+use Filament\Tables\Contracts\HasTable;
+use Filament\Tables\Table;
+use Illuminate\Contracts\View\View;
+use Livewire\Component;
 
 
 class TagAdminResource extends Component implements HasForms, HasTable

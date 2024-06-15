@@ -2,8 +2,8 @@
     <livewire:wire-elements-modal />
     <div class="py-2 rounded-lg dark:text-white dark:bg-gray-800">
         <div class="flex flex-wrap justify-center items-center space-x-4">
-            <livewire:OrderByDate />
-            <livewire:SearchBox />
+            <livewire:common.order-by-date />
+            <livewire:common.search-box />
         </div>
     </div>
     @if ($images->isEmpty())
@@ -17,7 +17,7 @@
     @else
         <div class="py-7 px- flex flex-wrap flex-row justify-center items-center gap-y-4">
             @foreach ($images as $image)
-                <livewire:image-component :image="$image" :wire:key="$image->id" lazy />
+                <livewire:common.image-component :image="$image" :wire:key="$image->id" lazy />
             @endforeach
         </div>
     @endif

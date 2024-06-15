@@ -1,26 +1,26 @@
 <?php
 
-namespace App\Livewire\Admin;
+namespace App\Livewire\Pages\Admin;
 
-use App\Models\Embedding;
+use App\Models\Lora;
 use Filament\Forms\Components\TextInput;
-use Livewire\Component;
-use Filament\Tables;
-use Filament\Tables\Table;
-use Illuminate\Contracts\View\View;
-use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
-use Filament\Tables\Contracts\HasTable;
+use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Concerns\InteractsWithTable;
+use Filament\Tables\Contracts\HasTable;
+use Filament\Tables\Table;
+use Illuminate\Contracts\View\View;
+use Livewire\Component;
 
-class EmbeddingAdminResource extends Component implements HasForms, HasTable
+class LoraAdminResource extends Component implements HasForms, HasTable
 {
     use InteractsWithTable;
     use InteractsWithForms;
 
 
-    protected static ?string $model = Embedding::class;
+    protected static ?string $model = Lora::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -28,8 +28,8 @@ class EmbeddingAdminResource extends Component implements HasForms, HasTable
     public static function table(Table $table): Table
     {
         return $table
-            ->query(Embedding::query())
-            ->heading('Embeddings')
+            ->query(Lora::query())
+            ->heading('Loras')
             ->headerActions([
                 Tables\Actions\CreateAction::make()->form([
                     TextInput::make('name')
@@ -72,6 +72,6 @@ class EmbeddingAdminResource extends Component implements HasForms, HasTable
     }
     public function render(): View
     {
-        return view('livewire.admin.admin-checkpoint');
+        return view('livewire.admin.admin-lora');
     }
 }

@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Common;
 
 use App\Models\Image;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
-use Livewire\Component;
 use Livewire\Attributes\On;
+use Livewire\Component;
 
 /**
  * Class ImageComponent
@@ -54,6 +52,6 @@ class ImageComponent extends Component
      */
     public function render()
     {
-        return view('livewire.artivision.components.image-component');
+        return view('livewire.common.image-component');
     }
 }

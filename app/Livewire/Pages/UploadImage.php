@@ -184,6 +184,6 @@ class UploadImage extends Component implements HasForms, HasActions
 
     public function render(): View
     {
-        return view('livewire.images.upload-image');
+        return view('livewire.pages.upload-image');
     }
 }

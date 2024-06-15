@@ -1,33 +1,38 @@
 <?php
 
-namespace App\Livewire\Pages;
+namespace App\Livewire\Images;
 
 use App\Models\Checkpoint;
-use App\Models\Embedding;
 use App\Models\Image;
 use App\Models\Lora;
+use App\Models\Embedding;
 use App\Models\ResourceRequest;
 use Filament\Actions\Action;
+use Filament\Forms\Components\Actions\Action as FormAction;
+use Filament\Forms\Concerns\InteractsWithForms;
+use Filament\Forms\Contracts\HasForms;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
-use Filament\Forms\Components\Actions\Action as FormAction;
+
+use Filament\Forms\Form;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\Radio;
-use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Toggle;
-use Filament\Forms\Concerns\InteractsWithForms;
-use Filament\Forms\Contracts\HasForms;
-use Filament\Forms\Form;
+
+use Illuminate\Support\HtmlString;
+
+use Livewire\Component;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Livewire\Component;
+
+use Illuminate\Support\Facades\Auth;
 
 
 class GenerateImage extends Component implements HasForms, HasActions

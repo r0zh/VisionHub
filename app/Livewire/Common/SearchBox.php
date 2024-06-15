@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Common;
 
 use Livewire\Component;
 
@@ -9,20 +9,23 @@ use Livewire\Component;
  *
  * This class represents a Livewire component for a search box.
  */
-class SearchBox extends Component {
+class SearchBox extends Component
+{
     public $search = '';
 
     /**
      * Update the search value and dispatch an event.
      */
-    public function updateSearch() {
+    public function updateSearch()
+    {
         $this->dispatch('searchUpdated', $this->search);
     }
 
     /**
      * Render the Livewire component.
      */
-    public function render() {
-        return view('livewire.artivision.components.search-box');
+    public function render()
+    {
+        return view('livewire.common.search-box');
     }
 }

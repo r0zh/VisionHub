@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Common;
 
 
 use LivewireUI\Modal\ModalComponent;
@@ -10,7 +10,8 @@ use LivewireUI\Modal\ModalComponent;
  * 
  * This class represents a Livewire component for managing filter visibility.
  */
-class FilterVisibility extends ModalComponent {
+class FilterVisibility extends ModalComponent
+{
     public $filter = 'all';
 
     /**
@@ -18,7 +19,8 @@ class FilterVisibility extends ModalComponent {
      *
      * @return void
      */
-    public function updateFilter() {
+    public function updateFilter()
+    {
         $this->dispatch('filterUpdated', $this->filter);
     }
 
@@ -27,7 +29,8 @@ class FilterVisibility extends ModalComponent {
      *
      * @return \Illuminate\Contracts\View\View
      */
-    public function render() {
-        return view('livewire.artivision.components.filter-visibility');
+    public function render()
+    {
+        return view('livewire.common.filter-visibility');
     }
 }

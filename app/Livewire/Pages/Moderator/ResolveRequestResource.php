@@ -1,20 +1,19 @@
 <?php
 
-namespace App\Livewire\Moderator;
+namespace App\Livewire\Pages\Moderator;
 
+use App\Filament\Resources\TagResource\Pages;
 use App\Models\ResourceRequest;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
+use Filament\Tables;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
-use Livewire\Component;
-use Illuminate\Contracts\View\View;
-use App\Filament\Resources\TagResource\Pages;
-
-use Filament\Tables;
 use Filament\Tables\Table;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Select;
+use Illuminate\Contracts\View\View;
+use Livewire\Component;
 
 class ResolveRequestResource extends Component implements HasForms, HasTable
 {
