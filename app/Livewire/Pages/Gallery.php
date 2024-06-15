@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Pages;
 
 use App\Models\Image;
 use Livewire\Attributes\On;
@@ -129,6 +129,6 @@ class Gallery extends Component
      */
     public function render()
     {
-        return view('livewire.artivision.gallery');
+        return view('livewire.pages.gallery');
     }
 }

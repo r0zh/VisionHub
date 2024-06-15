@@ -1,5 +1,7 @@
 <?php
 
+use App\Livewire\Pages\Gallery;
+use App\Livewire\Pages\Community;
 use App\Livewire\Images\GenerateImage;
 use App\Livewire\Images\UploadImage;
 use App\Livewire\Moderator\ResolveRequest;
@@ -45,9 +47,9 @@ Route::middleware('auth')->middleware('checkPermission:moderator')->group(functi
 Route::middleware('auth')->group(function () {
     Route::get('create', GenerateImage::class)->middleware(['auth'])->name('create');
     Route::get('upload', UploadImage::class)->middleware(['auth'])->name('upload');
-    Route::view('gallery', 'gallery')->name('gallery');
+    Route::get('gallery', Gallery::class)->middleware(['auth'])->name('gallery');
+    Route::get('community', Community::class)->middleware(['auth'])->name('community');
     Route::view('profile', 'profile')->name('profile');
-    Route::view('community', 'community')->name('community');
 });
 
 Route::get('/private/images/{user}/{file}', [App\Http\Controllers\ImageController::class, 'getImage']);

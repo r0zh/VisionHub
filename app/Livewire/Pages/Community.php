@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Pages;
 
 use Livewire\Component;
 use App\Models\Image;
@@ -78,6 +78,6 @@ class Community extends Component
      */
     public function render()
     {
-        return view('livewire.artivision.community');
+        return view('livewire.pages.community');
     }
 }
