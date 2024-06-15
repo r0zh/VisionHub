@@ -9,6 +9,7 @@
             <livewire:common.search-box />
         </div>
     </div>
+    <h1 class="text-3xl mt-4 font-bold text-center dark:text-white">Images from {{ $this->getUserName() }}</h1>
     @if ($images->isEmpty())
         <div class="flex justify-center items-start p-4">
             <div
