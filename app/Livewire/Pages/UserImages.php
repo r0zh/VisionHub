@@ -4,6 +4,7 @@ namespace App\Livewire\Pages;
 
 use Livewire\Component;
 use App\Models\Image;
+use App\Models\User;
 use Filament\Notifications\Notification;
 
 use Livewire\Attributes\On;
@@ -39,6 +40,11 @@ class UserImages extends Component
     public function canView()
     {
         return $this->user_id == auth()->id() || auth()->user()->role->name == 'moderator' || auth()->user()->role->name == 'admin';
+    }
+
+    public function getUserName()
+    {
+        return User::find($this->user_id)->name;
     }
 
     /**
