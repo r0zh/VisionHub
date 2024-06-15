@@ -4,7 +4,7 @@
             <div class="flex justify-center items-center">
                 <div class="w-fit h-fit">
                     <img src="@if ($image->public == 1) {{ asset('storage/' . $image->path) }} @else {{ url($image->path) }} @endif"
-                        alt="{{ $image->positivePrompt }}" class="xl:w-fit xl_max-h-[80vh] rounded-xl shadow-lg" />
+                        alt="{{ $image->positivePrompt }}" class="xl:w-fit max-h-[80vh] rounded-xl shadow-lg" />
                     <h1 class="text-xl font-bold">By {{ $image->user->name }}</h1>
                 </div>
             </div>
