@@ -1,28 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" style="overflow: auto !important">
 
-<script>
-// Create a callback function to execute when mutations are observed
-var callback = function(mutationsList, observer) {
-    for(var mutation of mutationsList) {
-        if (mutation.type == 'attributes' && mutation.attributeName == 'style') {
-            // Check if the style attribute contains 'overflow: hidden'
-            if (document.documentElement.style.overflow === 'hidden') {
-                // Revert the change
-                document.documentElement.style.overflow = 'auto';
-            }
-        }
-    }
-};
-
-// Create an observer instance linked to the callback function
-var observer = new MutationObserver(callback);
-
-// Start observing the `html` tag for attribute changes
-observer.observe(document.documentElement, { attributes: true, attributeFilter: ['style'] });
-
-</script>
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,19 +8,23 @@ observer.observe(document.documentElement, { attributes: true, attributeFilter: 
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    <style>
+        [x-cloak] {
+            display: none !important;
+        }
+    </style>
+
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-    <!-- Scripts -->
-    @livewire('wire-elements-modal')
+    <!-- Styles -->
     @filamentStyles
-    @filamentScripts
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite('resources/css/app.css')
 </head>
 
 <body class="font-sans antialiased">
-        @vite('resources/js/app.js')
     <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
         <livewire:layout.navigation />
 
@@ -56,10 +38,17 @@ observer.observe(document.documentElement, { attributes: true, attributeFilter: 
         @endif
 
         <!-- Page Content -->
-        <main>
+        <main class="mt-10 mx-4">
             {{ $slot }}
         </main>
     </div>
+
+    <!-- Scripts -->
+    @livewire('wire-elements-modal')
+    @livewire('notifications')
+
+    @filamentScripts
+    @vite('resources/js/app.js')
 </body>
 
 </html>
