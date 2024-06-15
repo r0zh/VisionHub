@@ -12,6 +12,7 @@
         "filament/notifications": "^3.2",
         "filament/tables": "^3.2",
         "guzzlehttp/guzzle": "*",
+        "lara-zeus/accordion": "^1.1",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
