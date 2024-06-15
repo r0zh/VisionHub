@@ -39,7 +39,7 @@ Route::middleware('auth')->middleware('checkPermission:admin')->group(function (
 });
 
 Route::middleware('auth')->middleware('checkPermission:moderator')->group(function () {
-    Route::get('resolve', ResolveRequestResource::class);
+    Route::get('resolve', ResolveRequestResource::class)->name('requests');
 });
 
 Route::middleware('auth')->group(function () {

@@ -41,6 +41,11 @@ new class extends Component {
                     <x-nav-link :href="route('community')" :active="request()->routeIs('community')" wire:navigate>
                         {{ __('Community') }}
                     </x-nav-link>
+                    @if (auth()->user()->hasRole('moderator'))
+                        <x-nav-link :href="route('requests')" :active="request()->routeIs('requests')" wire:navigate>
+                            {{ __('Requests') }}
+                        </x-nav-link>
+                    @endif
                     @if (auth()->user()->hasRole('admin'))
                         <x-nav-link>
                             <livewire:common.admin-routes-list />
