@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Image;
 use Livewire\Attributes\On;
 use Livewire\Component;
+use Filament\Notifications\Notification;
 
 /**
  * Class Gallery
@@ -12,12 +13,11 @@ use Livewire\Component;
  *
  * This class represents a Livewire component to manage the gallery page.
  */
-class Gallery extends Component {
+class Gallery extends Component
+{
     public $images;
 
     public $filter = 'all';
-
-    public $selectedImage = null;
 
     // search query
     public $search;
@@ -28,8 +28,10 @@ class Gallery extends Component {
     /**
      * Mount the component and retrieve all images from the database.
      */
-    public function mount() {
+    public function mount()
+    {
         $this->images = Image::where('user_id', auth()->id())->get();
+        $this->selectedImage = Image::find(1);
     }
 
     /**
@@ -37,7 +39,8 @@ class Gallery extends Component {
      * @param $filter
      */
     #[On('filterUpdated')]
-    public function updateFilterVisibility($filter) {
+    public function updateFilterVisibility($filter)
+    {
         if ($filter != $this->filter) {
             $this->filter = $filter;
             $this->getImages();
@@ -49,7 +52,8 @@ class Gallery extends Component {
      * @param $search
      */
     #[On('searchUpdated')]
-    public function updateSearch($search) {
+    public function updateSearch($search)
+    {
         if ($search != $this->search) {
             $this->search = $search;
             $this->getImages();
@@ -62,7 +66,8 @@ class Gallery extends Component {
      * @param $direction
      */
     #[On('orderUpdated')]
-    public function updateOrder($direction) {
+    public function updateOrder($direction)
+    {
         if ($direction != $this->direction) {
             $this->direction = $direction;
             $this->getImages();
@@ -72,7 +77,8 @@ class Gallery extends Component {
     /**
      * Fetch the images based on the current filter, search, and order direction.
      */
-    public function getImages() {
+    public function getImages()
+    {
         if ($this->filter == 'all') {
             $this->images = Image::where('user_id', auth()->id())
                 ->where('positivePrompt', 'like', '%' . $this->search . '%')
@@ -97,7 +103,8 @@ class Gallery extends Component {
      * Update the filter value and fetch the images accordingly.
      */
     #[On('imageDeleted')]
-    public function imageDeleted() {
+    public function imageDeleted()
+    {
         $this->getImages();
     }
 
@@ -105,24 +112,23 @@ class Gallery extends Component {
      * Fetch the images when the image visibility is updated.
      */
     #[On('imageVisibilityUpdated')]
-    public function imageVisibilityUpdated() {
+    public function imageVisibilityUpdated()
+    {
         $this->getImages();
     }
 
-    /**
-     * Handle the event when an image is selected.
-     * Dispatch the 'openModal' event with the 'ImageDetails' component and the image ID as parameters.
-     * @param $id
-     */
-    #[On('imageSelected')]
-    public function imageSelected($id) {
-        $this->dispatch('openModal', 'ImageDetails', ['id' => $id]);
+    public function loadMore()
+    {
+        Notification::make()
+            ->title('Saved successfully')
+            ->send();
     }
 
     /**
      * Render the Livewire component.
      */
-    public function render() {
+    public function render()
+    {
         return view('livewire.artivision.gallery');
     }
 }
