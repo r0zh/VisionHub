@@ -30,7 +30,7 @@
                 <h1 class="text-3xl font-bold mt-1">Seed</h1>
                 <p>{{ $image->seed }}</p>
                 <br>
-                @if ($image->loras)
+                @if ($image->loras->isNotEmpty())
                     <x-zeus-accordion::accordion activeAccordion="0">
                         <x-zeus-accordion::accordion.item :label="'Loras'">
                             <ul class="list-disc ml-3">
@@ -41,7 +41,7 @@
                         </x-zeus-accordion::accordion.item>
                     </x-zeus-accordion::accordion>
                 @endif
-                @if ($image->embeddings)
+                @if ($image->embeddings->isNotEmpty())
                     <x-zeus-accordion::accordion activeAccordion="0">
                         <x-zeus-accordion::accordion.item :label="'Embeddings'">
                             <ul class="list-disc ml-3">
@@ -52,7 +52,7 @@
                         </x-zeus-accordion::accordion.item>
                     </x-zeus-accordion::accordion>
                 @endif
-                @if ($image->tags)
+                @if ($image->tags->isNotEmpty())
                     <x-zeus-accordion::accordion activeAccordion="0">
                         <x-zeus-accordion::accordion.item :label="'Tags'">
                             <ul class="list-disc ml-3">
