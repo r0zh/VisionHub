@@ -45,10 +45,6 @@ new class extends Component {
                         <x-nav-link>
                             <livewire:common.admin-routes-list />
                         </x-nav-link>
-
-                        <x-nav-link :href="route('admin')" :active="request()->routeIs('admin')" wire:navigate>
-                            {{ __('Admin') }}
-                        </x-nav-link>
                     @endif
                 </div>
             </div>

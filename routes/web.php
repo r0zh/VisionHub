@@ -36,7 +36,6 @@ Route::middleware('auth')->middleware('checkPermission:admin')->group(function (
     Route::get('admin/loras', LoraAdminResource::class);
     Route::get('admin/checkpoints', CheckpointAdminResource::class);
     Route::get('admin/styles', StyleAdminResource::class);
-    Route::view('/admin', 'admin')->name('admin');
 });
 
 Route::middleware('auth')->middleware('checkPermission:moderator')->group(function () {
