@@ -1,18 +1,17 @@
 <?php
 
-use App\Livewire\Pages\Gallery;
-use App\Livewire\Pages\Community;
-use App\Livewire\Images\GenerateImage;
-use App\Livewire\Images\UploadImage;
 use App\Livewire\Moderator\ResolveRequest;
-use App\Livewire\Moderator\ResolveRequestResource;
+use App\Livewire\Pages\Admin\CheckpointResource;
+use App\Livewire\Pages\Admin\ImageResource;
+use App\Livewire\Pages\Admin\LoraResource;
+use App\Livewire\Pages\Admin\TagResource;
+use App\Livewire\Pages\Admin\UserResource;
+use App\Livewire\Pages\Community;
+use App\Livewire\Pages\Gallery;
+use App\Livewire\Pages\GenerateImage;
+use App\Livewire\Pages\Moderator\ResolveRequestResource;
+use App\Livewire\Pages\UploadImage;
 use Illuminate\Support\Facades\Route;
-use App\Livewire\Admin\TagAdminResource;
-use App\Livewire\Admin\ImageAdminResource;
-use App\Livewire\Admin\UserAdminResource;
-use App\Livewire\Admin\LoraAdminResource;
-use App\Livewire\Admin\CheckpointAdminResource;
-use App\Livewire\Admin\StyleAdminResource;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,12 +31,11 @@ Route::get('/', function () {
 
 
 Route::middleware('auth')->middleware('checkPermission:admin')->group(function () {
-    Route::get('admin/tags', TagAdminResource::class);
-    Route::get('admin/users', UserAdminResource::class);
-    Route::get('admin/images', ImageAdminResource::class);
-    Route::get('admin/loras', LoraAdminResource::class);
-    Route::get('admin/checkpoints', CheckpointAdminResource::class);
-    Route::get('admin/styles', StyleAdminResource::class);
+    Route::get('admin/tags', TagResource::class);
+    Route::get('admin/users', UserResource::class);
+    Route::get('admin/images', ImageResource::class);
+    Route::get('admin/loras', LoraResource::class);
+    Route::get('admin/checkpoints', CheckpointResource::class);
 });
 
 Route::middleware('auth')->middleware('checkPermission:moderator')->group(function () {
