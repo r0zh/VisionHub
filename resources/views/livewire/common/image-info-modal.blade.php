@@ -5,7 +5,11 @@
                 <div class="w-fit h-fit">
                     <img src="@if ($image->public == 1) {{ asset('storage/' . $image->path) }} @else {{ url($image->path) }} @endif"
                         alt="{{ $image->positivePrompt }}" class="xl:w-fit max-h-[80vh] rounded-xl shadow-lg" />
-                    <h1 class="text-xl font-bold">By {{ $image->user->name }}</h1>
+                    <h1 class="text-xl font-bold">By
+                        <a href="/user/{{ $image->user_id }}">
+                            {{ $image->user->name }}
+                        </a>
+                    </h1>
                 </div>
             </div>
             <div class="p-2">
@@ -14,7 +18,7 @@
                     <p>{{ $image->name }}</p>
                 @endif
                 @if ($this->image->description)
-                    <h1 class="text-3xl font-bold mt-1 mt-1">Description</h1>
+                    <h1 class="text-3xl font-bold mt-1">Description</h1>
                     <p class="break-all">{{ $image->description }}</p>
                 @endif
                 <h1 class="text-3xl font-bold mt-1">Positive Prompt</h1>
