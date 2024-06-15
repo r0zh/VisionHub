@@ -3,6 +3,7 @@
 namespace App\Livewire\Images;
 
 // auth
+use App\Rules\AllowedRatios;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\Image;
@@ -29,8 +30,11 @@ use Filament\Forms\Components\Section;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Radio;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\Actions\Action as FormAction;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
+use Closure;
 
 use Livewire\Component;
 use Illuminate\Contracts\View\View;
@@ -54,13 +58,7 @@ class UploadImage extends Component implements HasForms, HasActions
         return $form
             ->schema([
                 Section::make('Upload Image')->schema([
-                    Grid::make([
-                        'default' => 1,
-                        'md' => 5
-                    ])->schema([
-                                TextInput::make('name')->nullable()->columnSpan(4),
-                                Checkbox::make('public')->label('Public')->default(true)->required(),
-                            ]),
+                    TextInput::make('name')->nullable(),
                     RichEditor::make('description')->nullable(),
                     Grid::make([
                         'default' => 1,
@@ -132,10 +130,18 @@ class UploadImage extends Component implements HasForms, HasActions
 
                     FileUpload::make('imagePath')->imageEditor()->visibility('private')
                         ->imageEditorAspectRatios([
-                            '16:9',
-                            '4:3',
+                            '2:3',
                             '1:1',
-                        ])->image()->label('Upload Image')->required(),
+                        ])->image()
+                        ->label('Upload Image')
+                        ->rule(new AllowedRatios())
+                        ->validationMessages([
+                            'AllowedRatios' => 'Image must have a 2:3 or 1:1 aspect ratio. Use the editor to crop it please.',
+                        ])
+                        ->required(),
+                    Toggle::make('public')
+                        ->onColor('success')
+                        ->offColor('danger')
                 ])
             ])
             ->statePath('data')
