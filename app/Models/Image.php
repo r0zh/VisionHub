@@ -20,7 +20,6 @@ class Image extends Model
 
     protected $fillable = [
         'user_id', // 'user_id' is a foreign key to the 'id' column in the 'users' table
-        'style_id',
         'checkpoint_id',
         'seed',
         'name',
@@ -38,10 +37,6 @@ class Image extends Model
     public function checkpoint()
     {
         return $this->belongsTo(Checkpoint::class);
-    }
-    public function style()
-    {
-        return $this->belongsTo(Style::class);
     }
     public function owner()
     {

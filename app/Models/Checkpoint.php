@@ -26,8 +26,5 @@ class Checkpoint extends Model
     {
         return $this->hasMany(Image::class);
     }
-    public function styles()
-    {
-        return $this->hasMany(Style::class);
-    }
+
 }

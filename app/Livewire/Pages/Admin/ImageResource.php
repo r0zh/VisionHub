@@ -32,7 +32,6 @@ class ImageResource extends Component implements HasForms, HasTable
     public $imagePath;
     public $name;
     public $ratio = "1:1";
-    public $style = "realistic";
 
     protected static ?string $model = Image::class;
 
@@ -86,7 +85,6 @@ class ImageResource extends Component implements HasForms, HasTable
         'positive_prompt' => 'required|string|min:2',
         'negative_prompt' => '',
         'ratio' => 'required',
-        'style' => 'required',
         'tags' => 'required'
     ];
 
@@ -129,7 +127,7 @@ class ImageResource extends Component implements HasForms, HasTable
         $this->positive_prompt;
         $this->negative_prompt;
         $this->seed;
-        $json = json_encode(['positivePrompt' => $this->positive_prompt, 'negativePrompt' => $this->negative_prompt, "seed" => $this->seed, "ratio" => $this->ratio, "style" => $this->style]);
+        $json = json_encode(['positivePrompt' => $this->positive_prompt, 'negativePrompt' => $this->negative_prompt, "seed" => $this->seed, "ratio" => $this->ratio]);
         $address = "https://1843-2a0c-5a85-6402-c500-dee3-dd3c-b34e-c0d2.ngrok-free.app/get_image";
         $response = Http::withBody($json, 'application/json')->timeout(60 * 5)
             ->withHeaders([
@@ -155,7 +153,7 @@ class ImageResource extends Component implements HasForms, HasTable
     {
         // move the image to the public or private directory
         //dd($this->form->getState());
-        dd($this->name, $this->positivePrompt, $this->negativePrompt, $this->seed, $this->style, $this->imagePath);
+        dd($this->name, $this->positivePrompt, $this->negativePrompt, $this->seed, $this->imagePath);
         $userPath = Auth::user()->id . '_' . explode('@', Auth::user()->email)[0];
         Storage::disk('public')->move($this->imagePath, 'images/' . $userPath . '/' . $this->name . '.png');
 
@@ -166,7 +164,6 @@ class ImageResource extends Component implements HasForms, HasTable
             'positivePrompt' => $this->positive_prompt,
             'negativePrompt' => $this->negative_prompt,
             'public' => true,
-            'style' => $this->style,
             // Store the image in the public or private directory
             'path' => $imagePath,
             'created_at' => now(),

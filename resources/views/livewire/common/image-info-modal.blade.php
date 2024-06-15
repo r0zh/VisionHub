@@ -63,10 +63,7 @@
                         </x-zeus-accordion::accordion.item>
                     </x-zeus-accordion::accordion>
                 @endif
-                @if ($image->style)
-                    <h1 class="text-3xl font-bold mt-1">Style</h1>
-                    <p>{{ $image->style->name }}</p>
-                @endif
+
                 <h1 class="text-3xl font-bold mt-1">Created At</h1>
                 <p>{{ $dateCreated }}</p>
 

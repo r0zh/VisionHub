@@ -17,7 +17,6 @@ class DatabaseSeeder extends Seeder
         $this->call(EmbeddingTableSeeder::class);
         $this->call(LoraTableSeeder::class);
         $this->call(CheckpointTableSeeder::class);
-        $this->call(StyleTableSeeder::class);
         $this->call(ImageTableSeeder::class);
         $this->call(TagTableSeeder::class);
         $this->call(ImageTagsTableSeeder::class);

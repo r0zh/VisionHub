@@ -60,7 +60,6 @@ class GenerateImage extends Component implements HasForms, HasActions
                         'default' => 1,
                         'md' => 2
                     ])->schema([
-                                Select::make('style_id')->preload()->relationship(name: 'style', titleAttribute: 'name'),
                                 Select::make('checkpoint_id')->preload()->relationship(name: 'checkpoint', titleAttribute: 'name')->required()->hint(view('livewire.common.request-form', ['type' => 'checkpoint'])),
                                 TextInput::make('positivePrompt')->required(),
                                 TextInput::make('negativePrompt'),

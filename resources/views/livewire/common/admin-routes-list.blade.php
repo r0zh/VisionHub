@@ -19,8 +19,5 @@
         <p href="/admin/checkpoints" wire:navigate class="cursor-pointer text-lg">
             Checkpoints
         </p>
-        <p href="/admin/styles" wire:navigate class="cursor-pointer text-lg">
-            Styles
-        </p>
     </div>
 </x-filament::modal>

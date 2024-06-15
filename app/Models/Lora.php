@@ -17,10 +17,6 @@ class Lora extends Model
         'fileName',
         'description',
     ];
-    public function styles()
-    {
-        return $this->hasMany(Style::class, 'style_lora');
-    }
     public function images()
     {
         return $this->hasMany(Image::class, 'image_lora');

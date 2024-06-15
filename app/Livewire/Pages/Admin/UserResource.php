@@ -12,6 +12,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
+use Filament\Tables\Columns\ImageColumn;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
 
@@ -50,7 +51,25 @@ class UserResource extends Component implements HasForms, HasTable
                 ]),
             ])
             ->columns([
-                TextColumn::make('name')->label('User Name'),
+                TextColumn::make('role_id')
+                    ->numeric()
+                    ->sortable(),
+                TextColumn::make('name')
+                    ->searchable(),
+                TextColumn::make('bio')
+                    ->searchable(),
+                ImageColumn::make('profilePic'),
+                TextColumn::make('email')
+                    ->searchable(),
+
+                TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
