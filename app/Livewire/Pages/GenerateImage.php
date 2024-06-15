@@ -1,38 +1,33 @@
 <?php
 
-namespace App\Livewire\Images;
+namespace App\Livewire\Pages;
 
 use App\Models\Checkpoint;
+use App\Models\Embedding;
 use App\Models\Image;
 use App\Models\Lora;
-use App\Models\Embedding;
 use App\Models\ResourceRequest;
 use Filament\Actions\Action;
-use Filament\Forms\Components\Actions\Action as FormAction;
-use Filament\Forms\Concerns\InteractsWithForms;
-use Filament\Forms\Contracts\HasForms;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
-
-use Filament\Forms\Form;
+use Filament\Forms\Components\Actions\Action as FormAction;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Radio;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Repeater;
-use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Toggle;
-
-use Illuminate\Support\HtmlString;
-
-use Livewire\Component;
+use Filament\Forms\Concerns\InteractsWithForms;
+use Filament\Forms\Contracts\HasForms;
+use Filament\Forms\Form;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-
-use Illuminate\Support\Facades\Auth;
+use Livewire\Component;
 
 
 class GenerateImage extends Component implements HasForms, HasActions
@@ -61,7 +56,7 @@ class GenerateImage extends Component implements HasForms, HasActions
                         'md' => 2
                     ])->schema([
                                 Select::make('style_id')->preload()->relationship(name: 'style', titleAttribute: 'name'),
-                                Select::make('checkpoint_id')->preload()->relationship(name: 'checkpoint', titleAttribute: 'name')->required()->hint(view('forms.components.request-form', ['type' => 'checkpoint'])),
+                                Select::make('checkpoint_id')->preload()->relationship(name: 'checkpoint', titleAttribute: 'name')->required()->hint(view('livewire.common.request-form', ['type' => 'checkpoint'])),
                                 TextInput::make('positivePrompt')->required(),
                                 TextInput::make('negativePrompt'),
                                 TextInput::make('seed')->numeric()->required()->maxValue(4294967296)->minValue(0)->default(rand(1, 4294967296)),
@@ -89,7 +84,7 @@ class GenerateImage extends Component implements HasForms, HasActions
                         ->cloneable()
                         ->defaultItems(0)
                         ->columns(2)
-                        ->hint(view('forms.components.request-form', ['type' => 'lora'])),
+                        ->hint(view('livewire.common.request-form', ['type' => 'lora'])),
 
                     Repeater::make('embeddings')
                         ->columns([
@@ -118,7 +113,7 @@ class GenerateImage extends Component implements HasForms, HasActions
                         ->cloneable()
                         ->defaultItems(0)
                         ->columns(2)
-                        ->hint(view('forms.components.request-form', ['type' => 'embedding'])),
+                        ->hint(view('livewire.common.request-form', ['type' => 'embedding'])),
                     Toggle::make('highQ')->label('High Quality')->hint('High quality images take longer to generate.'),
                 ])
             ])
