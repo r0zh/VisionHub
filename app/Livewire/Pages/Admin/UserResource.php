@@ -9,6 +9,9 @@ use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
 use Filament\Tables;
+use Filament\Tables\Actions\Action;
+use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
@@ -62,7 +65,12 @@ class UserResource extends Component implements HasForms, HasTable
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make()->form([
+                Action::make('Images')
+                    ->label('Images')
+                    ->icon('heroicon-o-photo')
+                    ->color('info')
+                    ->url(fn(User $user) => route('user', $user)),
+                EditAction::make()->form([
                     Select::make('role_id')
                         ->required()
                         ->relationship('role', 'name'),
@@ -70,7 +78,7 @@ class UserResource extends Component implements HasForms, HasTable
                         ->required()
                         ->maxLength(255),
                 ]),
-                Tables\Actions\DeleteAction::make()
+                DeleteAction::make()
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
