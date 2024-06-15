@@ -7,7 +7,8 @@ new class extends Component {
     /**
      * Log the current user out of the application.
      */
-    public function logout(Logout $logout): void {
+    public function logout(Logout $logout): void
+    {
         $logout();
 
         $this->redirect('/', navigate: true);
@@ -21,7 +22,7 @@ new class extends Component {
             <div class="flex">
                 <!-- Logo -->
                 <div class="flex items-center shrink-0">
-                    <a href="{{ route('upload') }}" wire:navigate>
+                    <a href="{{ route('landing') }}" wire:navigate>
                         <x-application-logo class="block w-auto h-9 text-gray-800 fill-current dark:text-gray-200" />
                     </a>
                 </div>
@@ -41,6 +42,10 @@ new class extends Component {
                         {{ __('Community') }}
                     </x-nav-link>
                     @if (auth()->user()->hasRole('admin'))
+                        <x-nav-link>
+                            <livewire:common.admin-routes-list />
+                        </x-nav-link>
+
                         <x-nav-link :href="route('admin')" :active="request()->routeIs('admin')" wire:navigate>
                             {{ __('Admin') }}
                         </x-nav-link>
