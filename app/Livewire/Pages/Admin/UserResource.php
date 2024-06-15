@@ -3,6 +3,7 @@
 namespace App\Livewire\Pages\Admin;
 
 use App\Models\User;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
@@ -13,6 +14,7 @@ use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
 use Filament\Tables\Columns\ImageColumn;
+use Filament\Forms\Components\DateTimePicker;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
 
@@ -36,32 +38,17 @@ class UserResource extends Component implements HasForms, HasTable
     {
         return $table
             ->query(User::query())
-            ->headerActions([
-                Tables\Actions\CreateAction::make()->form([
-                    TextInput::make('name')
-                        ->required()
-                        ->maxLength(255),
-                    TextInput::make('email')
-                        ->required()
-                        ->maxLength(255),
-                    TextInput::make('password')
-                        ->required()
-                        ->maxLength(255),
-
-                ]),
-            ])
             ->columns([
-                TextColumn::make('role_id')
+                TextColumn::make('role.name')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('name')
                     ->searchable(),
-                TextColumn::make('bio')
-                    ->searchable(),
-                ImageColumn::make('profilePic'),
                 TextColumn::make('email')
+                    ->words(1)
                     ->searchable(),
-
+                TextColumn::make('images_count')->counts('images')->label('Number of images')
+                    ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -76,15 +63,12 @@ class UserResource extends Component implements HasForms, HasTable
             ])
             ->actions([
                 Tables\Actions\EditAction::make()->form([
+                    Select::make('role_id')
+                        ->required()
+                        ->relationship('role', 'name'),
                     TextInput::make('name')
                         ->required()
                         ->maxLength(255),
-                    TextInput::make('email')
-                        ->required()
-                        ->maxLength(255),
-                    TextInput::make('password')
-                        ->required()
-                        ->maxLength(255)->label('New password')
                 ]),
                 Tables\Actions\DeleteAction::make()
             ])
@@ -95,21 +79,6 @@ class UserResource extends Component implements HasForms, HasTable
             ]);
     }
 
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
-    }
-
-    public static function getPages(): array
-    {
-        /* return [
-            'index' => Pages\ListUsers::route('/'),
-            'create' => Pages\CreateUser::route('/create'),
-            'edit' => Pages\EditUser::route('/{record}/edit'),
-        ]; */
-    }
     public function render(): View
     {
         return view('livewire.pages.admin.user-resource');

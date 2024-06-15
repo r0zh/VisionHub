@@ -53,7 +53,7 @@ class User extends Authenticatable
      */
     public function images()
     {
-        return $this->hasMany(Image::class)->first();
+        return $this->hasMany(Image::class);
     }
     /**
      * Get the images for the user.
