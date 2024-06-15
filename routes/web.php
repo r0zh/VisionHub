@@ -11,6 +11,7 @@ use App\Livewire\Pages\Gallery;
 use App\Livewire\Pages\GenerateImage;
 use App\Livewire\Pages\Moderator\ResolveRequestResource;
 use App\Livewire\Pages\UploadImage;
+use App\Livewire\Pages\UserImages;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -47,6 +48,7 @@ Route::middleware('auth')->group(function () {
     Route::get('upload', UploadImage::class)->middleware(['auth'])->name('upload');
     Route::get('gallery', Gallery::class)->middleware(['auth'])->name('gallery');
     Route::get('community', Community::class)->middleware(['auth'])->name('community');
+    Route::get('user/{user_id}', UserImages::class)->middleware(['auth'])->name('user');
     Route::view('profile', 'profile')->name('profile');
 });
 
