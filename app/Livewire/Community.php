@@ -12,7 +12,8 @@ use Livewire\Attributes\On;
  *
  * @package App\Livewire
  */
-class Community extends Component {
+class Community extends Component
+{
     public $images;
 
     public $selectedImage = null;
@@ -26,11 +27,12 @@ class Community extends Component {
     /**
      * Mount the component and retrieve all images from the database.
      */
-    public function mount() {
-        $this->images         = Image::all()->where('public', true);
+    public function mount()
+    {
+        $this->images = Image::all()->where('public', true);
         $this->filteredImages = $this->images;
         $this->searchedImages = $this->filteredImages;
-        $this->orderedImages  = $this->searchedImages->sortByDesc('created_at');
+        $this->orderedImages = $this->searchedImages->sortByDesc('created_at');
     }
 
     /**
@@ -38,7 +40,8 @@ class Community extends Component {
      * @param string $search
      */
     #[On('searchUpdated')]
-    public function updateSearch($search) {
+    public function updateSearch($search)
+    {
         if ($search != $this->search) {
             $this->search = $search;
             $this->getImages();
@@ -50,7 +53,8 @@ class Community extends Component {
      * @param string $direction
      */
     #[On('orderUpdated')]
-    public function updateOrder($direction) {
+    public function updateOrder($direction)
+    {
         if ($direction != $this->direction) {
             $this->direction = $direction;
             $this->getImages();
@@ -60,43 +64,20 @@ class Community extends Component {
     /**
      * Fetch the images based on the search query and ordering direction.
      */
-    public function getImages() {
+    public function getImages()
+    {
         $this->images = Image::where('positivePrompt', 'like', '%' . $this->search . '%')
             ->where('public', true)
             ->orderBy('created_at', $this->direction)
             ->get();
     }
 
-    /**
-     * Update the filter value and fetch the images accordingly.
-     */
-    #[On('imageDeleted')]
-    public function imageDeleted() {
-        $this->getImages();
-    }
-
-    /**
-     * Fetch the images when the image visibility is updated.
-     */
-    #[On('imageVisibilityUpdated')]
-    public function imageVisibilityUpdated() {
-        $this->getImages();
-    }
-
-    /**
-     * Handle the event when an image is selected.
-     * Dispatch the 'openModal' event with the 'ImageDetails' component and the image ID as parameters.
-     * @param $id
-     */
-    #[On('imageSelected')]
-    public function imageSelected($id) {
-        $this->dispatch('openModal', 'ImageDetails', ['id' => $id]);
-    }
 
     /**
      * Render the component.
      */
-    public function render() {
+    public function render()
+    {
         return view('livewire.artivision.community');
     }
 }
