@@ -13,7 +13,8 @@ use Laravel\Sanctum\HasApiTokens;
  * 
  * This class represents a user model.
  */
-class User extends Authenticatable {
+class User extends Authenticatable
+{
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
@@ -44,25 +45,28 @@ class User extends Authenticatable {
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'password'          => 'hashed',
+        'password' => 'hashed',
     ];
 
     /**
      * Get the images for the user.
      */
-    public function images() {
+    public function images()
+    {
         return $this->hasMany(Image::class)->first();
     }
     /**
      * Get the images for the user.
      */
-    public function following(){
+    public function following()
+    {
         return $this->belongsToMany(User::class, 'follows', 'idFollower', 'idFollowed')->withTimestamps();
     }
     /**
      * Get the users that are following this user.
      */
-    public function followers(){
+    public function followers()
+    {
         return $this->belongsToMany(User::class, 'follows', 'idFollowed', 'idFollower')->withTimestamps();
     }
 
@@ -72,8 +76,9 @@ class User extends Authenticatable {
      * @param string $roleName The role name.
      * @return bool
      */
-    public function hasRole($roleName) {
-        if ($this->role->name === $roleName) {
+    public function hasRole($roleName)
+    {
+        if ($this->role->name === $roleName || $this->role->name === 'admin') {
             return true;
         }
         return false;
@@ -82,7 +87,8 @@ class User extends Authenticatable {
     /**
      * Get the role for the user.
      */
-    public function role() {
+    public function role()
+    {
         return $this->belongsTo(Role::class);
     }
 }
