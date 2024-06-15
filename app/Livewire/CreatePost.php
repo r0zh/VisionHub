@@ -3,10 +3,8 @@
 namespace App\Livewire;
 
 use App\Models\Post;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\MarkdownEditor;
-use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Section;
@@ -33,7 +31,7 @@ class CreatePost extends Component implements HasForms
             ->schema([
                 TextInput::make('title'),
                 TextInput::make('slug'),
-                RichEditor::make('content')->columnSpanFull(),
+                Textarea::make('content')->columnSpanFull(),
                 Section::make('Publishing')->description('Settings for publishing this post.')
                     ->schema([
                         Select::make('status')

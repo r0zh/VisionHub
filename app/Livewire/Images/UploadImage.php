@@ -2,13 +2,11 @@
 
 namespace App\Livewire\Images;
 
-// auth
 use App\Rules\AllowedRatios;
+use Filament\Forms\Components\Textarea;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\Image;
-use App\Models\Style;
-use App\Models\Tag;
 use App\Models\ResourceRequest;
 
 use Filament\Actions\Action;
@@ -17,24 +15,18 @@ use Filament\Actions\Concerns\InteractsWithActions;
 
 
 use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
 
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\Actions\Action as FormAction;
-use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
-
-use Closure;
 
 use Livewire\Component;
 use Illuminate\Contracts\View\View;
@@ -59,7 +51,7 @@ class UploadImage extends Component implements HasForms, HasActions
             ->schema([
                 Section::make('Upload Image')->schema([
                     TextInput::make('name')->nullable(),
-                    RichEditor::make('description')->nullable(),
+                    Textarea::make('description')->nullable(),
                     Grid::make([
                         'default' => 1,
                         'md' => 2
