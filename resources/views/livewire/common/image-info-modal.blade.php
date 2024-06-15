@@ -1,10 +1,12 @@
-<x-filament::modal id="image-info-modal" width="7xl" alignment="center" class="dark:text-white">
-
+<x-filament::modal id="image-info-modal" width="fit" alignment="center" class="dark:text-white">
     <div>
-        <div class="grid grid-cols-2 gap-3 p-4  w-full">
-            <div class="w-fit grid-column-span-2">
-                <img src="@if ($image->public == 1) {{ asset('storage/' . $image->path) }} @else {{ url($image->path) }} @endif"
-                    alt="{{ $image->positivePrompt }}" class="w-fit max-h-[80vh] rounded-xl shadow-lg" />
+        <div class="xl:grid xl:grid-cols-2 gap-3 p-4 w-fit">
+            <div class="flex justify-center items-center">
+                <div class="w-fit h-fit">
+                    <img src="@if ($image->public == 1) {{ asset('storage/' . $image->path) }} @else {{ url($image->path) }} @endif"
+                        alt="{{ $image->positivePrompt }}" class="xl:w-fit xl_max-h-[80vh] rounded-xl shadow-lg" />
+                    <h1 class="text-xl font-bold">By {{ $image->user->name }}</h1>
+                </div>
             </div>
             <div class="p-2">
                 @if ($this->image->name)
@@ -12,24 +14,60 @@
                     <p>{{ $image->name }}</p>
                 @endif
                 @if ($this->image->description)
-                    <h1 class="text-3xl font-bold">Description</h1>
-                    <p>{{ $image->description }}</p>
+                    <h1 class="text-3xl font-bold mt-1 mt-1">Description</h1>
+                    <p class="break-all">{{ $image->description }}</p>
                 @endif
-                <h1 class="text-3xl font-bold">Seed</h1>
-                <p>{{ $image->seed }}</p>
-                <h1 class="text-3xl font-bold">Positive Prompt</h1>
+                <h1 class="text-3xl font-bold mt-1">Positive Prompt</h1>
                 <p>{{ $image->positivePrompt }}</p>
-                <h1 class="text-3xl font-bold">NegativePrompt</h1>
                 @if ($image->negativePrompt)
+                    <h1 class="text-3xl font-bold mt-1">NegativePrompt</h1>
                     <p>{{ $image->negativePrompt }}</p>
-                @else
-                    <p>No negative prompt</p>
                 @endif
-                <h1 class="text-3xl font-bold">User</h1>
-                <p>{{ $image->user->name }}</p>
-                <h1 class="text-3xl font-bold">Style</h1>
-                {{-- <p>{{ $image->style->name }}</p> --}}
-                <h1 class="text-3xl font-bold">Created At</h1>
+                @if ($this->image->checkpoint)
+                    <h1 class="text-3xl font-bold mt-1">Checkpoint</h1>
+                    <p>{{ $image->checkpoint->name }}</p>
+                @endif
+                <h1 class="text-3xl font-bold mt-1">Seed</h1>
+                <p>{{ $image->seed }}</p>
+                <br>
+                @if ($image->loras)
+                    <x-zeus-accordion::accordion activeAccordion="0">
+                        <x-zeus-accordion::accordion.item :label="'Loras'">
+                            <ul class="list-disc ml-3">
+                                @for ($i = 0; $i < count($image->loras); $i++)
+                                    <li>{{ $image->loras[$i]->name }}</li>
+                                @endfor
+                            </ul>
+                        </x-zeus-accordion::accordion.item>
+                    </x-zeus-accordion::accordion>
+                @endif
+                @if ($image->embeddings)
+                    <x-zeus-accordion::accordion activeAccordion="0">
+                        <x-zeus-accordion::accordion.item :label="'Embeddings'">
+                            <ul class="list-disc ml-3">
+                                @for ($i = 0; $i < count($image->embeddings); $i++)
+                                    <li>{{ $image->embeddings[$i]->name }}</li>
+                                @endfor
+                            </ul>
+                        </x-zeus-accordion::accordion.item>
+                    </x-zeus-accordion::accordion>
+                @endif
+                @if ($image->tags)
+                    <x-zeus-accordion::accordion activeAccordion="0">
+                        <x-zeus-accordion::accordion.item :label="'Tags'">
+                            <ul class="list-disc ml-3">
+                                @for ($i = 0; $i < count($image->tags); $i++)
+                                    <li>{{ $image->tags[$i]->name }}</li>
+                                @endfor
+                            </ul>
+                        </x-zeus-accordion::accordion.item>
+                    </x-zeus-accordion::accordion>
+                @endif
+                @if ($image->style)
+                    <h1 class="text-3xl font-bold mt-1">Style</h1>
+                    <p>{{ $image->style->name }}</p>
+                @endif
+                <h1 class="text-3xl font-bold mt-1">Created At</h1>
                 <p>{{ $dateCreated }}</p>
 
             </div>
