@@ -28,6 +28,7 @@ Route::post('/auth/register', [AuthController::class, 'register']);
 Route::post('/auth/login', [AuthController::class, 'login']);
 Route::get('models/public', [ThreeDModelController::class, 'index']);
 Route::get('model/{id}/thumbnail', [ThreeDModelServeController::class, 'serveThreeDModelThumbnail'])->name('models.thumbnail');
+Route::get('model/{id}/get', [ThreeDModelServeController::class, 'serveThreeDModel'])->name('models.download');
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/auth/checkToken', [AuthController::class, 'checkToken']);
@@ -38,7 +39,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('images/{id}/get', [ImageServeController::class, 'serveImage'])->name('images.download');
     Route::post('models/upload', [ThreeDModelController::class, 'store']);
     Route::get('models/user/{id}', [ThreeDModelController::class, 'userModels']);
-    Route::get('model/{id}/get', [ThreeDModelServeController::class, 'serveThreeDModel'])->name('models.download');
     Route::get('user/{id}/get', [UserController::class, 'user'])->name('user.get');
-    Route::get('user/get_id', [UserController::class, 'id'])->name('user.get_id');
+    Route::get('user', [UserController::class, 'currentUser'])->name('user');
 });
