@@ -37,14 +37,14 @@ class EmbeddingResource extends Component implements HasForms, HasTable
                         ->maxLength(255)->label('Name'),
                     TextInput::make('fileName')
                         ->required()
-                        ->maxLength(255)->label('Path'),
+                        ->maxLength(255),
                     TextInput::make('description')
                         ->maxLength(255)->label('Description'),
                 ]),
             ])
             ->columns([
                 TextColumn::make('name')->label('Name')->searchable(),
-                TextColumn::make('fileName')->label('Path'),
+                TextColumn::make('fileName'),
                 TextColumn::make('description')->label('Description')->searchable(),
             ])
             ->filters([
@@ -58,7 +58,7 @@ class EmbeddingResource extends Component implements HasForms, HasTable
                             ->maxLength(255)->label('Name'),
                         TextInput::make('fileName')
                             ->required()
-                            ->maxLength(255)->label('Path'),
+                            ->maxLength(255),
                         TextInput::make('description')
                             ->maxLength(255)->label('Description'),
                     ]),

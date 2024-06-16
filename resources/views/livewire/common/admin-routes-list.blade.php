@@ -21,6 +21,9 @@
         <p href="/admin/loras" wire:navigate class="cursor-pointer text-lg">
             Loras
         </p>
+        <p href="/admin/embeddings" wire:navigate class="cursor-pointer text-lg">
+            Embeddings
+        </p>
         <p href="/admin/checkpoints" wire:navigate class="cursor-pointer text-lg">
             Checkpoints
         </p>
