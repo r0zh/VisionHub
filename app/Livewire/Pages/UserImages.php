@@ -42,9 +42,9 @@ class UserImages extends Component
         return $this->user_id == auth()->id() || auth()->user()->role->name == 'moderator' || auth()->user()->role->name == 'admin';
     }
 
-    public function getUserName()
+    public function getUser()
     {
-        return User::find($this->user_id)->name;
+        return User::find($this->user_id);
     }
 
     /**

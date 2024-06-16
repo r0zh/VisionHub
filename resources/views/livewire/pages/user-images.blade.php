@@ -8,7 +8,10 @@
             <livewire:common.search-box />
         </div>
     </div>
-    <h1 class="text-3xl mt-4 font-bold text-center dark:text-white">Images from {{ $this->getUserName() }}</h1>
+    <h1 class="text-3xl mt-4 font-bold text-center dark:text-white">Images from {{ $this->getUser()->name }} <span
+            class=" text-base">View <a class="text-yellow-200"
+                href="{{ config('services.angular') }}/profile/{{ $this->getUser()->id }}">3d
+                models</a></span></h1>
     @if ($images->isEmpty())
         <div class="flex justify-center items-start p-4">
             <div
