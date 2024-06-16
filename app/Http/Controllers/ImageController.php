@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -37,6 +39,17 @@ class ImageController extends Controller
             return $response;
         } else {
             abort(403, 'Unauthorized action.');
+        }
+    }
+
+    public function privateImage($type, $idWithUser, $image)
+    {
+        $id = Str::before($idWithUser, '_');
+        $user = User::find($id);
+        if (Auth::user()->id == $user->id || Auth::user()->hasRole('admin')) {
+            return Storage::disk('local')->download("private/" . $type . "/" . $idWithUser . "/" . $image);
+        } else {
+            return response()->json(['message' => 'Unauthorized'], 403);
         }
     }
 }
