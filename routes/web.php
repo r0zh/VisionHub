@@ -1,16 +1,16 @@
 <?php
 
-use App\Livewire\Moderator\ResolveRequest;
 use App\Livewire\Pages\Admin\CheckpointResource;
 use App\Livewire\Pages\Admin\EmbeddingResource;
 use App\Livewire\Pages\Admin\ImageResource;
-use App\Livewire\Pages\Admin\ThreeDModelResource;
 use App\Livewire\Pages\Admin\LoraResource;
 use App\Livewire\Pages\Admin\TagResource;
+use App\Livewire\Pages\Admin\ThreeDModelResource;
 use App\Livewire\Pages\Admin\UserResource;
 use App\Livewire\Pages\Community;
 use App\Livewire\Pages\Gallery;
 use App\Livewire\Pages\GenerateImage;
+use App\Livewire\Pages\LandingPage;
 use App\Livewire\Pages\Moderator\ResolveRequestResource;
 use App\Livewire\Pages\UploadImage;
 use App\Livewire\Pages\UserImages;
@@ -26,12 +26,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/', function () {
-    return redirect()->away('index.html');
-})->name('landing');
-// rerout to the upload page
-
-
+Route::get('/', LandingPage::class)->name('landing');
 
 Route::middleware('auth')->middleware('checkPermission:admin')->group(function () {
     Route::get('admin/users', UserResource::class);
