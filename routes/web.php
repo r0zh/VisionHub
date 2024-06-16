@@ -2,6 +2,7 @@
 
 use App\Livewire\Moderator\ResolveRequest;
 use App\Livewire\Pages\Admin\CheckpointResource;
+use App\Livewire\Pages\Admin\EmbeddingResource;
 use App\Livewire\Pages\Admin\ImageResource;
 use App\Livewire\Pages\Admin\ThreeDModelResource;
 use App\Livewire\Pages\Admin\LoraResource;
@@ -43,7 +44,7 @@ Route::middleware('auth')->middleware('checkPermission:moderator')->group(functi
     Route::get('admin/three-d-models', ThreeDModelResource::class);
     Route::get('admin/loras', LoraResource::class);
     Route::get('admin/checkpoints', CheckpointResource::class);
-
+    Route::get('admin/embeddings', EmbeddingResource::class);
 });
 
 Route::middleware('auth')->group(function () {
