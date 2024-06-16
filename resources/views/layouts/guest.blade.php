@@ -17,16 +17,46 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-sans antialiased text-gray-900 ">
-    <div class="flex flex-col items-center pt-6 min-h-screen bg-gray-100 sm:justify-center sm:pt-0 bg-[linear-gradient(180deg,_#000000_38.19%,_#6F42C1_100%)]">
+<style>
+    .text-gray-900 {
+        color: #1a202c;
+    }
+
+    .bg-gray-100 {
+        background-color: #f7fafc;
+    }
+
+    .bg-white {
+        background-color: #fff;
+    }
+
+    .bg-gray-800 {
+        background-color: #2d3748;
+    }
+
+    .text-black {
+        color: #000000;
+    }
+
+    .hover:bg-gray-700 {
+        background-color: #4a5568;
+    }
+
+    .dark:text-gray-800 {
+        color: #2d3748;
+    }
+
+</style>
+<body class="font-sans antialiased text-white ">
+    <div
+        class="flex flex-col items-center pt-6 min-h-screen bg-gray-100 sm:justify-center sm:pt-0 bg-[linear-gradient(180deg,_#000000_38.19%,_#6F42C1_100%)]">
         <div>
             <a href="/" wire:navigate>
                 <x-application-logo class="w-20 h-20 text-gray-500 fill-current" />
             </a>
         </div>
 
-        <div
-            class="overflow-hidden py-4 px-6 mt-6 w-full bg-white shadow-md sm:max-w-md sm:rounded-lg dark:bg-gray-800">
+        <div class="overflow-hidden py-4 px-6 mt-6 w-full bg-gray-800 shadow-md sm:max-w-md sm:rounded-lg">
             {{ $slot }}
         </div>
     </div>
