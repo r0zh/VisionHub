@@ -303,5 +303,9 @@
     "here": "aquí",
     "Cannot find the :type you are looking for? Request it": "¿No encuentras el :type que estás buscando? Solicítalo",
     "High Quality": "Alta Calidad",
-    "High quality images take longer to generate.": "Las imágenes de alta calidad tardan más en generarse."
+    "High quality images take longer to generate.": "Las imágenes de alta calidad tardan más en generarse.",
+    "Resource description": "Descripción del recurso",
+    "Resource name": "Nombre del recurso",
+    "Resource request": "Petición de Recurso",
+    "Resource url": "URL del Recurso"
 }
