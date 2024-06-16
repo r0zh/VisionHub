@@ -1,3 +1,4 @@
+/*************************************************Fonts******************************************/
 @font-face {
     font-family: mate;
     src: url('../fonts/MatePrata/Mate/Mate-Regular.ttf');
@@ -7,14 +8,15 @@
     font-family: prata ;
     src: url("../fonts/MatePrata/Prata/Prata-Regular.ttf");
 }
+/*******************************************General Stuff******************************************/
 *{
     box-sizing: border-box;
+    font-family: prata;
     margin: 0;
     padding: 0;
-}
-a{
     text-decoration: none;
 }
+/********************************************VisionHub Header*************************************/
 #visionHubdiv{
     background-image: url(./Frame\ 2.png);
     background-repeat: no-repeat;
@@ -24,14 +26,12 @@ a{
     justify-content: center;
     padding: 15vh;
     margin: 10vh;
-    
 }
 #visionHubT{
     font-size:8em;
 }
 #sloganVH{
     text-align: center;
-    
 }
 #subTitleVH{
     font-size:4em;
@@ -39,6 +39,7 @@ a{
 #subSloganVH{
     font-size: 1.5em;
 }
+/******************************************Body and Divisions***********************************/
 #mainBodyTemplate{
     margin-top: 22vh;
     display: grid;
@@ -54,7 +55,7 @@ a{
     display: flex;
     width: 90%;
     justify-content: center;
-    margin-bottom: 15vh;
+    margin-bottom: 10vh;
 }
 #wrapper2D{
     background-color: #fedeb7;
@@ -62,11 +63,20 @@ a{
 #wrapper3D{
     background-color: #b7d6fd;
 }
+#wrapperCommunity{
+    height: 80%;
+    text-align: center;
+    display: block;
+    background-color: rgb(176, 176, 176, 0.5);
+}
 .subVisionHubdiv{
+    border-radius: 30px;
+    box-shadow: 3px 3px black;
     margin: 20px;
     padding: 50px;
     text-align: center;
     width: 75%;
+    transition: opacity 0.2s, transform 0.2s;
 }
 .subVisionHubT{
     font-size: 2em;
@@ -76,74 +86,139 @@ a{
     display: flex;
     justify-content: center;
 }
-
-#gradientYellow {
-    width: 100%;
-    height: 200px;
-    background: linear-gradient(to bottom, #fedeb7, white);
+#communityGrid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    align-items: center;
 }
-#whiteSpace{
-    width: 100%;
-    height: 100px;
-    background-color: white;
-}
-#gradientBlue {
-    width: 100%;
-    height: 200px;
-    background: linear-gradient(to bottom, white, #b7d6fd);
+.comunnityDiv{
+    height: 80%;
+    transition: opacity 0.2s, transform 0.2s;
+    background-color: #b0b0b0;
 }
 
 #generatordiv2d{
     background-color: #fdae4b;
-    border-radius: 30px;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    transform: translateX(-100%); 
 }
 #generatorB2d{
     background-color: #fdae4b;
 }
 #generatordiv3d{
-    border-radius: 30px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     background-color: #4b9afc;
+    transform: translateX(100%); 
 }
 #generatorB3d{
     background-color: #4b9afc;
 }
-
 .buttonApp{
+    box-shadow: 3px 3px black;
+    border: 0.5px solid black;
     width: 50%;
     display: inline-block;
     color: black;
     cursor: pointer;
     padding: 2.5vh;
     border-radius: 10px;
+    transition: 0.5s;
 }
-
-/* 
-                                    FLIP CARDS STUFF
- */
+.buttonApp:hover{
+    box-shadow: 0px 0px black;
+    transition: 0.5s;
+}
+/******************************************Moves hidden divs*************************************/
+.hidden {
+    opacity: 0;
+    display: none;
+}
+.visible {
+    display: grid;
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+/*********************************************Footer stuff***************************************/
+#footerWrapper{
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    background-color: #C6A1FF
+}
+#gridFooter{
+    margin: 20px;
+    width: 90%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    justify-content: center;
+}
+.gridFooterElement{
+    text-align: center;
+    align-self: center;
+    justify-content: center;
+    justify-items: center;
+}
+#gridFooter img{
+    width: 50%;
+}
+#gitHubLink{
+    color: black;
+    width: 60%;
+    box-shadow: 3px 3px black;
+    border: 0.5px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    transition: 0.5s;
+    margin-bottom: 20px;
+}
+#gitHubLink:hover{
+    box-shadow: 0px 0px black;
+    background-color: #5F3998;
+    color: white;
+    transition: 0.5s;
+}
+#gitHubLink img{
+    width: 15%;
+    border-radius: 5px;
+}
+#socialMedias{
+    text-decoration: none;
+}
+/***************************************Flip Cards Stuff*****************************************/
 .flipCardDetails {
     height: 200px;
     perspective: 1000px;
 }
-
 .flip-card-inner {
     border-radius: 10px;
     position: relative;
     width: 100%;
     height: 100%;
     text-align: center;
-
     transition: transform 0.8s;
     transform-style: preserve-3d;
 }
-
-.flipCardDetails:hover .flip-card-inner {
+.flipCardDetails:hover #flip-card-inner2d {
     transform: rotateY(180deg);
 }
-
+.flipCardDetails:hover #flip-card-inner-community {
+    transform: rotateY(180deg);
+}
+.flipCardDetails:hover #flip-card-inner3d{
+    transform: rotateY(-180deg);
+}
+.flipCardDetails:hover #flip-card-inner-upgrades{
+    transform: rotateY(-180deg);
+}
 .flip-card-front, .flip-card-back {
     border-radius: 10px;
     position: absolute;
@@ -151,13 +226,15 @@ a{
     height: 100%;
     backface-visibility: hidden;
 }
-
 .flip-card-front {
     display: flex;
     align-items: center;
-    justify-content: center;
-    
+    align-content: center;
+    justify-content: center;   
     color: black;
+}
+#flip-card-front-community{
+    background-color: #b0b0b0;
 }
 #flip-card-front-2d{
     background-color: #fdae4b;
@@ -165,13 +242,14 @@ a{
 #flip-card-front-3d{
     background-color: #4b9afc;
 }
-
 .flip-card-back {
-    border: 4px solid white;
-    
+    padding-top: 20px;
+    text-align: center;
     color: black;
-
     transform: rotateY(180deg);
+}
+#flip-card-back-community{
+    background-color: rgb(176, 176, 176, 0.5);
 }
 #flip-card-back-2d{
     background-color: #fedeb7;
@@ -179,3 +257,6 @@ a{
 #flip-card-back-3d{
     background-color: #b7d6fd;
 }
+
+
+
