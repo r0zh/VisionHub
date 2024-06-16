@@ -1,5 +1,4 @@
 <div>
-    <livewire:wire-elements-modal />
     <div class="py-2 rounded-lg dark:text-white dark:bg-gray-800">
         <div class="flex flex-wrap justify-center items-center space-x-4">
             <livewire:common.order-by-date />

@@ -44,7 +44,6 @@
     </div>
 
     <!-- Scripts -->
-    @livewire('wire-elements-modal')
     @livewire('notifications')
 
     @filamentScripts

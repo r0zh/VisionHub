@@ -2,15 +2,15 @@
 
 namespace App\Livewire\Common;
 
+use Livewire\Component;
 
-use LivewireUI\Modal\ModalComponent;
 
 /**
  * Class FilterVisibility
  * 
  * This class represents a Livewire component for managing filter visibility.
  */
-class FilterVisibility extends ModalComponent
+class FilterVisibility extends Component
 {
     public $filter = 'all';
 
