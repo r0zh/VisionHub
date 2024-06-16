@@ -13,7 +13,8 @@ return [
     | a conventional file to locate the various service credentials.
     |
     */
-    'flask' => 'http://flaskloadbalancer-64905749.us-east-1.elb.amazonaws.com',
+    'flask' => 'http://localhost:5000',
+    'angular' => 'http://localhost:4200',
 
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),
