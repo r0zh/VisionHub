@@ -28,6 +28,11 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('/', LandingPage::class)->name('landing');
 
+Route::get('/language/{locale}', function ($locale) {
+    session(['locale' => $locale]);
+    return redirect()->back();
+})->name('locale');
+
 Route::middleware('auth')->middleware('checkPermission:admin')->group(function () {
     Route::get('admin/users', UserResource::class);
 });
