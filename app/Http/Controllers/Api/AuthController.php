@@ -104,7 +104,14 @@ class AuthController extends Controller
         ], 200);
     }
 
-    public function user(Request $request)
+    public function checkToken(Request $request)
     {
+        return response()->json([
+            'status' => true,
+            'message' => 'Token is valid',
+            'user' => Auth::user()
+        ], 200);
     }
 }
+
+
