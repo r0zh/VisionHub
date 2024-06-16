@@ -1,22 +1,22 @@
 <x-filament::modal slide-over>
     <x-slot name="trigger">
-        Admin Views
+        {{ __('Admin Views') }}
     </x-slot>
 
     <div>
         <p href="/admin/images" wire:navigate class="cursor-pointer text-lg">
-            Images
+            {{ __('Images') }}
         </p>
         <p href="/admin/tags" wire:navigate class="cursor-pointer text-lg">
             Tags
         </p>
         @if (auth()->user()->hasRole('admin'))
             <p href="/admin/users" wire:navigate class="cursor-pointer text-lg">
-                Users
+                {{ __('Users') }}
             </p>
         @endif
         <p href="/admin/three-d-models" wire:navigate class="cursor-pointer text-lg">
-            3D Models
+            {{ trans_choice('3d models', 1) }}
         </p>
         <p href="/admin/loras" wire:navigate class="cursor-pointer text-lg">
             Loras

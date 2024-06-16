@@ -43,91 +43,92 @@ class UploadImage extends Component implements HasForms, HasActions
     {
         return $form
             ->schema([
-                Section::make('Upload Image')->schema([
-                    TextInput::make('name')->nullable(),
-                    Textarea::make('description')->nullable(),
-                    Grid::make([
-                        'default' => 1,
-                        'md' => 2
-                    ])->schema([
-
-                                Select::make('checkpoint_id')->preload()->relationship(name: 'checkpoint', titleAttribute: 'name')->required()->hint(view('livewire.common.request-form', ['type' => 'checkpoint'])),
-                                TextInput::make('positivePrompt')->required(),
-                                TextInput::make('negativePrompt'),
-                                TextInput::make('seed')->numeric()->required()->maxValue(4294967296)->minValue(0)->default(rand(1, 4294967296)),
-                                Select::make('tags')
-                                    ->multiple()
-                                    ->preload()
-                                    ->relationship('tags', 'name')
-                                    ->createOptionForm([
-                                        TextInput::make('name')
-                                            ->required(),
-                                    ]),
-                            ])->extraAttributes(['class' => 'custom-section-style']),
-                    Repeater::make('loras')
-                        ->relationship('imageLoras')
-                        ->schema([
-                            Select::make('lora_id')->relationship(name: 'lora', titleAttribute: 'name')->label("Lora name")->required(),
-                            TextInput::make('weight')->numeric()->required()->maxValue(1.0)->minValue(-1.0)->step(0.01)->default(1),
-
-                        ])
-                        ->extraItemActions([
-                            FormAction::make('LoraInfo')
-                                ->icon('heroicon-m-information-circle')
-                                ->color('info')
-                                ->modalSubmitAction(false)
-                                ->modalCancelActionLabel('Close')
-                                ->modalContent(view('info.lora'))
-                        ])
-                        ->cloneable()
-                        ->defaultItems(0)
-                        ->columns(2)
-                        ->hint(view('livewire.common.request-form', ['type' => 'lora'])),
-
-                    Repeater::make('embeddings')
-                        ->columns([
+                Section::make(__('Upload Image'))
+                    ->schema([
+                        TextInput::make('name')->label(__("Name"))->nullable(),
+                        Textarea::make('description')->label(__("Description"))->nullable(),
+                        Grid::make([
                             'default' => 1,
-                            'sm' => 1,
-                            'md' => 5,
-                            'lg' => 5,
-                            'xl' => 5,
-                            '2xl' => 5,
-                        ])
-                        ->relationship('imageEmbeddings')
-                        ->schema([
-                            Select::make('embedding_id')->relationship(name: 'embedding', titleAttribute: 'name')->label("Embedding name")->required()->columnSpan(2),
-                            TextInput::make('weight')->numeric()->required()->maxValue(1.0)->minValue(-1.0)->step(0.01)->columnSpan(2)->default(1),
-                            Radio::make('prompt_target')
-                                ->options([
-                                    'positive' => 'Positive',
-                                    'negative' => 'Negative',
-                                ])
-                                ->inline()
-                                ->inlineLabel(false)
-                                ->required()
-                        ])->extraItemActions([
-                                FormAction::make('LoraInfo')->icon('heroicon-m-information-circle')->color('info')->modalSubmitAction(false)->modalCancelActionLabel('Close')->modalContent(view('info.embedding'))
-                            ])
-                        ->cloneable()
-                        ->defaultItems(0)
-                        ->columns(2)
-                        ->hint(view('livewire.common.request-form', ['type' => 'embedding'])),
+                            'md' => 2
+                        ])->schema([
 
-                    FileUpload::make('imagePath')->imageEditor()->visibility('private')
-                        ->imageEditorAspectRatios([
-                            '2:3',
-                            '1:1',
-                        ])->image()
-                        ->label('Upload Image')
-                        ->rule(new AllowedRatios())
-                        ->validationMessages([
-                            'AllowedRatios' => 'Image must have a 2:3 or 1:1 aspect ratio. Use the editor to crop it please.',
-                        ])
-                        ->required(),
-                    Toggle::make('public')
-                        ->onColor('success')
-                        ->offColor('danger')
-                ])
+                                    Select::make('checkpoint_id')->preload()->relationship(name: 'checkpoint', titleAttribute: 'name')->required()->hint(view('livewire.common.request-form', ['type' => 'checkpoint'])),
+                                    TextInput::make('positivePrompt')->label(__('Positive Prompt'))->required(),
+                                    TextInput::make('negativePrompt')->label(__('Negative Prompt')),
+                                    TextInput::make('seed')->label(__('Seed'))->numeric()->required()->maxValue(4294967296)->minValue(0)->default(rand(1, 4294967296)),
+                                    Select::make('tags')
+                                        ->multiple()
+                                        ->preload()
+                                        ->relationship('tags', 'name')
+                                        ->createOptionForm([
+                                            TextInput::make('name')->label(__("Name"))
+                                                ->required(),
+                                        ]),
+                                ])->extraAttributes(['class' => 'custom-section-style']),
+                        Repeater::make('loras')
+                            ->relationship('imageLoras')
+                            ->schema([
+                                Select::make('lora_id')->relationship(name: 'lora', titleAttribute: 'name')->label(__('Lora name'))->required(),
+                                TextInput::make(__('weight'))->numeric()->required()->maxValue(1.0)->minValue(-1.0)->step(0.01)->default(1),
+
+                            ])
+                            ->extraItemActions([
+                                FormAction::make('LoraInfo')
+                                    ->icon('heroicon-m-information-circle')
+                                    ->color('info')
+                                    ->modalSubmitAction(false)
+                                    ->modalCancelActionLabel('Close')
+                                    ->modalContent(view('info.lora'))
+                            ])
+                            ->cloneable()
+                            ->defaultItems(0)
+                            ->columns(2)
+                            ->hint(view('livewire.common.request-form', ['type' => 'lora'])),
+
+                        Repeater::make('embeddings')
+                            ->columns([
+                                'default' => 1,
+                                'sm' => 1,
+                                'md' => 5,
+                                'lg' => 5,
+                                'xl' => 5,
+                                '2xl' => 5,
+                            ])
+                            ->relationship('imageEmbeddings')
+                            ->schema([
+                                Select::make('embedding_id')->relationship(name: 'embedding', titleAttribute: 'name')->label(__('Embedding name'))->required()->columnSpan(2),
+                                TextInput::make(__('weight'))->numeric()->required()->maxValue(1.0)->minValue(-1.0)->step(0.01)->columnSpan(2)->default(1),
+                                Radio::make('prompt_target')->label(__('Prompt target'))->label(__('Prompt target'))
+                                    ->options([
+                                        'positive' => __('Positive'),
+                                        'negative' => __('Negative'),
+                                    ])
+                                    ->inline()
+                                    ->inlineLabel(false)
+                                    ->required()
+                            ])->extraItemActions([
+                                    FormAction::make('LoraInfo')->icon('heroicon-m-information-circle')->color('info')->modalSubmitAction(false)->modalCancelActionLabel('Close')->modalContent(view('info.embedding'))
+                                ])
+                            ->cloneable()
+                            ->defaultItems(0)
+                            ->columns(2)
+                            ->hint(view('livewire.common.request-form', ['type' => 'embedding'])),
+
+                        FileUpload::make('imagePath')->imageEditor()->visibility('private')
+                            ->imageEditorAspectRatios([
+                                '2:3',
+                                '1:1',
+                            ])->image()
+                            ->label('Upload Image')
+                            ->rule(new AllowedRatios())
+                            ->validationMessages([
+                                'AllowedRatios' => 'Image must have a 2:3 or 1:1 aspect ratio. Use the editor to crop it please.',
+                            ])
+                            ->required(),
+                        Toggle::make('public')
+                            ->onColor('success')
+                            ->offColor('danger')
+                    ])
             ])
             ->statePath('data')
             ->model(Image::class);

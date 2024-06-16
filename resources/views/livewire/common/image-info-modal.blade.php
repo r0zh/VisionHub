@@ -5,7 +5,7 @@
                 <div class="w-fit h-fit">
                     <img src="@if ($image->public == 1) {{ asset('storage/' . $image->path) }} @else {{ url($image->path) }} @endif"
                         class="xl:w-fit max-h-[80vh] rounded-xl shadow-lg" />
-                    <h1 class="text-xl font-bold">By
+                    <h1 class="text-xl font-bold">{{ __('By') }}
                         <a href="/user/{{ $image->user_id }}" class="focus-visible:outline-none text-yellow-200">
                             {{ $image->user->name }}
                         </a>
@@ -14,24 +14,24 @@
             </div>
             <div class="p-2">
                 @if ($this->image->name)
-                    <h1 class="text-3xl font-bold">Name</h1>
+                    <h1 class="text-3xl font-bold">{{ __('Name') }}</h1>
                     <p>{{ $image->name }}</p>
                 @endif
                 @if ($this->image->description)
-                    <h1 class="text-3xl font-bold mt-1">Description</h1>
+                    <h1 class="text-3xl font-bold mt-1">{{ __('Description') }}</h1>
                     <p class="break-all">{{ $image->description }}</p>
                 @endif
-                <h1 class="text-3xl font-bold mt-1">Positive Prompt</h1>
+                <h1 class="text-3xl font-bold mt-1">{{ __('Positive Prompt') }}</h1>
                 <p>{{ $image->positivePrompt }}</p>
                 @if ($image->negativePrompt)
-                    <h1 class="text-3xl font-bold mt-1">NegativePrompt</h1>
+                    <h1 class="text-3xl font-bold mt-1">{{ __('Negative Prompt') }}</h1>
                     <p>{{ $image->negativePrompt }}</p>
                 @endif
                 @if ($this->image->checkpoint)
                     <h1 class="text-3xl font-bold mt-1">Checkpoint</h1>
                     <p>{{ $image->checkpoint->name }}</p>
                 @endif
-                <h1 class="text-3xl font-bold mt-1">Seed</h1>
+                <h1 class="text-3xl font-bold mt-1">{{ __('Seed') }}</h1>
                 <p>{{ $image->seed }}</p>
                 <br>
                 @if ($image->loras->isNotEmpty())
@@ -68,7 +68,7 @@
                     </x-zeus-accordion::accordion>
                 @endif
 
-                <h1 class="text-3xl font-bold mt-1">Created At</h1>
+                <h1 class="text-3xl font-bold mt-1">{{ __('Created At') }}</h1>
                 <p>{{ $dateCreated }}</p>
 
             </div>
@@ -78,12 +78,12 @@
         @if ($image->user->id == auth()->id() || auth()->user()->hasRole('moderator') || auth()->user()->hasRole('admin'))
             <x-filament::button wire:click='togglePublic' color="{{ $image->public ? 'gray' : 'info' }}"
                 icon="{{ $image->public ? 'heroicon-o-lock-closed' : 'heroicon-o-lock-open' }}">
-                {{ $image->public ? 'Make Private' : 'Make Public' }}
+                {{ $image->public ? __('Make') . ' ' . trans_choice('Private', 2) : __('Make') . ' ' . trans_choice('Public', 2) }}
             </x-filament::button>
         @endif
         @if ($image->user->id == auth()->id() || auth()->user()->hasRole('admin'))
             <x-filament::button wire:click='deleteImage' color="danger" icon="heroicon-o-trash">
-                Delete
+                {{ __('Delete') }}
             </x-filament::button>
         @endif
 

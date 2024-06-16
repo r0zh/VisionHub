@@ -41,10 +41,10 @@ class ThreeDModelResource extends Component implements HasForms, HasTable
         return $table
             ->query(ThreeDModel::query())
             ->columns([
-                TextColumn::make('name')
+                TextColumn::make('name')->label(__("Name"))
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: false),
-                TextColumn::make('description')
+                TextColumn::make('description')->label(__("Description"))
                     ->limit(20)
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -69,7 +69,7 @@ class ThreeDModelResource extends Component implements HasForms, HasTable
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('name')->label('Name'),
+                TextColumn::make('name')->label(__("Name"))->label('Name'),
             ])
             ->actions([
                 Action::make('View')
@@ -80,8 +80,8 @@ class ThreeDModelResource extends Component implements HasForms, HasTable
                         fn(ThreeDModel $threeDModel) => redirect()->away(config('services.angular') . "/{$threeDModel->id}")
                     ),
                 EditAction::make()->form([
-                    TextInput::make('name')->nullable(),
-                    Textarea::make('description')->nullable(),
+                    TextInput::make('name')->label(__("Name"))->nullable(),
+                    Textarea::make('description')->label(__("Description"))->nullable(),
                     TextInput::make('prompt')->required(),
                     TextInput::make('path')->required(),
                     TextInput::make('thumbnail')->required(),

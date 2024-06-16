@@ -3,8 +3,7 @@
         Request {{ $type }}
         {{ ($this->openRequestForm)(['type' => $type]) }}
     @else
-        Cannot find the
-        {{ $type }} you are looking for? Request it
+        {{ __('Cannot find the :type you are looking for? Request it', ['type' => $type]) }}
         {{ ($this->openRequestForm)(['type' => $type]) }}
     @endif
 </p>

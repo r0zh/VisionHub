@@ -33,13 +33,13 @@ class CheckpointResource extends Component implements HasForms, HasTable
             ->heading('Checkpoints')
             ->headerActions([
                 Tables\Actions\CreateAction::make()->form([
-                    TextInput::make('name')
+                    TextInput::make('name')->label(__("Name"))
                         ->required()
                         ->maxLength(255)->label('Name'),
                     TextInput::make('fileName')
                         ->required()
                         ->maxLength(255)->label('Path'),
-                    TextInput::make('description')
+                    TextInput::make('description')->label(__("Description"))
                         ->maxLength(255)->label('Description'),
                     TextInput::make('steps')
                         ->required(),
@@ -73,9 +73,9 @@ class CheckpointResource extends Component implements HasForms, HasTable
                 ]),
             ])
             ->columns([
-                TextColumn::make('name')->label('Name')->searchable(),
+                TextColumn::make('name')->label(__("Name"))->label('Name')->searchable(),
                 TextColumn::make('fileName')->label('Path'),
-                TextColumn::make('description')->label('Description')->searchable(),
+                TextColumn::make('description')->label(__("Description"))->label('Description')->searchable(),
                 TextColumn::make('steps')
                     ->numeric()
                     ->toggleable(isToggledHiddenByDefault: true)
@@ -105,13 +105,13 @@ class CheckpointResource extends Component implements HasForms, HasTable
             ->actions([
                 Tables\Actions\EditAction::make()
                     ->form([
-                        TextInput::make('name')
+                        TextInput::make('name')->label(__("Name"))
                             ->required()
                             ->maxLength(255)->label('Name'),
                         TextInput::make('fileName')
                             ->required()
                             ->maxLength(255)->label('Path'),
-                        TextInput::make('description')
+                        TextInput::make('description')->label(__("Description"))
                             ->maxLength(255)->label('Description'),
                         TextInput::make('steps')
                             ->required(),

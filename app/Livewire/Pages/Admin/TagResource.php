@@ -43,13 +43,13 @@ class TagResource extends Component implements HasForms, HasTable
             ->query(Tag::query())
             ->headerActions([
                 Tables\Actions\CreateAction::make()->form([
-                    TextInput::make('name')
+                    TextInput::make('name')->label(__("Name"))
                         ->required()
                         ->maxLength(255),
                 ]),
             ])
             ->columns([
-                TextColumn::make('name'),
+                TextColumn::make('name')->label(__("Name")),
             ])
             ->filters([
                 // ...
@@ -60,7 +60,7 @@ class TagResource extends Component implements HasForms, HasTable
                     ->url(fn (): string => route('posts.edit', ['name'])), */
                 Tables\Actions\EditAction::make()
                     ->form([
-                        TextInput::make('name')
+                        TextInput::make('name')->label(__("Name"))
                             ->required()
                             ->maxLength(255),
                     ]),

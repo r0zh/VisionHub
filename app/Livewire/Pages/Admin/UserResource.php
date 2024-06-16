@@ -45,7 +45,7 @@ class UserResource extends Component implements HasForms, HasTable
                 TextColumn::make('role.name')
                     ->numeric()
                     ->sortable(),
-                TextColumn::make('name')
+                TextColumn::make('name')->label(__("Name"))
                     ->searchable(),
                 TextColumn::make('email')
                     ->words(1)
@@ -74,7 +74,7 @@ class UserResource extends Component implements HasForms, HasTable
                     Select::make('role_id')
                         ->required()
                         ->relationship('role', 'name'),
-                    TextInput::make('name')
+                    TextInput::make('name')->label(__("Name"))
                         ->required()
                         ->maxLength(255),
                 ]),

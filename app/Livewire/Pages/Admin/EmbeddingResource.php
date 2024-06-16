@@ -32,20 +32,20 @@ class EmbeddingResource extends Component implements HasForms, HasTable
             ->heading('Embeddings')
             ->headerActions([
                 Tables\Actions\CreateAction::make()->form([
-                    TextInput::make('name')
+                    TextInput::make('name')->label(__("Name"))
                         ->required()
                         ->maxLength(255)->label('Name'),
                     TextInput::make('fileName')
                         ->required()
                         ->maxLength(255),
-                    TextInput::make('description')
+                    TextInput::make('description')->label(__("Description"))
                         ->maxLength(255)->label('Description'),
                 ]),
             ])
             ->columns([
-                TextColumn::make('name')->label('Name')->searchable(),
+                TextColumn::make('name')->label(__("Name"))->label('Name')->searchable(),
                 TextColumn::make('fileName'),
-                TextColumn::make('description')->label('Description')->searchable(),
+                TextColumn::make('description')->label(__("Description"))->label('Description')->searchable(),
             ])
             ->filters([
                 //
@@ -53,13 +53,13 @@ class EmbeddingResource extends Component implements HasForms, HasTable
             ->actions([
                 Tables\Actions\EditAction::make()
                     ->form([
-                        TextInput::make('name')
+                        TextInput::make('name')->label(__("Name"))
                             ->required()
                             ->maxLength(255)->label('Name'),
                         TextInput::make('fileName')
                             ->required()
                             ->maxLength(255),
-                        TextInput::make('description')
+                        TextInput::make('description')->label(__("Description"))
                             ->maxLength(255)->label('Description'),
                     ]),
                 Tables\Actions\DeleteAction::make()

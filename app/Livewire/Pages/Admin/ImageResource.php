@@ -40,10 +40,10 @@ class ImageResource extends Component implements HasForms, HasTable
         return $table
             ->query(Image::query())
             ->columns([
-                TextColumn::make('name')
+                TextColumn::make('name')->label(__("Name"))
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: false),
-                TextColumn::make('description')
+                TextColumn::make('description')->label(__("Description"))
                     ->limit(20)
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -52,12 +52,12 @@ class ImageResource extends Component implements HasForms, HasTable
                 TextColumn::make('checkpoint.name')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: false),
-                TextColumn::make('positivePrompt')
+                TextColumn::make('positivePrompt')->label(__('Positive Prompt'))
                     ->searchable()
                     ->limit(20)
                     ->copyable()
                     ->toggleable(isToggledHiddenByDefault: false),
-                TextColumn::make('negativePrompt')
+                TextColumn::make('negativePrompt')->label(__('Negative Prompt'))
                     ->searchable()
                     ->limit(20)
                     ->copyable()
@@ -77,7 +77,7 @@ class ImageResource extends Component implements HasForms, HasTable
                     ->limit(20)
                     ->copyable()
                     ->toggleable(isToggledHiddenByDefault: false),
-                TextColumn::make('seed')
+                TextColumn::make('seed')->label(__('Seed'))
                     ->numeric()
                     ->sortable()
                     ->words(2)
@@ -92,7 +92,7 @@ class ImageResource extends Component implements HasForms, HasTable
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('name')->label('Name'),
+                TextColumn::make('name')->label(__("Name"))->label('Name'),
             ])
             ->filters([
                 //
@@ -110,26 +110,25 @@ class ImageResource extends Component implements HasForms, HasTable
                     )->modalSubmitAction(false)->modalCancelActionLabel('Close')->modalWidth('fit')
                 ,
                 EditAction::make()->form([
-                    TextInput::make('name')->nullable(),
-                    Textarea::make('description')->nullable(),
+                    TextInput::make('name')->label(__("Name"))->nullable(),
+                    Textarea::make('description')->label(__("Description"))->nullable(),
                     Select::make('checkpoint_id')->preload()->relationship(name: 'checkpoint', titleAttribute: 'name')->required(),
-                    TextInput::make('positivePrompt')->required(),
-                    TextInput::make('negativePrompt'),
-                    TextInput::make('seed')->numeric()->required()->maxValue(4294967296)->minValue(0)->default(rand(1, 4294967296)),
+                    TextInput::make('positivePrompt')->label(__('Positive Prompt'))->required(),
+                    TextInput::make('negativePrompt')->label(__('Negative Prompt')),
+                    TextInput::make('seed')->label(__('Seed'))->numeric()->required()->maxValue(4294967296)->minValue(0)->default(rand(1, 4294967296)),
                     Select::make('tags')
                         ->multiple()
                         ->preload()
                         ->relationship('tags', 'name')
                         ->createOptionForm([
-                            TextInput::make('name')
+                            TextInput::make('name')->label(__("Name"))
                                 ->required(),
                         ]),
                     Repeater::make('loras')
                         ->relationship('imageLoras')
                         ->schema([
-                            Select::make('lora_id')->relationship(name: 'lora', titleAttribute: 'name')->label("Lora name")->required(),
-                            TextInput::make('weight')->numeric()->required()->maxValue(1.0)->minValue(-1.0)->step(0.01)->default(1),
-
+                            Select::make('lora_id')->relationship(name: 'lora', titleAttribute: 'name')->label(__('Lora name'))->required(),
+                            TextInput::make(__('weight'))->numeric()->required()->maxValue(1.0)->minValue(-1.0)->step(0.01)->default(1),
                         ])
                         ->cloneable()
                         ->defaultItems(0)
@@ -146,12 +145,12 @@ class ImageResource extends Component implements HasForms, HasTable
                         ])
                         ->relationship('imageEmbeddings')
                         ->schema([
-                            Select::make('embedding_id')->relationship(name: 'embedding', titleAttribute: 'name')->label("Embedding name")->required()->columnSpan(2),
-                            TextInput::make('weight')->numeric()->required()->maxValue(1.0)->minValue(-1.0)->step(0.01)->columnSpan(2)->default(1),
-                            Radio::make('prompt_target')
+                            Select::make('embedding_id')->relationship(name: 'embedding', titleAttribute: 'name')->label(__('Embedding name'))->required()->columnSpan(2),
+                            TextInput::make(__('weight'))->numeric()->required()->maxValue(1.0)->minValue(-1.0)->step(0.01)->columnSpan(2)->default(1),
+                            Radio::make('prompt_target')->label(__('Prompt target'))
                                 ->options([
-                                    'positive' => 'Positive',
-                                    'negative' => 'Negative',
+                                    'positive' => __('Positive'),
+                                    'negative' => __('Negative'),
                                 ])
                                 ->inline()
                                 ->inlineLabel(false)

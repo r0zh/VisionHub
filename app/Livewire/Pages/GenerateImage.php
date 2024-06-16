@@ -50,71 +50,72 @@ class GenerateImage extends Component implements HasForms, HasActions
     {
         return $form
             ->schema([
-                Section::make('Upload Image')->schema([
-                    Grid::make([
-                        'default' => 1,
-                        'md' => 2
-                    ])->schema([
-                                Select::make('checkpoint_id')->preload()->relationship(name: 'checkpoint', titleAttribute: 'name')->required()->hint(view('livewire.common.request-form', ['type' => 'checkpoint'])),
-                                TextInput::make('positivePrompt')->required(),
-                                TextInput::make('negativePrompt'),
-                                TextInput::make('seed')->numeric()->required()->maxValue(4294967296)->minValue(0)->default(rand(1, 4294967296)),
-                                Select::make('ratio')->options([
-                                    '2:3' => '2:3',
-                                    '1:1' => '1:1',
-                                ])->required(),
-                            ])->extraAttributes(['class' => 'custom-section-style']),
-
-                    Repeater::make('loras')
-                        ->relationship('imageLoras')
-                        ->schema([
-                            Select::make('lora_id')->relationship(name: 'lora', titleAttribute: 'name')->label("Lora name")->required(),
-                            TextInput::make('weight')->numeric()->required()->maxValue(1.0)->minValue(-1.0)->step(0.01)->default(1),
-
-                        ])
-                        ->extraItemActions([
-                            FormAction::make('LoraInfo')
-                                ->icon('heroicon-m-information-circle')
-                                ->color('info')
-                                ->modalSubmitAction(false)
-                                ->modalCancelActionLabel('Close')
-                                ->modalContent(view('info.lora'))
-                        ])
-                        ->cloneable()
-                        ->defaultItems(0)
-                        ->columns(2)
-                        ->hint(view('livewire.common.request-form', ['type' => 'lora'])),
-
-                    Repeater::make('embeddings')
-                        ->columns([
+                Section::make(__('Generate Image'))
+                    ->schema([
+                        Grid::make([
                             'default' => 1,
-                            'sm' => 1,
-                            'md' => 5,
-                            'lg' => 5,
-                            'xl' => 5,
-                            '2xl' => 5,
-                        ])
-                        ->relationship('imageEmbeddings')
-                        ->schema([
-                            Select::make('embedding_id')->relationship(name: 'embedding', titleAttribute: 'name')->label("Embedding name")->required()->columnSpan(2),
-                            TextInput::make('weight')->numeric()->required()->maxValue(1.0)->minValue(-1.0)->step(0.01)->columnSpan(2)->default(1),
-                            Radio::make('prompt_target')
-                                ->options([
-                                    'positive' => 'Positive',
-                                    'negative' => 'Negative',
-                                ])
-                                ->inline()
-                                ->inlineLabel(false)
-                                ->required()
-                        ])->extraItemActions([
-                                FormAction::make('LoraInfo')->icon('heroicon-m-information-circle')->color('info')->modalSubmitAction(false)->modalCancelActionLabel('Close')->modalContent(view('info.embedding'))
+                            'md' => 2
+                        ])->schema([
+                                    Select::make('checkpoint_id')->preload()->relationship(name: 'checkpoint', titleAttribute: 'name')->required()->hint(view('livewire.common.request-form', ['type' => 'checkpoint'])),
+                                    TextInput::make('positivePrompt')->label(__('Positive Prompt'))->required(),
+                                    TextInput::make('negativePrompt')->label(__('Negative Prompt')),
+                                    TextInput::make('seed')->label(__('Seed'))->numeric()->required()->maxValue(4294967296)->minValue(0)->default(rand(1, 4294967296)),
+                                    Select::make('ratio')->options([
+                                        '2:3' => '2:3',
+                                        '1:1' => '1:1',
+                                    ])->required(),
+                                ])->extraAttributes(['class' => 'custom-section-style']),
+
+                        Repeater::make('loras')
+                            ->relationship('imageLoras')
+                            ->schema([
+                                Select::make('lora_id')->relationship(name: 'lora', titleAttribute: 'name')->label(__('Lora name'))->required(),
+                                TextInput::make(__('weight'))->numeric()->required()->maxValue(1.0)->minValue(-1.0)->step(0.01)->default(1),
+
                             ])
-                        ->cloneable()
-                        ->defaultItems(0)
-                        ->columns(2)
-                        ->hint(view('livewire.common.request-form', ['type' => 'embedding'])),
-                    Toggle::make('highQ')->label('High Quality')->hint('High quality images take longer to generate.'),
-                ])
+                            ->extraItemActions([
+                                FormAction::make('LoraInfo')
+                                    ->icon('heroicon-m-information-circle')
+                                    ->color('info')
+                                    ->modalSubmitAction(false)
+                                    ->modalCancelActionLabel('Close')
+                                    ->modalContent(view('info.lora'))
+                            ])
+                            ->cloneable()
+                            ->defaultItems(0)
+                            ->columns(2)
+                            ->hint(view('livewire.common.request-form', ['type' => 'lora'])),
+
+                        Repeater::make('embeddings')
+                            ->columns([
+                                'default' => 1,
+                                'sm' => 1,
+                                'md' => 5,
+                                'lg' => 5,
+                                'xl' => 5,
+                                '2xl' => 5,
+                            ])
+                            ->relationship('imageEmbeddings')
+                            ->schema([
+                                Select::make('embedding_id')->relationship(name: 'embedding', titleAttribute: 'name')->label(__('Embedding name'))->required()->columnSpan(2),
+                                TextInput::make(__('weight'))->numeric()->required()->maxValue(1.0)->minValue(-1.0)->step(0.01)->columnSpan(2)->default(1),
+                                Radio::make('prompt_target')->label(__('Prompt target'))
+                                    ->options([
+                                        'positive' => __('Positive'),
+                                        'negative' => __('Negative'),
+                                    ])
+                                    ->inline()
+                                    ->inlineLabel(false)
+                                    ->required()
+                            ])->extraItemActions([
+                                    FormAction::make('LoraInfo')->icon('heroicon-m-information-circle')->color('info')->modalSubmitAction(false)->modalCancelActionLabel('Close')->modalContent(view('info.embedding'))
+                                ])
+                            ->cloneable()
+                            ->defaultItems(0)
+                            ->columns(2)
+                            ->hint(view('livewire.common.request-form', ['type' => 'embedding'])),
+                        Toggle::make('highQ')->label(__('High Quality'))->hint(__('High quality images take longer to generate.')),
+                    ])
             ])
             ->statePath('data')
             ->model(Image::class);
@@ -202,17 +203,17 @@ class GenerateImage extends Component implements HasForms, HasActions
             ->label('Save Image')
             ->modalContent(view('livewire.images.generate.save-image-form', ['imagePath' => session('imagePath')]))
             ->form([
-                TextInput::make('name')
+                TextInput::make('name')->label(__("Name"))
                     ->nullable()
                     ->maxLength(255),
-                TextInput::make('description')
+                TextInput::make('description')->label(__("Description"))
                     ->nullable(),
                 Select::make('tags')
                     ->multiple()
                     ->preload()
                     ->relationship('tags', 'name')
                     ->createOptionForm([
-                        TextInput::make('name')
+                        TextInput::make('name')->label(__("Name"))
                             ->required(),
                     ]),
                 Checkbox::make('public')
@@ -226,7 +227,7 @@ class GenerateImage extends Component implements HasForms, HasActions
     public function openRequestForm(): Action
     {
         return Action::make('openRequestForm')
-            ->label('here')
+            ->label(__('here'))
             ->modalHeading('Resource request')
             ->form([
                 TextInput::make('resource_name')
