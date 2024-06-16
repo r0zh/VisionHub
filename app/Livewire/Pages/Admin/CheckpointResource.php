@@ -3,6 +3,7 @@
 namespace App\Livewire\Pages\Admin;
 
 use App\Models\Checkpoint;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
@@ -40,12 +41,63 @@ class CheckpointResource extends Component implements HasForms, HasTable
                         ->maxLength(255)->label('Path'),
                     TextInput::make('description')
                         ->maxLength(255)->label('Description'),
+                    TextInput::make('steps')
+                        ->required(),
+                    TextInput::make('cfg')
+                        ->required()
+                        ->numeric(),
+                    Select::make('sampler_name')
+                        ->options([
+                            "euler",
+                            "eurler_ancestral",
+                            "dpmpp_sde",
+                            "dpmpp_sde_gpu",
+                            "dpmpp_2m",
+                            "dpmpp_2m_gpu",
+                            "dpmpp_2m_sde_gpu",
+                            "dpmpp_2m_sde",
+                            "dpmpp_2m_sde_gpu",
+                            "lcm"
+                        ])
+                        ->required(),
+                    Select::make('scheduler')
+                        ->options([
+                            "normal",
+                            "karras",
+                            "exponential",
+                            "sgm_uniform",
+                            "simple",
+                            "ddim_uniform"
+                        ])
+                        ->required(),
                 ]),
             ])
             ->columns([
                 TextColumn::make('name')->label('Name')->searchable(),
                 TextColumn::make('fileName')->label('Path'),
                 TextColumn::make('description')->label('Description')->searchable(),
+                TextColumn::make('steps')
+                    ->numeric()
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->sortable(),
+                TextColumn::make('cfg')
+                    ->numeric()
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->sortable(),
+                TextColumn::make('sampler_name')
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->searchable(),
+                TextColumn::make('scheduler')
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->searchable(),
+                TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
@@ -61,6 +113,35 @@ class CheckpointResource extends Component implements HasForms, HasTable
                             ->maxLength(255)->label('Path'),
                         TextInput::make('description')
                             ->maxLength(255)->label('Description'),
+                        TextInput::make('steps')
+                            ->required(),
+                        TextInput::make('cfg')
+                            ->required()
+                            ->numeric(),
+                        Select::make('sampler_name')
+                            ->options([
+                                "euler",
+                                "eurler_ancestral",
+                                "dpmpp_sde",
+                                "dpmpp_sde_gpu",
+                                "dpmpp_2m",
+                                "dpmpp_2m_gpu",
+                                "dpmpp_2m_sde_gpu",
+                                "dpmpp_2m_sde",
+                                "dpmpp_2m_sde_gpu",
+                                "lcm"
+                            ])
+                            ->required(),
+                        Select::make('scheduler')
+                            ->options([
+                                "normal",
+                                "karras",
+                                "exponential",
+                                "sgm_uniform",
+                                "simple",
+                                "ddim_uniform"
+                            ])
+                            ->required(),
                     ]),
                 Tables\Actions\DeleteAction::make()
             ])
