@@ -2,21 +2,25 @@
 
 namespace App\Livewire\Pages\Admin;
 
-use App\Filament\Resources\TagResource\Pages;
 use App\Models\Image;
+use Filament\Forms\Components\Radio;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Tables;
+use Filament\Tables\Actions\Action;
+use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Storage;
-use Livewire\Attributes\On;
 use Livewire\Component;
 
 
@@ -25,13 +29,6 @@ class ImageResource extends Component implements HasForms, HasTable
     use InteractsWithTable;
     use InteractsWithForms;
 
-    public $fetching;
-    public $positivePrompt;
-    public $negativePrompt;
-    public $seed;
-    public $imagePath;
-    public $name;
-    public $ratio = "1:1";
 
     protected static ?string $model = Image::class;
 
@@ -43,156 +40,149 @@ class ImageResource extends Component implements HasForms, HasTable
         return $table
             ->query(Image::query())
             ->columns([
-                TextColumn::make('user.name')->label('User Name'),
-                TextColumn::make('user.email')->label('Email'),
+                TextColumn::make('name')
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: false),
+                TextColumn::make('description')
+                    ->limit(20)
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('user.name')->label('User Name')
+                    ->sortable(),
+                TextColumn::make('checkpoint.name')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: false),
+                TextColumn::make('positivePrompt')
+                    ->searchable()
+                    ->limit(20)
+                    ->copyable()
+                    ->toggleable(isToggledHiddenByDefault: false),
+                TextColumn::make('negativePrompt')
+                    ->searchable()
+                    ->limit(20)
+                    ->copyable()
+                    ->toggleable(isToggledHiddenByDefault: false),
+                TextColumn::make('loras.name')
+                    ->searchable()
+                    ->limit(40)
+                    ->copyable()
+                    ->toggleable(isToggledHiddenByDefault: false),
+                TextColumn::make('embeddings.name')
+                    ->searchable()
+                    ->limit(40)
+                    ->copyable()
+                    ->toggleable(isToggledHiddenByDefault: false),
+                TextColumn::make('path')
+                    ->searchable()
+                    ->limit(20)
+                    ->copyable()
+                    ->toggleable(isToggledHiddenByDefault: false),
+                TextColumn::make('seed')
+                    ->numeric()
+                    ->sortable()
+                    ->words(2)
+                    ->toggleable(isToggledHiddenByDefault: false),
+                IconColumn::make('public')
+                    ->boolean(),
+                TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('name')->label('Name'),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make()
-                    ->form([
-                        TextInput::make('name')
-                            ->required()
-                            ->maxLength(255),
-                    ]),
-                Tables\Actions\DeleteAction::make()
+                Action::make('View')
+                    ->label('View image')
+                    ->icon('heroicon-o-photo')
+                    ->color('info')
+                    ->modalContent(
+                        fn(Image $image): View => view(
+                            'livewire.common.image-modal',
+                            ['image' => $image],
+                        )
+                    )->modalSubmitAction(false)->modalCancelActionLabel('Close')->modalWidth('fit')
+                ,
+                EditAction::make()->form([
+                    TextInput::make('name')->nullable(),
+                    Textarea::make('description')->nullable(),
+                    Select::make('checkpoint_id')->preload()->relationship(name: 'checkpoint', titleAttribute: 'name')->required(),
+                    TextInput::make('positivePrompt')->required(),
+                    TextInput::make('negativePrompt'),
+                    TextInput::make('seed')->numeric()->required()->maxValue(4294967296)->minValue(0)->default(rand(1, 4294967296)),
+                    Select::make('tags')
+                        ->multiple()
+                        ->preload()
+                        ->relationship('tags', 'name')
+                        ->createOptionForm([
+                            TextInput::make('name')
+                                ->required(),
+                        ]),
+                    Repeater::make('loras')
+                        ->relationship('imageLoras')
+                        ->schema([
+                            Select::make('lora_id')->relationship(name: 'lora', titleAttribute: 'name')->label("Lora name")->required(),
+                            TextInput::make('weight')->numeric()->required()->maxValue(1.0)->minValue(-1.0)->step(0.01)->default(1),
+
+                        ])
+                        ->cloneable()
+                        ->defaultItems(0)
+                        ->columns(2),
+
+                    Repeater::make('embeddings')
+                        ->columns([
+                            'default' => 1,
+                            'sm' => 1,
+                            'md' => 5,
+                            'lg' => 5,
+                            'xl' => 5,
+                            '2xl' => 5,
+                        ])
+                        ->relationship('imageEmbeddings')
+                        ->schema([
+                            Select::make('embedding_id')->relationship(name: 'embedding', titleAttribute: 'name')->label("Embedding name")->required()->columnSpan(2),
+                            TextInput::make('weight')->numeric()->required()->maxValue(1.0)->minValue(-1.0)->step(0.01)->columnSpan(2)->default(1),
+                            Radio::make('prompt_target')
+                                ->options([
+                                    'positive' => 'Positive',
+                                    'negative' => 'Negative',
+                                ])
+                                ->inline()
+                                ->inlineLabel(false)
+                                ->required()
+                        ])
+                        ->cloneable()
+                        ->defaultItems(0)
+                        ->columns(2),
+                    Toggle::make('public')
+                        ->onColor('success')
+                        ->offColor('danger')
+                ]),
+                DeleteAction::make()
+
             ])
             ->bulkActions([
-
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                ]),
             ]);
     }
 
-    public static function getRelations(): array
+    public static function openImageInfoModal($image)
     {
-        return [
-            //
-        ];
+        $self = new self();
+        $self->dispatch('imageSelected', image: $image);
+        $self->dispatch('open-modal', ['id' => 'image-info-modal']);
     }
 
-    public static function getPages(): array
-    {
-        return [
-            'index' => Pages\ListImages::route('/'),
-            'create' => Pages\CreateImage::route('/create'),
-            'edit' => Pages\EditImage::route('/{record}/edit'),
-        ];
-    }
-    protected $rules = [
-        'name' => 'required|string|min:2|max:255',
-        'seed' => 'required|numeric',
-        'positive_prompt' => 'required|string|min:2',
-        'negative_prompt' => '',
-        'ratio' => 'required',
-        'tags' => 'required'
-    ];
-
-    /**
-     * Mount the component.
-     *
-     * This method is called when the component is being mounted.
-     * It initializes the $fetching property.
-     */
-    public function mount()
-    {
-        $this->fetching = false;
-    }
-
-    /**
-     * Fetch the image data.
-     *
-     * This method is called when the user clicks the fetch button.
-     * It sets the $fetching property to true, validates the form data,
-     * and dispatches the 'fetch-image' event.
-     */
-    public function fetch()
-    {
-        $this->fetching = true;
-        //ñ$this->validate();
-        $this->dispatch('fetch-image');
-    }
-
-    /**
-     * Handle the 'fetch-image' event.
-     *
-     * This method is called when the 'fetch-image' event is dispatched.
-     * It retrieves the form data, sends a POST request to the image API,
-     * saves the image to storage, and sets the $fetching property to false.
-     */
-    #[On('fetch-image')]
-    public function fetchImage()
-    {
-        // get data from the form
-        $this->positive_prompt;
-        $this->negative_prompt;
-        $this->seed;
-        $json = json_encode(['positivePrompt' => $this->positive_prompt, 'negativePrompt' => $this->negative_prompt, "seed" => $this->seed, "ratio" => $this->ratio]);
-        $address = "https://1843-2a0c-5a85-6402-c500-dee3-dd3c-b34e-c0d2.ngrok-free.app/get_image";
-        $response = Http::withBody($json, 'application/json')->timeout(60 * 5)
-            ->withHeaders([
-                'Content-Type' => 'application/json',
-            ])->post($address);
-        // display the image in the browser
-        $image = $response->getBody();
-        $this->imagePath = "images/tmp/image.png";
-        Storage::disk('public')->put($this->imagePath, $image);
-        $this->fetching = false;
-    }
-
-    /**
-     * Save the image.
-     *
-     * This method is called when the user clicks the save button.
-     * It moves the image to the user's directory, saves the image path to the database,
-     * and redirects to the gallery page.
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function saveImage()
-    {
-        // move the image to the public or private directory
-        //dd($this->form->getState());
-        dd($this->name, $this->positivePrompt, $this->negativePrompt, $this->seed, $this->imagePath);
-        $userPath = Auth::user()->id . '_' . explode('@', Auth::user()->email)[0];
-        Storage::disk('public')->move($this->imagePath, 'images/' . $userPath . '/' . $this->name . '.png');
-
-        // save the image path to the database
-        $imagePath = 'images/' . $userPath . '/' . $this->name . '.png';
-        Image::create([
-            'seed' => $this->seed,
-            'positivePrompt' => $this->positive_prompt,
-            'negativePrompt' => $this->negative_prompt,
-            'public' => true,
-            // Store the image in the public or private directory
-            'path' => $imagePath,
-            'created_at' => now(),
-            'user_id' => Auth::user()->id,
-        ]);
-
-        // redirect to gallery
-        return redirect()->to('/gallery');
-    }
     public function render(): View
     {
-
-        if (request()->is('admin/images/create'))
-            return view('livewire.visionHub.forms.form-image');
         return view('livewire.pages.admin.image-resource');
-
-        /* if (request()->is('admin/images/create')) {
-            return view('livewire.visionHub.forms.form-image');
-        } elseif (request()->is('admin/images/list')) {
-            return view('livewire.pages.admin.image-resource');
-        }else
-            return view('livewire.visionHub.forms.form-image');
-         */
-
-        /* $form = Form::make(); // Crear el formulario
-        $this->form($form); // Configurar el esquema del formulario
-
-        return view('livewire.visionHub.forms.form-image', [
-        'form' => $form->schema()->render(), // Renderizar el formulario
-    ]); */
     }
 }
