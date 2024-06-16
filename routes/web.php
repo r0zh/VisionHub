@@ -32,15 +32,16 @@ Route::get('/', function () {
 
 
 Route::middleware('auth')->middleware('checkPermission:admin')->group(function () {
-    Route::get('admin/tags', TagResource::class);
     Route::get('admin/users', UserResource::class);
-    Route::get('admin/images', ImageResource::class);
-    Route::get('admin/loras', LoraResource::class);
-    Route::get('admin/checkpoints', CheckpointResource::class);
 });
 
 Route::middleware('auth')->middleware('checkPermission:moderator')->group(function () {
     Route::get('resolve', ResolveRequestResource::class)->name('requests');
+    Route::get('admin/tags', TagResource::class);
+    Route::get('admin/images', ImageResource::class);
+    Route::get('admin/loras', LoraResource::class);
+    Route::get('admin/checkpoints', CheckpointResource::class);
+
 });
 
 Route::middleware('auth')->group(function () {

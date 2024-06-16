@@ -10,9 +10,11 @@
         <p href="/admin/tags" wire:navigate class="cursor-pointer text-lg">
             Tags
         </p>
-        <p href="/admin/users" wire:navigate class="cursor-pointer text-lg">
-            Users
-        </p>
+        @if (auth()->user()->hasRole('admin'))
+            <p href="/admin/users" wire:navigate class="cursor-pointer text-lg">
+                Users
+            </p>
+        @endif
         <p href="/admin/loras" wire:navigate class="cursor-pointer text-lg">
             Loras
         </p>

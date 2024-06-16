@@ -46,7 +46,7 @@ new class extends Component {
                             {{ __('Requests') }}
                         </x-nav-link>
                     @endif
-                    @if (auth()->user()->hasRole('admin'))
+                    @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('moderator'))
                         <x-nav-link>
                             <livewire:common.admin-routes-list />
                         </x-nav-link>
