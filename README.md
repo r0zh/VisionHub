@@ -51,3 +51,6 @@ Para instalar y utilizar VisionHub, sigue estos pasos:
 
 ### CheckPoint
 [Video](https://drive.google.com/file/d/1GPy1Gv4cX6CCfkl943jLvkfbpGoQ8JoE/view?usp=sharing)
+
+### Figma
+[Dev Mode Model](https://www.figma.com/design/aEFF26799mmBetGKZAb16l/VisionHub-Langing?m=dev&node-id=0-1&t=04fA0WBxkUMyFb8W-1)
