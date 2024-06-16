@@ -3,6 +3,7 @@
 use App\Livewire\Moderator\ResolveRequest;
 use App\Livewire\Pages\Admin\CheckpointResource;
 use App\Livewire\Pages\Admin\ImageResource;
+use App\Livewire\Pages\Admin\ThreeDModelResource;
 use App\Livewire\Pages\Admin\LoraResource;
 use App\Livewire\Pages\Admin\TagResource;
 use App\Livewire\Pages\Admin\UserResource;
@@ -39,6 +40,7 @@ Route::middleware('auth')->middleware('checkPermission:moderator')->group(functi
     Route::get('resolve', ResolveRequestResource::class)->name('requests');
     Route::get('admin/tags', TagResource::class);
     Route::get('admin/images', ImageResource::class);
+    Route::get('admin/three-d-models', ThreeDModelResource::class);
     Route::get('admin/loras', LoraResource::class);
     Route::get('admin/checkpoints', CheckpointResource::class);
 

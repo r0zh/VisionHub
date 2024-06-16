@@ -21,8 +21,8 @@ class UserController extends Controller
         $user = User::find($id);
         return response()->json($user);
     }
-    public function id()
+    public function currentUser()
     {
-        return response()->json(Auth::user()->id);
+        return response()->json(Auth::user());
     }
 }
