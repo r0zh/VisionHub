@@ -78,7 +78,7 @@ class GenerateImage extends Component implements HasForms, HasActions
                                     ->icon('heroicon-m-information-circle')
                                     ->color('info')
                                     ->modalSubmitAction(false)
-                                    ->modalCancelActionLabel('Close')
+                                    ->modalCancelActionLabel(__('Close'))
                                     ->modalContent(view('info.lora'))
                             ])
                             ->cloneable()
@@ -108,7 +108,7 @@ class GenerateImage extends Component implements HasForms, HasActions
                                     ->inlineLabel(false)
                                     ->required()
                             ])->extraItemActions([
-                                    FormAction::make('LoraInfo')->icon('heroicon-m-information-circle')->color('info')->modalSubmitAction(false)->modalCancelActionLabel('Close')->modalContent(view('info.embedding'))
+                                    FormAction::make('EmbeddingInfo')->icon('heroicon-m-information-circle')->color('info')->modalSubmitAction(false)->modalCancelActionLabel(__('Close'))->modalContent(view('info.embedding'))
                                 ])
                             ->cloneable()
                             ->defaultItems(0)
@@ -216,7 +216,7 @@ class GenerateImage extends Component implements HasForms, HasActions
                         TextInput::make('name')->label(__("Name"))
                             ->required(),
                     ]),
-                Checkbox::make('public')
+                Checkbox::make('public')->label(trans_choice('Public', 0))
             ])
             ->model(Image::class)
             ->action(function (array $data): void {

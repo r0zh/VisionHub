@@ -48,7 +48,7 @@ class ThreeDModelResource extends Component implements HasForms, HasTable
                     ->limit(20)
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('user.name')->label('User Name')
+                TextColumn::make('user.name')->label(__("User Name"))
                     ->sortable(),
                 TextColumn::make('path')
                     ->searchable()
@@ -59,25 +59,25 @@ class ThreeDModelResource extends Component implements HasForms, HasTable
                     ->disk(
                         fn(ThreeDModel $model) => $model->public ? 'public' : 'local'
                     ),
-                IconColumn::make('public')
+                IconColumn::make('public')->label(trans_choice('Public', 0))
                     ->boolean(),
-                TextColumn::make('created_at')
+                TextColumn::make('created_at')->label(__('Created At'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
+                TextColumn::make('updated_at')->label(__('Updated At'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('name')->label(__("Name"))->label('Name'),
+                TextColumn::make('name')->label(__("Name")),
             ])
             ->actions([
                 Action::make('View')
-                    ->label('View model')
+                    ->label(__('View model'))
                     ->icon('heroicon-o-photo')
                     ->color('info')
                     ->action(
-                        fn(ThreeDModel $threeDModel) => redirect()->away(config('services.angular') . "/{$threeDModel->id}")
+                        fn(ThreeDModel $threeDModel) => redirect()->away(config('services.angular') . "/profile/{$threeDModel->user_id}")
                     ),
                 EditAction::make()->form([
                     TextInput::make('name')->label(__("Name"))->nullable(),
@@ -85,7 +85,7 @@ class ThreeDModelResource extends Component implements HasForms, HasTable
                     TextInput::make('prompt')->required(),
                     TextInput::make('path')->required(),
                     TextInput::make('thumbnail')->required(),
-                    Toggle::make('public')
+                    Toggle::make('public')->label(trans_choice('Public', 0))
                         ->onColor('success')
                         ->offColor('danger')
                 ]),

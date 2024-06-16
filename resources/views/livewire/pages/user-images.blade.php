@@ -11,7 +11,7 @@
     <h1 class="text-3xl mt-4 font-bold text-center dark:text-white">{{ __('Images by') }}
         {{ $this->getUser()->name }}
         <span class=" text-base">{{ __('View') }} <a class="text-yellow-200"
-                href="{{ config('services.angular') }}/profile/{{ $this->getUser()->id }}">{{ __('3d models') }}</a></span>
+                href="{{ config('services.angular') }}/profile/{{ $this->getUser()->id }}">{{ trans_choice('3d models', 0) }}</a></span>
     </h1>
     @if ($images->isEmpty())
         <div class="flex justify-center items-start p-4">

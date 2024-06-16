@@ -77,7 +77,7 @@ class UploadImage extends Component implements HasForms, HasActions
                                     ->icon('heroicon-m-information-circle')
                                     ->color('info')
                                     ->modalSubmitAction(false)
-                                    ->modalCancelActionLabel('Close')
+                                    ->modalCancelActionLabel(__('Close'))
                                     ->modalContent(view('info.lora'))
                             ])
                             ->cloneable()
@@ -107,7 +107,7 @@ class UploadImage extends Component implements HasForms, HasActions
                                     ->inlineLabel(false)
                                     ->required()
                             ])->extraItemActions([
-                                    FormAction::make('LoraInfo')->icon('heroicon-m-information-circle')->color('info')->modalSubmitAction(false)->modalCancelActionLabel('Close')->modalContent(view('info.embedding'))
+                                    FormAction::make('LoraInfo')->icon('heroicon-m-information-circle')->color('info')->modalSubmitAction(false)->modalCancelActionLabel(__('Close'))->modalContent(view('info.embedding'))
                                 ])
                             ->cloneable()
                             ->defaultItems(0)
@@ -125,7 +125,7 @@ class UploadImage extends Component implements HasForms, HasActions
                                 'AllowedRatios' => 'Image must have a 2:3 or 1:1 aspect ratio. Use the editor to crop it please.',
                             ])
                             ->required(),
-                        Toggle::make('public')
+                        Toggle::make('public')->label(trans_choice('Public', 0))
                             ->onColor('success')
                             ->offColor('danger')
                     ])

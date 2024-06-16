@@ -264,12 +264,13 @@
     "You're logged in!": "¡Usted está conectado!",
     "Your email address is unverified.": "Su dirección de correo electrónico no está verificada.",
     "Images by" : "Imágenes de",
-    "3d models" : "modelos 3d|{1} Modelos 3d",
+    "3d models" : "{0}modelos 3d|{1} Modelos 3d",
     "Description": "Descripción",
     "Positive Prompt": "Prompt Positivo",
     "Negative Prompt": "Prompt Negativo",
     "Seed": "Semilla",
     "Created At": "Creado en",
+    "Updated At": "Actualizado en",
     "Search by" : "Buscar por",
     "Ascending" : "Ascendente",
     "Descending" : "Descendente",
@@ -307,5 +308,12 @@
     "Resource description": "Descripción del recurso",
     "Resource name": "Nombre del recurso",
     "Resource request": "Petición de Recurso",
-    "Resource url": "URL del Recurso"
+    "Resource url": "URL del Recurso",
+    "Reset": "Resetear",
+    "View image": "Ver imagen",
+    "File Name": "Nombre del archivo",
+    "User Name": "Nombre de usuario",
+    "Number of images": "Número de imágenes",
+    "Role": "Rol",
+    "View model": "Ver modelo"
 }

@@ -15,7 +15,7 @@
             {{ $this->form }}
 
             <x-filament::button type="submit" class="submitButton">
-                Submit
+                {{__('Submit')}}
             </x-filament::button>
         </form>
 

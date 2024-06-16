@@ -34,18 +34,18 @@ class LoraResource extends Component implements HasForms, HasTable
                 Tables\Actions\CreateAction::make()->form([
                     TextInput::make('name')->label(__("Name"))
                         ->required()
-                        ->maxLength(255)->label('Name'),
+                        ->maxLength(255),
                     TextInput::make('fileName')
                         ->required()
                         ->maxLength(255)->label('Path'),
                     TextInput::make('description')->label(__("Description"))
-                        ->maxLength(255)->label('Description'),
+                        ->maxLength(255),
                 ]),
             ])
             ->columns([
-                TextColumn::make('name')->label(__("Name"))->label('Name')->searchable(),
+                TextColumn::make('name')->label(__("Name"))->searchable(),
                 TextColumn::make('fileName')->label('Path'),
-                TextColumn::make('description')->label(__("Description"))->label('Description')->searchable(),
+                TextColumn::make('description')->label(__("Description"))->searchable(),
             ])
             ->filters([
                 //
@@ -55,12 +55,12 @@ class LoraResource extends Component implements HasForms, HasTable
                     ->form([
                         TextInput::make('name')->label(__("Name"))
                             ->required()
-                            ->maxLength(255)->label('Name'),
+                            ->maxLength(255),
                         TextInput::make('fileName')
                             ->required()
                             ->maxLength(255)->label('Path'),
                         TextInput::make('description')->label(__("Description"))
-                            ->maxLength(255)->label('Description'),
+                            ->maxLength(255),
                     ]),
                 Tables\Actions\DeleteAction::make()
             ])

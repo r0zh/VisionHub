@@ -43,6 +43,7 @@ class UserResource extends Component implements HasForms, HasTable
             ->query(User::query())
             ->columns([
                 TextColumn::make('role.name')
+                    ->label(__("Role"))
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('name')->label(__("Name"))
@@ -50,13 +51,13 @@ class UserResource extends Component implements HasForms, HasTable
                 TextColumn::make('email')
                     ->words(1)
                     ->searchable(),
-                TextColumn::make('images_count')->counts('images')->label('Number of images')
+                TextColumn::make('images_count')->counts('images')->label(__("Number of images"))
                     ->searchable(),
-                TextColumn::make('created_at')
+                TextColumn::make('created_at')->label(__('Created At'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
+                TextColumn::make('updated_at')->label(__('Updated At'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -71,7 +72,7 @@ class UserResource extends Component implements HasForms, HasTable
                     ->color('info')
                     ->url(fn(User $user) => route('user', $user)),
                 EditAction::make()->form([
-                    Select::make('role_id')
+                    Select::make('role_id')->label(__("Role"))
                         ->required()
                         ->relationship('role', 'name'),
                     TextInput::make('name')->label(__("Name"))

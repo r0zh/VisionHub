@@ -47,7 +47,7 @@ class ImageResource extends Component implements HasForms, HasTable
                     ->limit(20)
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('user.name')->label('User Name')
+                TextColumn::make('user.name')->label(__("User Name"))
                     ->sortable(),
                 TextColumn::make('checkpoint.name')
                     ->sortable()
@@ -82,24 +82,24 @@ class ImageResource extends Component implements HasForms, HasTable
                     ->sortable()
                     ->words(2)
                     ->toggleable(isToggledHiddenByDefault: false),
-                IconColumn::make('public')
+                IconColumn::make('public')->label(trans_choice('Public', 0))
                     ->boolean(),
-                TextColumn::make('created_at')
+                TextColumn::make('created_at')->label(__('Created At'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
+                TextColumn::make('updated_at')->label(__('Updated At'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('name')->label(__("Name"))->label('Name'),
+                TextColumn::make('name')->label(__("Name")),
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Action::make('View')
-                    ->label('View image')
+                    ->label(__('View image'))
                     ->icon('heroicon-o-photo')
                     ->color('info')
                     ->modalContent(
@@ -107,7 +107,7 @@ class ImageResource extends Component implements HasForms, HasTable
                             'livewire.common.image-modal',
                             ['image' => $image],
                         )
-                    )->modalSubmitAction(false)->modalCancelActionLabel('Close')->modalWidth('fit')
+                    )->modalSubmitAction(false)->modalCancelActionLabel(__('Close'))->modalWidth('fit')
                 ,
                 EditAction::make()->form([
                     TextInput::make('name')->label(__("Name"))->nullable(),
@@ -159,7 +159,7 @@ class ImageResource extends Component implements HasForms, HasTable
                         ->cloneable()
                         ->defaultItems(0)
                         ->columns(2),
-                    Toggle::make('public')
+                    Toggle::make('public')->label(trans_choice('Public', 0))
                         ->onColor('success')
                         ->offColor('danger')
                 ]),

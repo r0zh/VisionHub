@@ -4,10 +4,10 @@
 
         <div class="flex w-full items-center justify-center mt-4 gap-2">
             <x-filament::button type="submit">
-                Create
+                {{ __('Create') }}
             </x-filament::button>
             <x-filament::button type="button" wire:click="resetForm" color="danger">
-                Reset
+                {{ __('Reset') }}
             </x-filament::button>
         </div>
 
