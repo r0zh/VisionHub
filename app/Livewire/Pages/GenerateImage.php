@@ -230,10 +230,10 @@ class GenerateImage extends Component implements HasForms, HasActions
             ->label(__('here'))
             ->modalHeading(__('Resource request'))
             ->form([
-                TextInput::make('resource_name')
+                TextInput::make('resource_name')->label(__('Resource Name'))
                     ->maxLength(255)->required()->label(__('Resource name')),
-                TextInput::make('resource_url')->url()->required()->label(__('Resource url')),
-                TextInput::make('resource_description')
+                TextInput::make('resource_url')->label(__('Resource url'))->url()->required()->label(__('Resource url')),
+                TextInput::make('resource_description')->label(__('Resource description'))
                     ->nullable()->label(__('Resource description'))
             ])
             ->model(Image::class)

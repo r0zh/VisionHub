@@ -315,5 +315,14 @@
     "User Name": "Nombre de usuario",
     "Number of images": "Número de imágenes",
     "Role": "Rol",
-    "View model": "Ver modelo"
+    "View model": "Ver modelo",
+    "Resolve": "Solucionar",
+    "Request Type": "Tipo de solicitud",
+    "Resource Name": "Nombre del recurso",
+    "Status": "Estado",
+    "Pending": "Pendiente",
+    "Approved": "Aprobado",
+    "Rejected": "Rechazado",
+    "Sender": "Remitente",
+    "Resolved by": "Resuelto por"
 }

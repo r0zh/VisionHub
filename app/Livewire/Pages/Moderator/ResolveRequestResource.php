@@ -30,29 +30,30 @@ class ResolveRequestResource extends Component implements HasForms, HasTable
         return $table
             ->query(ResourceRequest::query())
             ->columns([
-                Tables\Columns\TextColumn::make('request_type')
+                Tables\Columns\TextColumn::make('request_type')->label(__('Request Type'))
                     ->searchable(),
-                Tables\Columns\TextColumn::make('resource_name')
+                Tables\Columns\TextColumn::make('resource_name')->label(__('Resource Name'))
                     ->searchable(),
-                Tables\Columns\TextColumn::make('resource_url')
+                Tables\Columns\TextColumn::make('resource_description')->label(__('Resource description')),
+                Tables\Columns\TextColumn::make('resource_url')->label(__('Resource url'))
                     ->searchable()
                     ->state(function (ResourceRequest $record): string {
-                        return "<a style='color: aqua' href='" . $record->resource_url . "'> Source </a>";
+                        return "<a style='color: aqua' href='" . $record->resource_url . "'> " . $record->resource_url . " </a>";
                     })
                     ->html()
                 ,
-                Tables\Columns\TextColumn::make('status')->state(function (ResourceRequest $record): string {
+                Tables\Columns\TextColumn::make('status')->label(__('Status'))->state(function (ResourceRequest $record): string {
                     if ($record->status === 'pending')
-                        return "<p style='color:yellow; font-weight: bold'>Pending</p>";
+                        return "<p style='color:yellow; font-weight: bold'>" . __("Pending") . "</p>";
                     else if ($record->status === 'approved')
-                        return "<p style='color:green; font-weight: bold'>Approved</p>";
+                        return "<p style='color:green; font-weight: bold'>" . __("Approved") . "</p>";
                     else if ($record->status === 'rejected')
-                        return "<p style='color:red; font-weight: bold'>Rejected</p>";
+                        return "<p style='color:red; font-weight: bold'>" . __("Rejected") . "</p>";
                     else
                         return $record->status;
                 })->html(),
-                Tables\Columns\TextColumn::make('sender_id')->numeric()->sortable(),
-                Tables\Columns\TextColumn::make('resolved_by')->numeric()->sortable(),
+                Tables\Columns\TextColumn::make('sender.name')->label(__('Sender'))->numeric()->sortable(),
+                Tables\Columns\TextColumn::make('resolved.name')->label(__('Resolved by'))->numeric()->sortable(),
                 Tables\Columns\TextColumn::make('created_at')->label(__('Created At'))->dateTime()->sortable()->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')->label(__('Updated At'))->dateTime()->sortable()->toggleable(isToggledHiddenByDefault: true),
             ])
@@ -61,23 +62,23 @@ class ResolveRequestResource extends Component implements HasForms, HasTable
             ])
             ->actions([
                 Tables\Actions\EditAction::make()
-                    ->label('Resolve')
+                    ->label(__('Resolve'))
                     ->color('success')
                     ->form([
-                        TextInput::make('request_type')
+                        TextInput::make('request_type')->label(__('Request Type'))
                             ->disabled(),
-                        TextInput::make('resource_name')
+                        TextInput::make('resource_name')->label(__('Resource Name'))
                             ->disabled(),
-                        TextInput::make('resource_url')
+                        TextInput::make('resource_url')->label(__('Resource url'))
                             ->url()
                             ->disabled(),
-                        TextInput::make('resource_description')
+                        TextInput::make('resource_description')->label(__('Resource description'))
                             ->disabled(),
-                        TextInput::make('sender_id')
+                        TextInput::make('sender.name')->label(__('Sender'))
                             ->required()
                             ->maxLength(255)
                             ->disabled(),
-                        Select::make('status')
+                        Select::make('status')->label(__('Status'))
                             ->options([
                                 'pending' => 'Pending',
                                 'approved' => 'Approved',
@@ -96,20 +97,20 @@ class ResolveRequestResource extends Component implements HasForms, HasTable
                 Tables\Actions\EditAction::make()
                     ->label('Edit')
                     ->form([
-                        TextInput::make('request_type')
+                        TextInput::make('request_type')->label(__('Request Type'))
                             ->disabled(),
-                        TextInput::make('resource_name')
+                        TextInput::make('resource_name')->label(__('Resource Name'))
                             ->disabled(),
-                        TextInput::make('resource_url')
+                        TextInput::make('resource_url')->label(__('Resource url'))
                             ->url()
                             ->disabled(),
-                        TextInput::make('resource_description')
+                        TextInput::make('resource_description')->label(__('Resource description'))
                             ->disabled(),
-                        TextInput::make('sender_id')
+                        TextInput::make('sender.name')->label(__('Sender'))->label(__('Sender Id'))
                             ->required()
                             ->maxLength(255)
                             ->disabled(),
-                        Select::make('status')
+                        Select::make('status')->label(__('Status'))
                             ->options([
                                 'pending' => 'Pending',
                                 'approved' => 'Approved',

@@ -79,6 +79,15 @@ new class extends Component {
 
       <!-- Settings Dropdown -->
       <div class="hidden sm:flex sm:items-center sm:ms-6">
+        <div class="flex space-x-4 mr-4">
+          <a href="{{ route('locale', 'en') }}">
+            <x-flag-country-us class="w-6 h-6" />
+          </a>
+          <a href="{{ route('locale', 'es') }}">
+            <x-flag-country-es class="w-6 h-6" />
+          </a>
+        </div>
+
         <x-dropdown align="right" width="48">
           <x-slot name="trigger">
             <button

@@ -162,10 +162,10 @@ class UploadImage extends Component implements HasForms, HasActions
             ->label('here')
             ->modalHeading('Resource request')
             ->form([
-                TextInput::make('resource_name')
+                TextInput::make('resource_name')->label(__('Resource Name'))
                     ->maxLength(255)->required(),
-                TextInput::make('resource_url')->url()->required(),
-                TextInput::make('resource_description')
+                TextInput::make('resource_url')->label(__('Resource url'))->url()->required(),
+                TextInput::make('resource_description')->label(__('Resource description'))
                     ->nullable()
             ])
             ->model(Image::class)
