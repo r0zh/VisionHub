@@ -15,6 +15,9 @@
                 Users
             </p>
         @endif
+        <p href="/admin/three-d-models" wire:navigate class="cursor-pointer text-lg">
+            3D Models
+        </p>
         <p href="/admin/loras" wire:navigate class="cursor-pointer text-lg">
             Loras
         </p>
