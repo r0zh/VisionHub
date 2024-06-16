@@ -2,9 +2,7 @@
 
 namespace App\Providers;
 
-use BezhanSalleh\FilamentLanguageSwitch\Enums\Placement;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Lang;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,6 +19,5 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Lang::load('land', 'es', resource_path('lang/es.json'));
     }
 }
