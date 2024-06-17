@@ -50,13 +50,11 @@ jobs:
           echo "APP_KEY=base64:/smQviY6DyGdLc3JDyIoygk1bSe5FAVUWi9on1kuDGM=" >> .env
           echo "APP_DEBUG=true" >> .env
           echo "DB_CONNECTION=mysql" >> .env
-          echo "DB_HOST=visionhub-db.ccl3nurx4kwy.us-east-1.rds.amazonaws.com" >> .env
+          echo "DB_HOST=visionhub-db.cs3otbsyccbh.us-east-1.rds.amazonaws.com" >> .env
           echo "DB_PORT=3306" >> .env
           echo "DB_DATABASE=visionhub" >> .env
           echo "DB_USERNAME=${{ secrets.DB_USER }}" >> .env
           echo "DB_PASSWORD=${{ secrets.DB_PASS }}" >> .env
-        
-    
 
       - name: Login to Amazon ECR
         id: login-ecr
