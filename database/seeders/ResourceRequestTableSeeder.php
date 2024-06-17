@@ -22,7 +22,18 @@ class ResourceRequestTableSeeder extends Seeder
                 'status' => 'pending',
                 'resolved_by' => null,
             ],
-
+            [
+                'id' => 1,
+                'request_type' => 'lora',
+                'resource_name' => 'Detail Tweaker',
+                'resource_url' => 'https://civitai.com/models/122359/detail-tweaker-xl',
+                'resource_description' => 'Lora to tweak how much detail there is in an image',
+                'status' => 'approved',
+                'sender_id' => 1,
+                'resolved_by' => 2,
+                'created_at' => '2024-06-17 04:01:43',
+                'updated_at' => '2024-06-17 04:05:41',
+            ]
         ]);
     }
 }
