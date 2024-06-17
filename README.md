@@ -2,7 +2,7 @@
 Por David Natanael y Roberto Sánchez
 ## Repositorios relacionados
 
-[Angular repository](https://github.com/r0zh/VisionHub-angular): Angular frontend
+[Angular repository](https://github.com/r0zh/VisionHub-angular)
 
 [Flask Image Generator Repository](https://github.com/r0zh/VisionHub-flask-images)
 
