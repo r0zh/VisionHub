@@ -8,11 +8,10 @@ Por David Natanael y Roberto Sánchez
 
 
 ## Despliegue de la aplicación (temporalmente apagado para ahorrar recursos)
-[VisionHub (laravel)](http://laravelloadbalancer-1413397690.us-east-1.elb.amazonaws.com/)
+[VisionHub (laravel)](http://laravelloadbalancer-1094644412.us-east-1.elb.amazonaws.com)
 
-[VisionHub (angular)](http://angularloadbalancer-279767366.us-east-1.elb.amazonaws.com/)
+[VisionHub (angular)](http://angularloadbalancer-1607106454.us-east-1.elb.amazonaws.com)
 
-[Flask microservice](http://flaskloadbalancer-64905749.us-east-1.elb.amazonaws.com) (Hacer petición al endpoint get_image mediante post para probar) 
 
 ## Notion del proyecto 
 [Notion](https://www.notion.so/e67ae944be194b38bcba67d7642c7b3f?v=912bed725fd94a7dab5d94a88ed09741) 
