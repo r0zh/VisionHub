@@ -126,7 +126,6 @@ class GenerateImage extends Component implements HasForms, HasActions
             session()->forget('imagePath');
         }
         $this->imagePath = "";
-        $this->fetching = true;
         $data = $this->form->getState();
         $checkpoint = Checkpoint::find($data['checkpoint_id']);
         $data['checkpoint'] = $checkpoint->fileName;
@@ -154,6 +153,8 @@ class GenerateImage extends Component implements HasForms, HasActions
 
         $apiUrl = config('services.flask') . '/generate';
         //display jpeg response
+        $this->fetching = true;
+
         $response = Http::timeout(5 * 60)->post($apiUrl, $data);
 
         // display the image in the browser
