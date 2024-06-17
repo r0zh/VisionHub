@@ -69,7 +69,7 @@ class UploadImage extends Component implements HasForms, HasActions
                             ->relationship('imageLoras')
                             ->schema([
                                 Select::make('lora_id')->relationship(name: 'lora', titleAttribute: 'name')->label(__('Lora name'))->required(),
-                                TextInput::make(__('weight'))->numeric()->required()->maxValue(1.0)->minValue(-1.0)->step(0.01)->default(1),
+                                TextInput::make('weight')->label(__('weight'))->numeric()->required()->maxValue(1.0)->minValue(-1.0)->step(0.01)->default(1),
 
                             ])
                             ->extraItemActions([
@@ -97,7 +97,7 @@ class UploadImage extends Component implements HasForms, HasActions
                             ->relationship('imageEmbeddings')
                             ->schema([
                                 Select::make('embedding_id')->relationship(name: 'embedding', titleAttribute: 'name')->label(__('Embedding name'))->required()->columnSpan(2),
-                                TextInput::make(__('weight'))->numeric()->required()->maxValue(1.0)->minValue(-1.0)->step(0.01)->columnSpan(2)->default(1),
+                                TextInput::make('weight')->label(__('weight'))->numeric()->required()->maxValue(1.0)->minValue(-1.0)->step(0.01)->columnSpan(2)->default(1),
                                 Radio::make('prompt_target')->label(__('Prompt target'))->label(__('Prompt target'))
                                     ->options([
                                         'positive' => __('Positive'),
