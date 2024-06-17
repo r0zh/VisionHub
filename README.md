@@ -4,7 +4,9 @@ Por David Natanael y Roberto Sánchez
 
 [Angular repository](https://github.com/r0zh/VisionHub-angular): Angular frontend
 
-[Flask repository](https://github.com/r0zh/VisionHub-flask): Flask microservice
+[Flask Image Generator Repository](https://github.com/r0zh/VisionHub-flask-images)
+
+[Flask Model Generator Repository](https://github.com/r0zh/VisionHub-flask-models)
 
 
 ## Despliegue de la aplicación (temporalmente apagado para ahorrar recursos)
@@ -47,6 +49,10 @@ Para instalar y utilizar VisionHub, sigue estos pasos:
 -   **Community**: Visualiza todas las fotos públicas, incluyendo las del usuario.
 -   **Admin**: Acceso a todas las fotos, públicas y privadas, para moderadores y administradores.
 -   **Profile**: Permite editar el perfil del usuario.
+
+## Esquema de la base de datos
+![EN](https://github.com/r0zh/VisionHub/assets/32245814/c76699a5-608b-4338-bc01-7f4c7f549087)
+![image](https://github.com/r0zh/VisionHub/assets/32245814/264affa0-cd6b-49e6-9cbe-4b1d2ad33c07)
 
 ### CheckPoint
 [Video](https://drive.google.com/file/d/1GPy1Gv4cX6CCfkl943jLvkfbpGoQ8JoE/view?usp=sharing)
