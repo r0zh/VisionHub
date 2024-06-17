@@ -52,8 +52,8 @@ class ResolveRequestResource extends Component implements HasForms, HasTable
                     else
                         return $record->status;
                 })->html(),
-                Tables\Columns\TextColumn::make('sender.name')->label(__('Sender'))->numeric()->sortable(),
-                Tables\Columns\TextColumn::make('resolved.name')->label(__('Resolved by'))->numeric()->sortable(),
+                Tables\Columns\TextColumn::make('sender.name')->label(__('Sender'))->sortable(),
+                Tables\Columns\TextColumn::make('resolved.name')->label(__('Resolved by'))->sortable(),
                 Tables\Columns\TextColumn::make('created_at')->label(__('Created At'))->dateTime()->sortable()->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')->label(__('Updated At'))->dateTime()->sortable()->toggleable(isToggledHiddenByDefault: true),
             ])
@@ -73,10 +73,6 @@ class ResolveRequestResource extends Component implements HasForms, HasTable
                             ->url()
                             ->disabled(),
                         TextInput::make('resource_description')->label(__('Resource description'))
-                            ->disabled(),
-                        TextInput::make('sender.name')->label(__('Sender'))
-                            ->required()
-                            ->maxLength(255)
                             ->disabled(),
                         Select::make('status')->label(__('Status'))
                             ->options([
@@ -105,10 +101,6 @@ class ResolveRequestResource extends Component implements HasForms, HasTable
                             ->url()
                             ->disabled(),
                         TextInput::make('resource_description')->label(__('Resource description'))
-                            ->disabled(),
-                        TextInput::make('sender.name')->label(__('Sender'))->label(__('Sender Id'))
-                            ->required()
-                            ->maxLength(255)
                             ->disabled(),
                         Select::make('status')->label(__('Status'))
                             ->options([
