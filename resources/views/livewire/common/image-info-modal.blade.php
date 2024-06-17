@@ -1,6 +1,6 @@
 <x-filament::modal id="image-info-modal" width="fit" alignment="center" class="dark:text-white">
     <div>
-        <div class="xl:grid xl:grid-cols-2 gap-3 p-4 w-fit">
+        <div class="xl:grid xl:grid-cols-2 gap-3 p-4 max-w-6xl">
             <div class="flex justify-center items-center">
                 <div class="w-fit h-fit">
                     <img src="@if ($image->public == 1) {{ asset('storage/' . $image->path) }} @else {{ url($image->path) }} @endif"
@@ -12,20 +12,20 @@
                     </h1>
                 </div>
             </div>
-            <div class="p-2">
+            <div class="p-2 max-w-lg">
                 @if ($this->image->name)
                     <h1 class="text-3xl font-bold">{{ __('Name') }}</h1>
                     <p>{{ $image->name }}</p>
                 @endif
                 @if ($this->image->description)
-                    <h1 class="text-3xl font-bold mt-1">{{ __('Description') }}</h1>
+                    <h1 class="text-3xl font-bold mt-1 ">{{ __('Description') }}</h1>
                     <p class="break-all">{{ $image->description }}</p>
                 @endif
-                <h1 class="text-3xl font-bold mt-1">{{ __('Positive Prompt') }}</h1>
-                <p>{{ $image->positivePrompt }}</p>
+                <h1 class="text-3xl font-bold mt-1 ">{{ __('Positive Prompt') }}</h1>
+                <p class="break-all">{{ $image->positivePrompt }}</p>
                 @if ($image->negativePrompt)
-                    <h1 class="text-3xl font-bold mt-1">{{ __('Negative Prompt') }}</h1>
-                    <p>{{ $image->negativePrompt }}</p>
+                    <h1 class="text-3xl font-bold mt-1 "">{{ __('Negative Prompt') }}</h1>
+                    <p class="break-all">{{ $image->negativePrompt }}</p>
                 @endif
                 @if ($this->image->checkpoint)
                     <h1 class="text-3xl font-bold mt-1">Checkpoint</h1>
