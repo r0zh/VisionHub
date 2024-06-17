@@ -14,7 +14,7 @@ return [
     |
     */
     'flask' => 'https://7af4-2a0c-5a85-6606-4100-890e-b1bf-1f34-8d4a.ngrok-free.app',
-    'angular' => 'angularloadbalancer-1607106454.us-east-1.elb.amazonaws.com',
+    'angular' => 'http://angularloadbalancer-1607106454.us-east-1.elb.amazonaws.com',
 
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),
