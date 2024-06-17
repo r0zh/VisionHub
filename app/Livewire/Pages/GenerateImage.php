@@ -201,7 +201,7 @@ class GenerateImage extends Component implements HasForms, HasActions
     {
         return Action::make('saveImageAction')
             ->label('Save Image')
-            ->modalContent(view('livewire.images.generate.save-image-form', ['imagePath' => session('imagePath')]))
+            ->modalContent(view('livewire.common.save-image-form', ['imagePath' => session('imagePath')]))
             ->form([
                 TextInput::make('name')->label(__("Name"))
                     ->nullable()
