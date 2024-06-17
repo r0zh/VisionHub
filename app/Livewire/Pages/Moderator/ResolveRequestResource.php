@@ -53,7 +53,7 @@ class ResolveRequestResource extends Component implements HasForms, HasTable
                         return $record->status;
                 })->html(),
                 Tables\Columns\TextColumn::make('sender.name')->label(__('Sender'))->sortable(),
-                Tables\Columns\TextColumn::make('resolved.name')->label(__('Resolved by'))->sortable(),
+                Tables\Columns\TextColumn::make('approvedBy.name')->label(__('Resolved by'))->sortable(),
                 Tables\Columns\TextColumn::make('created_at')->label(__('Created At'))->dateTime()->sortable()->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')->label(__('Updated At'))->dateTime()->sortable()->toggleable(isToggledHiddenByDefault: true),
             ])
