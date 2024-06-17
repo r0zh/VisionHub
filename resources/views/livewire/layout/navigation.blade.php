@@ -60,7 +60,7 @@ new class extends Component {
           >
             {{ __("Community") }}
           </x-nav-link>
-          @if (auth()->user()->hasRole('moderator'))
+          @if (auth()->user()?->hasRole('moderator'))
           <x-nav-link
             :href="route('requests')"
             :active="request()->routeIs('requests')"
@@ -68,8 +68,8 @@ new class extends Component {
           >
             {{ __("Requests") }}
           </x-nav-link>
-          @endif @if (auth()->user()->hasRole('admin') ||
-          auth()->user()->hasRole('moderator'))
+          @endif @if (auth()->user()?->hasRole('admin') ||
+          auth()->user()?->hasRole('moderator'))
           <x-nav-link>
             <livewire:common.admin-routes-list />
           </x-nav-link>
@@ -94,7 +94,7 @@ new class extends Component {
               class="inline-flex items-center py-2 px-3 text-sm font-medium leading-4 text-gray-500 bg-white rounded-md border border-transparent transition duration-150 ease-in-out dark:text-gray-400 dark:bg-gray-800 hover:text-gray-700 focus:outline-none dark:hover:text-gray-300"
             >
               <div
-                x-data="{{ json_encode(['name' => auth()->user()->name]) }}"
+                x-data="{{ json_encode(['name' => auth()->user()?->name]) }}"
                 x-text="name"
                 x-on:profile-updated.window="name = $event.detail.name"
               ></div>
@@ -115,6 +115,24 @@ new class extends Component {
             </button>
           </x-slot>
 
+          @if(!auth()->user())
+          <x-slot name="content">
+            <x-dropdown-link
+              :href="route('login')"
+              :active="request()->routeIs('login')"
+              wire:navigate
+            >
+              {{ __("Log in") }}
+            </x-dropdown-link>
+            <x-dropdown-link
+              :href="route('register')"
+              :active="request()->routeIs('register')"
+              wire:navigate
+            >
+              {{ __("Register") }}
+            </x-dropdown-link>
+          </x-slot>
+          @else
           <x-slot name="content">
             <x-dropdown-link :href="route('profile')" wire:navigate>
               {{ __("Profile") }}
@@ -127,6 +145,7 @@ new class extends Component {
               </x-dropdown-link>
             </button>
           </x-slot>
+          @endif
         </x-dropdown>
       </div>
 
@@ -181,15 +200,33 @@ new class extends Component {
       <div class="px-4">
         <div
           class="text-base font-medium text-gray-800 dark:text-gray-200"
-          x-data="{{ json_encode(['name' => auth()->user()->name]) }}"
+          x-data="{{ json_encode(['name' => auth()->user()?->name]) }}"
           x-text="name"
           x-on:profile-updated.window="name = $event.detail.name"
         ></div>
         <div class="text-sm font-medium text-gray-500">
-          {{ auth()->user()->email }}
+          {{ auth()->user()?->email }}
         </div>
       </div>
 
+      @if(!auth()->user())
+      <div class="mt-3 space-y-1">
+        <x-responsive-nav-link
+          :href="route('login')"
+          :active="request()->routeIs('login')"
+          wire:navigate
+        >
+          {{ __("Log in") }}
+        </x-responsive-nav-link>
+        <x-responsive-nav-link
+          :href="route('register')"
+          :active="request()->routeIs('register')"
+          wire:navigate
+        >
+          {{ __("Register") }}
+        </x-responsive-nav-link>
+      </div>
+      @else
       <div class="mt-3 space-y-1">
         <x-responsive-nav-link :href="route('profile')" wire:navigate>
           {{ __("Profile") }}
@@ -202,6 +239,7 @@ new class extends Component {
           </x-responsive-nav-link>
         </button>
       </div>
+      @endif
     </div>
   </div>
 </nav>
