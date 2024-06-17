@@ -13,7 +13,7 @@ return [
     | a conventional file to locate the various service credentials.
     |
     */
-    'flask' => 'http://localhost:5000',
+    'flask' => 'https://c38e-2a0c-5a85-6104-c600-5c97-2864-5996-b1d0.ngrok-free.app',
     'angular' => 'http://localhost:4200',
 
     'mailgun' => [
