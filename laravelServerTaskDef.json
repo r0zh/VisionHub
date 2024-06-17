@@ -2,16 +2,9 @@
     "containerDefinitions": [
         {
             "name": "laravelContainer",
-            "image": "838642147285.dkr.ecr.us-east-1.amazonaws.com/php-server:8019cb32510c5f608ea708cf1e338ec0feb245d1",
+            "image": "985161031569.dkr.ecr.us-east-1.amazonaws.com/php-server",
             "cpu": 0,
             "portMappings": [
-                {
-                    "name": "laravelcontainer-80-tcp",
-                    "containerPort": 80,
-                    "hostPort": 80,
-                    "protocol": "tcp",
-                    "appProtocol": "http"
-                },
                 {
                     "name": "laravelcontainer-8080-tcp",
                     "containerPort": 8080,
@@ -37,8 +30,8 @@
         }
     ],
     "family": "LaravelServerTaskDef",
-    "taskRoleArn": "arn:aws:iam::793956901187:role/LabRole",
-    "executionRoleArn": "arn:aws:iam::793956901187:role/LabRole",
+    "taskRoleArn": "arn:aws:iam::985161031569:role/LabRole",
+    "executionRoleArn": "arn:aws:iam::985161031569:role/LabRole",
     "networkMode": "awsvpc",
     "volumes": [],
     "placementConstraints": [],
