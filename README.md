@@ -1,5 +1,5 @@
 # VisionHub
-
+Por David Natanael y Roberto Sánchez
 ## Repositorios relacionados
 
 [Angular repository](https://github.com/r0zh/VisionHub-angular): Angular frontend
