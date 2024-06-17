@@ -11,11 +11,6 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
-    public function index()
-    {
-        $users = User::all();
-        return response()->json($users);
-    }
     public function user(string $id)
     {
         $user = User::find($id);
