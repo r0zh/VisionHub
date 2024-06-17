@@ -26,7 +26,6 @@ RUN php artisan db:seed
 RUN php artisan storage:link
 RUN php artisan config:cache
 RUN php artisan key:generate
-# route:cache will throw an error because of the route upload, need discussion
 #RUN php artisan route:cache
 RUN php artisan view:cache
 RUN php artisan event:cache
