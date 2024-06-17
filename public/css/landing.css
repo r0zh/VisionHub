@@ -11,10 +11,14 @@
 /*******************************************General Stuff******************************************/
 *{
     box-sizing: border-box;
-    font-family: prata;
     margin: 0;
     padding: 0;
     text-decoration: none;
+}
+.landingContainer{
+    font-family: pirata;
+    overflow: hidden;
+    color:white
 }
 /********************************************VisionHub Header*************************************/
 #visionHubdiv{
@@ -132,7 +136,7 @@
     transition: 0.5s;
 }
 /******************************************Moves hidden divs*************************************/
-.hidden {
+.displayNon {
     opacity: 0;
     display: none;
 }
@@ -257,6 +261,3 @@
 #flip-card-back-3d{
     background-color: #b7d6fd;
 }
-
-
-
