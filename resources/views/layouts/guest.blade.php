@@ -17,33 +17,7 @@
 </head>
 
 <style>
-    .text-gray-900 {
-        color: #1a202c;
-    }
 
-    .bg-gray-100 {
-        background-color: #f7fafc;
-    }
-
-    .bg-white {
-        background-color: #fff;
-    }
-
-    .bg-gray-800 {
-        background-color: #2d3748;
-    }
-
-    .text-black {
-        color: #000000;
-    }
-
-    .hover:bg-gray-700 {
-        background-color: #4a5568;
-    }
-
-    .dark:text-gray-800 {
-        color: #2d3748;
-    }
 
 </style>
 <body class="font-sans antialiased text-white ">
