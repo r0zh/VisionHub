@@ -155,7 +155,7 @@ class GenerateImage extends Component implements HasForms, HasActions
         //display jpeg response
         $this->fetching = true;
 
-        $response = Http::timeout(5 * 60)->post($apiUrl, $data);
+        $response = Http::timeout(8 * 60)->post($apiUrl, $data);
 
         // display the image in the browser
         $image = $response->getBody();
