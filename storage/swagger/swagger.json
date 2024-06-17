@@ -1,0 +1,980 @@
+openapi: 3.0.0
+info:
+  title: VisionHub
+  description: Documentation for the Application API
+  version: 1.0.0
+servers:
+  - url: https://test.com
+    description: VisionHub Main Server
+paths:
+  /auth/register:
+    post:
+      summary: Register a new user
+      description: Create a new user
+      deprecated: false
+      responses:
+        200:
+          description: User created successfully
+        401:
+          description: (Unauthorized) Invalid or missing Access Token
+      tags:
+        - auth
+
+  /auth/login:
+    post:
+      summary: Login to the system
+      description: Authenticate a user
+      deprecated: false
+      responses:
+        200:
+          description: User logged in successfully
+        401:
+          description: (Unauthorized) Invalid or missing Access Token
+      tags:
+        - auth
+
+  /auth/checkToken:
+    get:
+      summary: Validate the token
+      description: Check if the token is valid
+      deprecated: false
+      responses:
+        200:
+          description: Token is valid
+        401:
+          description: (Unauthorized) Invalid or missing Access Token
+      security:
+        - bearerAuth: []
+      tags:
+        - auth
+
+  /auth/logout:
+    post:
+      summary: Logout the user
+      description: Delete the user's tokens
+      deprecated: false
+      responses:
+        200:
+          description: User logged out successfully
+        401:
+          description: (Unauthorized) Invalid or missing Access Token
+      security:
+        - bearerAuth: []
+      tags:
+        - auth
+        
+  /images/public:
+    get:
+      summary: Display a listing of public images.
+      description: Returns a list of all public images.
+      deprecated: false
+      responses:
+        200:
+          description: OK
+        401:
+          description: (Unauthorized) Invalid or missing Access Token
+      security:
+        - bearerAuth: []
+      tags:
+        - images
+
+  /images/user:
+    get:
+      summary: Get the images uploaded by the user.
+      description: Returns a list of images uploaded by the current user.
+      deprecated: false
+      responses:
+        200:
+          description: OK
+        401:
+          description: (Unauthorized) Invalid or missing Access Token
+      security:
+        - bearerAuth: []
+      tags:
+        - images
+
+  /images/all:
+    get:
+      summary: Get all images.
+      description: Returns a list of all images.
+      deprecated: false
+      responses:
+        200:
+          description: OK
+        401:
+          description: (Unauthorized) Invalid or missing Access Token
+      security:
+        - bearerAuth: []
+      tags:
+        - images
+  /images/{id}/get:
+    get:
+      summary: Serve an image.
+      description: Returns the specified image.
+      deprecated: false
+      responses:
+        200:
+          description: OK
+        401:
+          description: (Unauthorized) Invalid or missing Access Token
+        404:
+          description: Image not found
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+      security:
+        - bearerAuth: []
+      tags:
+        - image
+  /models/upload:
+    post:
+      summary: Store a newly created 3D model.
+      description: Uploads a new 3D model.
+      deprecated: false
+      responses:
+        200:
+          description: OK
+        401:
+          description: (Unauthorized) Invalid or missing Access Token
+      security:
+        - bearerAuth: []
+      tags:
+        - models
+
+  /models/user/{id}:
+    get:
+      summary: Get the 3D models uploaded by the user.
+      description: Returns a list of 3D models uploaded by the specified user.
+      deprecated: false
+      responses:
+        200:
+          description: OK
+        401:
+          description: (Unauthorized) Invalid or missing Access Token
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+      security:
+        - bearerAuth: []
+      tags:
+        - models
+
+  /models/public:
+    get:
+      summary: Display a listing of public 3D models.
+      description: Returns a list of all public 3D models.
+      deprecated: false
+      responses:
+        200:
+          description: OK
+        401:
+          description: (Unauthorized) Invalid or missing Access Token
+      tags:
+        - models
+
+  /model/{id}/thumbnail:
+    get:
+      summary: Serve a 3D model thumbnail.
+      description: Returns the thumbnail for the specified 3D model.
+      deprecated: false
+      responses:
+        200:
+          description: OK
+        401:
+          description: (Unauthorized) Invalid or missing Access Token
+        403:
+          description: Unauthorized
+        404:
+          description: Model not found
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+      tags:
+        - model
+
+  /model/{id}/get:
+    get:
+      summary: Serve a 3D model.
+      description: Returns the specified 3D model.
+      deprecated: false
+      responses:
+        200:
+          description: OK
+        401:
+          description: (Unauthorized) Invalid or missing Access Token
+        403:
+          description: Unauthorized
+        404:
+          description: Model not found
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+      tags:
+        - model
+  /user/{id}/get:
+    get:
+      summary: Get a user.
+      description: Returns the specified user.
+      deprecated: false
+      responses:
+        200:
+          description: OK
+        401:
+          description: (Unauthorized) Invalid or missing Access Token
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+      security:
+        - bearerAuth: []
+      tags:
+        - user
+
+  /user:
+    get:
+      summary: Get current user.
+      description: Returns the user that made the request.
+      deprecated: false
+      responses:
+        200:
+          description: OK
+        401:
+          description: (Unauthorized) Invalid or missing Access Token
+      security:
+        - bearerAuth: []
+      tags:
+        - user
+tags: []
+components:
+  schemas:
+    Checkpoint:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: bigint
+          nullable: false
+          example: 1628724147
+        name:
+          type: string
+          description: string(255)
+          nullable: false
+          example: string
+        fileName:
+          type: string
+          description: string(255)
+          nullable: false
+          example: string
+        description:
+          type: string
+          description: string(255)
+          nullable: true
+          example: string
+        steps:
+          type: integer
+          description: integer
+          nullable: false
+          example: 1180784195
+        cfg:
+          type: number
+          format: float
+          description: float
+          nullable: false
+        sampler_name:
+          type: string
+          description: string(255)
+          nullable: false
+          example: string
+        scheduler:
+          type: string
+          description: string(255)
+          nullable: false
+          example: string
+        created_at:
+          type: string
+          format: date-time
+          description: datetime
+          nullable: true
+          example: string
+        updated_at:
+          type: string
+          format: date-time
+          description: datetime
+          nullable: true
+          example: string
+      required:
+        - id
+        - name
+        - fileName
+        - steps
+        - cfg
+        - sampler_name
+        - scheduler
+    Comment:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: bigint
+          nullable: false
+          example: 1836555111
+        created_at:
+          type: string
+          format: date-time
+          description: datetime
+          nullable: true
+          example: string
+        updated_at:
+          type: string
+          format: date-time
+          description: datetime
+          nullable: true
+          example: string
+      required:
+        - id
+    Embedding:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: bigint
+          nullable: false
+          example: 1519299980
+        name:
+          type: string
+          description: string(255)
+          nullable: false
+          example: string
+        fileName:
+          type: string
+          description: string(255)
+          nullable: false
+          example: string
+        description:
+          type: string
+          description: string(255)
+          nullable: true
+          example: string
+        created_at:
+          type: string
+          format: date-time
+          description: datetime
+          nullable: true
+          example: string
+        updated_at:
+          type: string
+          format: date-time
+          description: datetime
+          nullable: true
+          example: string
+      required:
+        - id
+        - name
+        - fileName
+    Follow:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: bigint
+          nullable: false
+          example: 1906938948
+        created_at:
+          type: string
+          format: date-time
+          description: datetime
+          nullable: true
+          example: string
+        updated_at:
+          type: string
+          format: date-time
+          description: datetime
+          nullable: true
+          example: string
+        idFollower:
+          type: integer
+          format: int64
+          description: bigint
+          nullable: false
+          example: 1763062471
+        idFollowed:
+          type: integer
+          format: int64
+          description: bigint
+          nullable: false
+          example: 1173106920
+      required:
+        - id
+        - idFollower
+        - idFollowed
+    Image:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: bigint
+          nullable: false
+          example: 1644904651
+        user_id:
+          type: integer
+          format: int64
+          description: bigint
+          nullable: false
+          example: 1977586812
+        checkpoint_id:
+          type: integer
+          format: int64
+          description: bigint
+          nullable: true
+          example: 1284620282
+        name:
+          type: string
+          description: string(255)
+          nullable: true
+          example: string
+        path:
+          type: string
+          description: string(255)
+          nullable: false
+          example: string
+        seed:
+          type: integer
+          format: int64
+          description: bigint
+          nullable: false
+          example: 1225545204
+        positivePrompt:
+          type: string
+          description: text(65535)
+          nullable: false
+          example: string
+        negativePrompt:
+          type: string
+          description: text(65535)
+          nullable: true
+          example: string
+        public:
+          type: boolean
+          description: boolean
+          nullable: false
+          example: true
+        description:
+          type: string
+          description: string(255)
+          nullable: true
+          example: string
+        created_at:
+          type: string
+          format: date-time
+          description: datetime
+          nullable: true
+          example: string
+        updated_at:
+          type: string
+          format: date-time
+          description: datetime
+          nullable: true
+          example: string
+      required:
+        - id
+        - user_id
+        - path
+        - seed
+        - positivePrompt
+        - public
+    ImageEmbedding:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: bigint
+          nullable: false
+          example: 1485312016
+        embedding_id:
+          type: integer
+          format: int64
+          description: bigint
+          nullable: false
+          example: 1971659809
+        image_id:
+          type: integer
+          format: int64
+          description: bigint
+          nullable: false
+          example: 1884153375
+        weight:
+          type: number
+          format: float
+          description: float
+          nullable: false
+        prompt_target:
+          type: string
+          description: string(255)
+          nullable: false
+          example: string
+        created_at:
+          type: string
+          format: date-time
+          description: datetime
+          nullable: true
+          example: string
+        updated_at:
+          type: string
+          format: date-time
+          description: datetime
+          nullable: true
+          example: string
+        embedding:
+          type: object
+          $ref: '#/components/schemas/Embedding'
+        image:
+          type: object
+          $ref: '#/components/schemas/Image'
+      required:
+        - id
+        - embedding_id
+        - image_id
+        - weight
+        - prompt_target
+    ImageLora:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: bigint
+          nullable: false
+          example: 1618701819
+        created_at:
+          type: string
+          format: date-time
+          description: datetime
+          nullable: true
+          example: string
+        updated_at:
+          type: string
+          format: date-time
+          description: datetime
+          nullable: true
+          example: string
+        lora_id:
+          type: integer
+          format: int64
+          description: bigint
+          nullable: false
+          example: 1354887756
+        image_id:
+          type: integer
+          format: int64
+          description: bigint
+          nullable: false
+          example: 1516006873
+        weight:
+          type: number
+          format: float
+          description: float
+          nullable: false
+        lora:
+          type: object
+          $ref: '#/components/schemas/Lora'
+        image:
+          type: object
+          $ref: '#/components/schemas/Image'
+      required:
+        - id
+        - lora_id
+        - image_id
+        - weight
+    Lora:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: bigint
+          nullable: false
+          example: 1890626360
+        name:
+          type: string
+          description: string(255)
+          nullable: false
+          example: string
+        fileName:
+          type: string
+          description: string(255)
+          nullable: false
+          example: string
+        description:
+          type: string
+          description: string(255)
+          nullable: true
+          example: string
+        created_at:
+          type: string
+          format: date-time
+          description: datetime
+          nullable: true
+          example: string
+        updated_at:
+          type: string
+          format: date-time
+          description: datetime
+          nullable: true
+          example: string
+      required:
+        - id
+        - name
+        - fileName
+    Permission:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: bigint
+          nullable: false
+          example: 1512903815
+        created_at:
+          type: string
+          format: date-time
+          description: datetime
+          nullable: true
+          example: string
+        updated_at:
+          type: string
+          format: date-time
+          description: datetime
+          nullable: true
+          example: string
+        name:
+          type: string
+          description: string(255)
+          nullable: false
+          example: string
+      required:
+        - id
+        - name
+    Pose:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: bigint
+          nullable: false
+          example: 1628315311
+        created_at:
+          type: string
+          format: date-time
+          description: datetime
+          nullable: true
+          example: string
+        updated_at:
+          type: string
+          format: date-time
+          description: datetime
+          nullable: true
+          example: string
+        name:
+          type: string
+          description: string(255)
+          nullable: false
+          example: string
+        user_id:
+          type: integer
+          format: int64
+          description: bigint
+          nullable: true
+          example: 1103439720
+        posePath:
+          type: string
+          description: string(255)
+          nullable: false
+          example: string
+        description:
+          type: string
+          description: string(255)
+          nullable: true
+          example: string
+      required:
+        - id
+        - name
+        - posePath
+    ResourceRequest:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: bigint
+          nullable: false
+          example: 1542313776
+        request_type:
+          type: string
+          description: string(255)
+          nullable: false
+          example: string
+        resource_name:
+          type: string
+          description: string(255)
+          nullable: false
+          example: string
+        resource_url:
+          type: string
+          description: string(255)
+          nullable: false
+          example: string
+        resource_description:
+          type: string
+          description: text(65535)
+          nullable: true
+          example: string
+        status:
+          type: string
+          description: string(255)
+          default: pending
+          nullable: false
+          example: string
+        sender_id:
+          type: integer
+          format: int64
+          description: bigint
+          nullable: false
+          example: 1198487865
+        resolved_by:
+          type: integer
+          format: int64
+          description: bigint
+          nullable: true
+          example: 1050259380
+        created_at:
+          type: string
+          format: date-time
+          description: datetime
+          nullable: true
+          example: string
+        updated_at:
+          type: string
+          format: date-time
+          description: datetime
+          nullable: true
+          example: string
+      required:
+        - id
+        - request_type
+        - resource_name
+        - resource_url
+        - status
+        - sender_id
+    Role:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: bigint
+          nullable: false
+          example: 1339354215
+        name:
+          type: string
+          description: string(255)
+          nullable: false
+          example: string
+        created_at:
+          type: string
+          format: date-time
+          description: datetime
+          nullable: true
+          example: string
+        updated_at:
+          type: string
+          format: date-time
+          description: datetime
+          nullable: true
+          example: string
+      required:
+        - id
+        - name
+    Tag:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: bigint
+          nullable: false
+          example: 1336659534
+        created_at:
+          type: string
+          format: date-time
+          description: datetime
+          nullable: true
+          example: string
+        updated_at:
+          type: string
+          format: date-time
+          description: datetime
+          nullable: true
+          example: string
+        name:
+          type: string
+          description: string(255)
+          nullable: false
+          example: string
+      required:
+        - id
+        - name
+    ThreeDModel:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: bigint
+          nullable: false
+          example: 1372662165
+        user_id:
+          type: integer
+          format: int64
+          description: bigint
+          nullable: false
+          example: 1603564178
+        name:
+          type: string
+          description: string(255)
+          nullable: true
+          example: string
+        description:
+          type: string
+          description: text(65535)
+          nullable: true
+          example: string
+        path:
+          type: string
+          description: string(255)
+          nullable: false
+          example: string
+        thumbnail:
+          type: string
+          description: string(255)
+          nullable: false
+          example: string
+        prompt:
+          type: string
+          description: string(255)
+          nullable: false
+          example: string
+        public:
+          type: boolean
+          description: boolean
+          default: '0'
+          nullable: false
+          example: true
+        created_at:
+          type: string
+          format: date-time
+          description: datetime
+          nullable: true
+          example: string
+        updated_at:
+          type: string
+          format: date-time
+          description: datetime
+          nullable: true
+          example: string
+      required:
+        - id
+        - user_id
+        - path
+        - thumbnail
+        - prompt
+        - public
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: bigint
+          nullable: false
+          example: 1484505452
+        role_id:
+          type: integer
+          format: int64
+          description: bigint
+          default: '1'
+          nullable: false
+          example: 1440143482
+        name:
+          type: string
+          description: string(255)
+          nullable: false
+          example: string
+        bio:
+          type: string
+          description: string(255)
+          nullable: true
+          example: string
+        profilePic:
+          type: string
+          description: string(255)
+          nullable: true
+          example: string
+        email:
+          type: string
+          description: string(255)
+          nullable: false
+          example: string
+        email_verified_at:
+          type: string
+          format: date-time
+          description: datetime
+          nullable: true
+          example: string
+        created_at:
+          type: string
+          format: date-time
+          description: datetime
+          nullable: true
+          example: string
+        updated_at:
+          type: string
+          format: date-time
+          description: datetime
+          nullable: true
+          example: string
+      required:
+        - id
+        - role_id
+        - name
+        - email
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
