@@ -19,8 +19,12 @@ class ThreeDModelServeController extends Controller
     {
         $model = ThreeDModel::find($id);
 
-        $hashedTooken = $request->bearerToken();
-        $user = PersonalAccessToken::findToken($hashedTooken)->tokenable;
+        $hashedToken = $request->bearerToken();
+        $user = null;
+
+        if (PersonalAccessToken::findToken($hashedToken)) {
+            $user = PersonalAccessToken::findToken($hashedToken)->tokenable;
+        }
 
         if (!$model) {
             return response()->json(['message' => 'Model not found'], 404);
@@ -28,7 +32,7 @@ class ThreeDModelServeController extends Controller
             if ($model->public) {
                 return Storage::disk('public')->download($model->path);
             } else {
-                if ($user->id == $model->user_id || $user->role == 'admin') {
+                if ($user && ($user->id == $model->user_id || $user->role == 'admin')) {
                     return Storage::disk('local')->download($model->path);
                 } else {
                     return response()->json(['message' => 'Unauthorized'], 403);
@@ -41,8 +45,11 @@ class ThreeDModelServeController extends Controller
     {
         $model = ThreeDModel::find($id);
 
-        $hashedTooken = $request->bearerToken();
-        $user = PersonalAccessToken::findToken($hashedTooken)->tokenable;
+        $hashedToken = $request->bearerToken();
+        $user = null;
+        if (!is_null(PersonalAccessToken::findToken($hashedToken))) {
+            $user = PersonalAccessToken::findToken($hashedToken)->tokenable;
+        }
 
         if (!$model) {
             return response()->json(['message' => 'Model not found'], 404);
@@ -50,7 +57,7 @@ class ThreeDModelServeController extends Controller
             if ($model->public) {
                 return Storage::disk('public')->download($model->thumbnail);
             } else {
-                if ($user->id == $model->user_id || $user->role == 'admin' || $user->role == 'moderator') {
+                if ($user && ($user->id == $model->user_id || $user->role == 'admin')) {
                     return Storage::disk('local')->download($model->thumbnail);
                 } else {
                     return response()->json(['message' => 'Unauthorized'], 403);
